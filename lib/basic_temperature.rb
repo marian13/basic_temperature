@@ -136,6 +136,12 @@ class BasicTemperature
     "#{degrees.to_i} #{scale.capitalize}"
   end
 
+  def <=>(other_temperature)
+    return unless other_temperature.instance_of?(BasicTemperature)
+
+    self.to_scale(other_temperature.scale).degrees <=> other_temperature.degrees
+  end
+
   private
 
   def initialize_via_positional_arguments(positional_arguments)

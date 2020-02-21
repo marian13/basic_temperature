@@ -579,4 +579,51 @@ RSpec.describe BasicTemperature do
       expect(new_temperature.degrees).to eq(-20)
     end
   end
+
+  describe '#<=>' do
+    context 'when first temperature is greater than second temperature' do
+      it 'returns 1' do
+        first_temperature = BasicTemperature.new(21, 'celcius')
+        second_temperature = BasicTemperature.new(20, 'celcius')
+
+        expect(first_temperature <=> second_temperature).to eq(1)
+      end
+    end
+
+    context 'when first temperature is lower than second temperature' do
+      it 'returns -1' do
+        first_temperature = BasicTemperature.new(20, 'celcius')
+        second_temperature = BasicTemperature.new(21, 'celcius')
+
+        expect(first_temperature <=> second_temperature).to eq(-1)
+      end
+    end
+
+    context 'when first temperature equals second temperature' do
+      it 'returns 0' do
+        first_temperature = BasicTemperature.new(20, 'celcius')
+        second_temperature = BasicTemperature.new(20, 'celcius')
+
+        expect(first_temperature <=> second_temperature).to eq(0)
+      end
+    end
+
+    context 'when second temperature is NOT a Temperature' do
+      it 'returns nil' do
+        first_temperature = BasicTemperature.new(20, 'celcius')
+        second_temperature = 'abc'
+
+        expect(first_temperature <=> second_temperature).to be_nil
+      end
+    end
+
+    context 'when first and second temperatures have different scales' do
+      it 'converts first temperature to second temperature scale' do
+        first_temperature = BasicTemperature.new(20, 'celcius')
+        second_temperature = BasicTemperature.new(250, 'kelvin')
+
+        expect(first_temperature <=> second_temperature).to eq(1)
+      end
+    end
+  end
 end
