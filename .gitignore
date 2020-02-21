@@ -9,3 +9,6 @@
 
 # rspec failure tracking
 .rspec_status
+
+# Hide `byebug` history
+.byebug_history
