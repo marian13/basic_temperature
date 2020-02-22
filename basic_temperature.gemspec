@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.description   = %q{Value object for basic temperature operations like conversions from Celcius to Fahrenhait or Kelvin etc.}
   spec.homepage      = "https://github.com/marian13/basic_temperature"
   spec.license       = "MIT"
-  spec.required_ruby_version = Gem::Requirement.new(">= 2.0.0")
+  spec.required_ruby_version = Gem::Requirement.new(">= 2.3.0")
 
   spec.metadata["homepage_uri"] = spec.homepage
   spec.metadata["source_code_uri"] = spec.homepage
@@ -24,6 +24,6 @@ Gem::Specification.new do |spec|
 
   spec.require_paths = ["lib"]
 
-  spec.add_development_dependency 'byebug', '~> 11.1'
+  spec.add_development_dependency 'byebug', '~> 10.0'
   spec.add_development_dependency 'rspec', '~> 3.0'
 end
