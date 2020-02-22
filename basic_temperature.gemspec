@@ -25,4 +25,5 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_development_dependency 'byebug', '~> 11.1'
+  spec.add_development_dependency 'rspec', '~> 3.0'
 end
