@@ -1,0 +1,13 @@
+AllCops:
+  Exclude:
+    - .git/**/*
+    - bin/**/*
+    - pkg/**/*
+    - spec/**/*
+    - vendor/bundle/**/*
+
+Layout/LineLength:
+  Max: 110
+
+Style/RedundantSelf:
+  Enabled: No
