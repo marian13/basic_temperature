@@ -409,8 +409,8 @@ RSpec.describe BasicTemperature do
   end
 
   describe '#+' do
-    context 'when addend is a Numeric' do
-      it 'returns temperature, where degrees = self.degress + addend' do
+    context 'when other is a Numeric' do
+      it 'returns temperature, where degrees = self.degress + other' do
         temperature = BasicTemperature.new(0, 'celcius')
 
         new_temperature = temperature + 25
@@ -427,44 +427,44 @@ RSpec.describe BasicTemperature do
       end
     end
 
-    context 'when addend is a Temperature' do
-      it 'returns temperature, where degrees = self.degress + addend.degrees' do
+    context 'when other is a Temperature' do
+      it 'returns temperature, where degrees = self.degress + other.degrees' do
         temperature = BasicTemperature.new(0, 'celcius')
-        addend = BasicTemperature.new(30, 'celcius')
+        other = BasicTemperature.new(30, 'celcius')
 
-        new_temperature = temperature + addend
+        new_temperature = temperature + other
 
         expect(new_temperature.degrees).to eq(30)
       end
 
-      context 'and addend has different scale than temperature' do
-        it 'returns temperature, where degrees = self.to_scale(addend.scale).degress + addend.degrees' do
+      context 'and other has different scale than temperature' do
+        it 'returns temperature, where degrees = self.to_scale(other.scale).degress + other.degrees' do
           temperature = BasicTemperature.new(0, 'celcius')
-          addend = BasicTemperature.new(30, 'kelvin')
+          other = BasicTemperature.new(30, 'kelvin')
 
-          new_temperature = temperature + addend
+          new_temperature = temperature + other
 
-          expect(new_temperature.scale).to eq(addend.scale)
+          expect(new_temperature.scale).to eq(other.scale)
           expect(new_temperature.degrees).to eq(303.15)
         end
       end
     end
 
-    context 'when addend is neither Numeric nor Temperature' do
+    context 'when other is neither Numeric nor Temperature' do
       it 'raises CoersionError' do
         temperature = BasicTemperature.new(0, 'celcius')
-        addend = 'abc'
+        other = 'abc'
 
-        expect { new_temperature = temperature + addend }
-          .to raise_error(BasicTemperature::InvalidAddendError)
-          .with_message("`#{addend}` is neither Numeric nor Temperature.")
+        expect { new_temperature = temperature + other }
+          .to raise_error(BasicTemperature::InvalidOtherError)
+          .with_message("`#{other}` is neither Numeric nor Temperature.")
       end
     end
   end
 
   describe '#+' do
-    context 'when addend is a Numeric' do
-      it 'returns temperature, where degrees = self.degress + addend' do
+    context 'when other is a Numeric' do
+      it 'returns temperature, where degrees = self.degress + other' do
         temperature = BasicTemperature.new(0, 'celcius')
 
         new_temperature = temperature + 25
@@ -481,44 +481,44 @@ RSpec.describe BasicTemperature do
       end
     end
 
-    context 'when addend is a Temperature' do
-      it 'returns temperature, where degrees = self.degress + addend.degrees' do
+    context 'when other is a Temperature' do
+      it 'returns temperature, where degrees = self.degress + other.degrees' do
         temperature = BasicTemperature.new(0, 'celcius')
-        addend = BasicTemperature.new(30, 'celcius')
+        other = BasicTemperature.new(30, 'celcius')
 
-        new_temperature = temperature + addend
+        new_temperature = temperature + other
 
         expect(new_temperature.degrees).to eq(30)
       end
 
-      context 'and addend has different scale than temperature' do
-        it 'returns temperature, where degrees = self.to_scale(addend.scale).degress + addend.degrees' do
+      context 'and other has different scale than temperature' do
+        it 'returns temperature, where degrees = self.to_scale(other.scale).degress + other.degrees' do
           temperature = BasicTemperature.new(0, 'celcius')
-          addend = BasicTemperature.new(30, 'kelvin')
+          other = BasicTemperature.new(30, 'kelvin')
 
-          new_temperature = temperature + addend
+          new_temperature = temperature + other
 
-          expect(new_temperature.scale).to eq(addend.scale)
+          expect(new_temperature.scale).to eq(other.scale)
           expect(new_temperature.degrees).to eq(303.15)
         end
       end
     end
 
-    context 'when addend is neither Numeric nor Temperature' do
-      it 'raises InvalidAddendError' do
+    context 'when other is neither Numeric nor Temperature' do
+      it 'raises InvalidotherError' do
         temperature = BasicTemperature.new(0, 'celcius')
-        addend = 'abc'
+        other = 'abc'
 
-        expect { new_temperature = temperature + addend }
-          .to raise_error(BasicTemperature::InvalidAddendError)
-          .with_message("`#{addend}` is neither Numeric nor Temperature.")
+        expect { new_temperature = temperature + other }
+          .to raise_error(BasicTemperature::InvalidOtherError)
+          .with_message("`#{other}` is neither Numeric nor Temperature.")
       end
     end
   end
 
   describe '#-' do
-    context 'when subtrahend is a Numeric' do
-      it 'returns temperature, where degrees = self.degress - subtrahend' do
+    context 'when other is a Numeric' do
+      it 'returns temperature, where degrees = self.degress - other' do
         temperature = BasicTemperature.new(0, 'celcius')
 
         new_temperature = temperature - 25
@@ -535,37 +535,37 @@ RSpec.describe BasicTemperature do
       end
     end
 
-    context 'when subtrahend is a Temperature' do
-      it 'returns temperature, where degrees = self.degress - subtrahend.degrees' do
+    context 'when other is a Temperature' do
+      it 'returns temperature, where degrees = self.degress - other.degrees' do
         temperature = BasicTemperature.new(0, 'celcius')
-        subtrahend = BasicTemperature.new(30, 'celcius')
+        other = BasicTemperature.new(30, 'celcius')
 
-        new_temperature = temperature - subtrahend
+        new_temperature = temperature - other
 
         expect(new_temperature.degrees).to eq(-30)
       end
 
-      context 'and subtrahend has different scale than temperature' do
-        it 'returns temperature, where degrees = self.to_scale(subtrahend.scale).degress - subtrahend.degrees' do
+      context 'and other has different scale than temperature' do
+        it 'returns temperature, where degrees = self.to_scale(other.scale).degress - other.degrees' do
           temperature = BasicTemperature.new(0, 'celcius')
-          subtrahend = BasicTemperature.new(30, 'kelvin')
+          other = BasicTemperature.new(30, 'kelvin')
 
-          new_temperature = temperature - subtrahend
+          new_temperature = temperature - other
 
-          expect(new_temperature.scale).to eq(subtrahend.scale)
+          expect(new_temperature.scale).to eq(other.scale)
           expect(new_temperature.degrees).to eq(243.14999999999998)
         end
       end
     end
 
-    context 'when subtrahend is neither Numeric nor Temperature' do
-      it 'raises InvalidSubtrahendError' do
+    context 'when other is neither Numeric nor Temperature' do
+      it 'raises InvalidotherError' do
         temperature = BasicTemperature.new(0, 'celcius')
-        subtrahend = 'abc'
+        other = 'abc'
 
-        expect { new_temperature = temperature - subtrahend }
-          .to raise_error(BasicTemperature::InvalidAddendError)
-          .with_message("`#{subtrahend}` is neither Numeric nor Temperature.")
+        expect { new_temperature = temperature - other }
+          .to raise_error(BasicTemperature::InvalidOtherError)
+          .with_message("`#{other}` is neither Numeric nor Temperature.")
       end
     end
   end

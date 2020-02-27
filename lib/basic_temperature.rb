@@ -1,10 +1,14 @@
+# frozen_string_literal: true
+
 require 'basic_temperature/version'
 
+# Value Object for basic temperature operations like conversions from Celcius to Fahrenhait or Kelvin etc.
+# rubocop:disable Metrics/ClassLength
 class BasicTemperature
   class InitializationArgumentsError < StandardError; end
   class InvalidDegreesError < StandardError; end
   class InvalidScaleError < StandardError; end
-  class InvalidAddendError < StandardError; end
+  class InvalidOtherError < StandardError; end
   class CoersionError < StandardError; end
 
   SCALES =
@@ -13,7 +17,6 @@ class BasicTemperature
       FAHRENHEIT = 'fahrenheit',
       KELVIN = 'kelvin'
     ]
-    .map(&:freeze)
     .freeze
 
   attr_reader :degrees, :scale
@@ -24,18 +27,22 @@ class BasicTemperature
 
     if keyword_arguments.any?
       initialize_via_keywords_arguments(keyword_arguments)
-    elsif positional_arguments.any?
+    else # positional_arguments.any?
       initialize_via_positional_arguments(positional_arguments)
     end
   end
 
+  # rubocop:disable Naming/AccessorMethodName
   def set_degrees(degrees)
     BasicTemperature.new(degrees, scale)
   end
+  # rubocop:enable Naming/AccessorMethodName
 
+  # rubocop:disable Naming/AccessorMethodName
   def set_scale(scale)
     self.to_scale(scale)
   end
+  # rubocop:enable Naming/AccessorMethodName
 
   def to_scale(scale)
     case cast_scale(scale)
@@ -98,28 +105,28 @@ class BasicTemperature
     @to_kelvin = BasicTemperature.new(degrees, KELVIN)
   end
 
-  def ==(other_temperature)
-    return false unless other_temperature.instance_of?(BasicTemperature)
+  def ==(other)
+    return false unless other.instance_of?(BasicTemperature)
 
-    self.degrees == other_temperature.degrees && self.scale == other_temperature.scale
+    self.degrees == other.degrees && self.scale == other.scale
   end
 
-  def +(addend)
+  def +(other)
     degrees, scale =
-      case addend
+      case other
       when Numeric
-        [self.degrees + addend, self.scale]
+        [self.degrees + other, self.scale]
       when BasicTemperature
-        [self.to_scale(addend.scale).degrees + addend.degrees, addend.scale]
+        [self.to_scale(other.scale).degrees + other.degrees, other.scale]
       else
-        raise_invalid_addend_error(addend)
+        raise_invalid_other_error(other)
       end
 
     BasicTemperature.new(degrees, scale)
   end
 
-  def -(subtrahend)
-    self + (-subtrahend)
+  def -(other)
+    self + -other
   end
 
   def -@
@@ -136,10 +143,10 @@ class BasicTemperature
     "#{degrees.to_i} #{scale.capitalize}"
   end
 
-  def <=>(other_temperature)
-    return unless other_temperature.instance_of?(BasicTemperature)
+  def <=>(other)
+    return unless other.instance_of?(BasicTemperature)
 
-    self.to_scale(other_temperature.scale).degrees <=> other_temperature.degrees
+    self.to_scale(other.scale).degrees <=> other.degrees
   end
 
   private
@@ -179,9 +186,7 @@ class BasicTemperature
   end
 
   def assert_numeric_or_temperature!(numeric_or_temperature)
-    if numeric_or_temperature.is_a?(Numeric) || numeric_or_temperature.instance_of?(BasicTemperature)
-      return
-    end
+    return if numeric_or_temperature.is_a?(Numeric) || numeric_or_temperature.instance_of?(BasicTemperature)
 
     raise_coersion_error(numeric_or_temperature)
   end
@@ -205,16 +210,17 @@ class BasicTemperature
   def raise_invalid_scale_error
     message =
       'scale has invalid value, ' \
-      "valid values are #{SCALES.map { |scale| "'#{scale}'"}.join(', ')}."
+      "valid values are #{SCALES.map { |scale| "'#{scale}'" }.join(', ')}."
 
     raise InvalidScaleError, message
   end
 
-  def raise_invalid_addend_error(addend)
-    raise InvalidAddendError, "`#{addend}` is neither Numeric nor Temperature."
+  def raise_invalid_other_error(other)
+    raise InvalidOtherError, "`#{other}` is neither Numeric nor Temperature."
   end
 
   def raise_coersion_error(object)
     raise CoersionError, "#{object} is neither Numeric nor Temperature."
   end
 end
+# rubocop:enable Metrics/ClassLength

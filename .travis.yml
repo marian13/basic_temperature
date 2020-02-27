@@ -14,4 +14,6 @@ rvm:
   - 2.6.0
   - 2.7.0
 
-script: bundle exec rspec spec
+script:
+  - bundle exec rubocop
+  - bundle exec rspec
