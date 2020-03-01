@@ -1,3 +1,5 @@
+require_relative 'coverage_helper'
+
 require "bundler/setup"
 require "basic_temperature"
 
