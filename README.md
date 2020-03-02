@@ -1,8 +1,4 @@
-[![Build Status](https://travis-ci.com/marian13/basic_temperature.svg?branch=master)](https://travis-ci.com/marian13/basic_temperature)
-
-[![Maintainability](https://api.codeclimate.com/v1/badges/a9acbc8db712f308d5f8/maintainability)](https://codeclimate.com/github/marian13/basic_temperature/maintainability)
-
-[![Coverage Status](https://coveralls.io/repos/github/marian13/basic_temperature/badge.svg)](https://coveralls.io/github/marian13/basic_temperature)
+[![Build Status](https://travis-ci.com/marian13/basic_temperature.svg?branch=master)](https://travis-ci.com/marian13/basic_temperature) [![Maintainability](https://api.codeclimate.com/v1/badges/a9acbc8db712f308d5f8/maintainability)](https://codeclimate.com/github/marian13/basic_temperature/maintainability) [![Coverage Status](https://coveralls.io/repos/github/marian13/basic_temperature/badge.svg)](https://coveralls.io/github/marian13/basic_temperature)
 
 # BasicTemperature
 
