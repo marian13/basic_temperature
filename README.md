@@ -1,3 +1,5 @@
+[![Maintainability](https://api.codeclimate.com/v1/badges/a9acbc8db712f308d5f8/maintainability)](https://codeclimate.com/github/marian13/basic_temperature/maintainability)
+
 # BasicTemperature
 
 Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/basic_temperature`. To experiment with that code, run `bin/console` for an interactive prompt.
