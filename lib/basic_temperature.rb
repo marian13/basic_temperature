@@ -108,7 +108,11 @@ class BasicTemperature
   def ==(other)
     return false unless other.instance_of?(BasicTemperature)
 
-    self.degrees == other.degrees && self.scale == other.scale
+    if self.scale == other.scale
+      self.degrees == other.degrees
+    else
+      self.to_scale(other.scale).degrees == other.degrees
+    end
   end
 
   def +(other)

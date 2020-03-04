@@ -309,39 +309,49 @@ RSpec.describe BasicTemperature do
       it 'returns false' do
         temperature = BasicTemperature.new(0, 'celcius')
 
-        other_temperature = nil
+        other = nil
 
-        expect(temperature == other_temperature).to eq(false)
+        expect(temperature == other).to eq(false)
       end
     end
 
-    context 'when temperature and other temperature do NOT have equal degrees' do
-      it 'returns false' do
-        temperature = BasicTemperature.new(0, 'celcius')
+    context 'when temperatures have the same scale' do
+      context 'when temperatures have different degrees' do
+        it 'returns false' do
+          temperature = BasicTemperature.new(0, 'celcius')
+          other = BasicTemperature.new(15, 'celcius')
 
-        other_temperature = BasicTemperature.new(15, 'celcius')
+          expect(temperature == other).to eq(false)
+        end
+      end
 
-        expect(temperature == other_temperature).to eq(false)
+      context 'when temperatures have the same degrees' do
+        it 'returns true' do
+          temperature = BasicTemperature.new(0, 'celcius')
+          other = BasicTemperature.new(0, 'celcius')
+
+          expect(temperature == other).to eq(true)
+        end
       end
     end
 
-    context 'when temperature and other temperature do NOT have equal scales' do
-      it 'returns false' do
-        temperature = BasicTemperature.new(0, 'celcius')
+    context 'when temperatures have different scales' do
+      context 'when converted first temperature does NOT have the same degrees as second temperature' do
+        it 'returns false' do
+          temperature = BasicTemperature.new(0, 'celcius')
+          other = BasicTemperature.new(0, 'kelvin')
 
-        other_temperature = BasicTemperature.new(0, 'kelvin')
-
-        expect(temperature == other_temperature).to eq(false)
+          expect(temperature == other).to eq(false)
+        end
       end
-    end
 
-    context 'when temperature and other temperature have equal degrees and scales' do
-      it 'returns true' do
-        temperature = BasicTemperature.new(0, 'celcius')
+      context 'when converted first temperature has the same degrees as second temperature' do
+        it 'returns true' do
+          temperature = BasicTemperature.new(0, 'celcius')
+          other = BasicTemperature.new(273.15, 'kelvin')
 
-        other_temperature = BasicTemperature.new(0, 'celcius')
-
-        expect(temperature == other_temperature).to eq(true)
+          expect(temperature == other).to eq(true)
+        end
       end
     end
   end
