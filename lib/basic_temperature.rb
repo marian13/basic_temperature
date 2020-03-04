@@ -5,6 +5,8 @@ require 'basic_temperature/version'
 # Value Object for basic temperature operations like conversions from Celsius to Fahrenhait or Kelvin etc.
 # rubocop:disable Metrics/ClassLength
 class BasicTemperature
+  include Comparable
+
   class InitializationArgumentsError < StandardError; end
   class InvalidDegreesError < StandardError; end
   class InvalidScaleError < StandardError; end
