@@ -12,7 +12,7 @@ Gem::Specification.new do |spec|
   spec.summary = 'Value object for basic temperature operations.'
   spec.description =
     'Value object for basic temperature operations like ' \
-    'conversions from Celcius to Fahrenhait or Kelvin etc.'
+    'conversions from Celsius to Fahrenhait or Kelvin etc.'
 
   spec.homepage = 'https://github.com/marian13/basic_temperature'
 
