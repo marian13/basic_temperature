@@ -2,7 +2,7 @@
 
 require 'basic_temperature/version'
 
-# Value Object for basic temperature operations like conversions from Celcius to Fahrenhait or Kelvin etc.
+# Value Object for basic temperature operations like conversions from Celsius to Fahrenhait or Kelvin etc.
 # rubocop:disable Metrics/ClassLength
 class BasicTemperature
   class InitializationArgumentsError < StandardError; end
@@ -13,7 +13,7 @@ class BasicTemperature
 
   SCALES =
     [
-      CELCIUS = 'celcius',
+      CELSIUS = 'celsius',
       FAHRENHEIT = 'fahrenheit',
       KELVIN = 'kelvin'
     ]
@@ -46,7 +46,7 @@ class BasicTemperature
 
   def to_scale(scale)
     case cast_scale(scale)
-    when CELCIUS
+    when CELSIUS
       to_celsius
     when FAHRENHEIT
       to_fahrenheit
@@ -60,7 +60,7 @@ class BasicTemperature
   def to_celsius
     return @to_celsius unless @to_celsius.nil?
 
-    return @to_celsius = self if self.scale == CELCIUS
+    return @to_celsius = self if self.scale == CELSIUS
 
     degrees =
       case self.scale
@@ -70,7 +70,7 @@ class BasicTemperature
         self.degrees - 273.15
       end
 
-    @to_celsius = BasicTemperature.new(degrees, CELCIUS)
+    @to_celsius = BasicTemperature.new(degrees, CELSIUS)
   end
 
   def to_fahrenheit
@@ -80,7 +80,7 @@ class BasicTemperature
 
     degrees =
       case self.scale
-      when CELCIUS
+      when CELSIUS
         self.degrees * (9 / 5r) + 32
       when KELVIN
         self.degrees * (9 / 5r) - 459.67
@@ -96,7 +96,7 @@ class BasicTemperature
 
     degrees =
       case self.scale
-      when CELCIUS
+      when CELSIUS
         self.degrees + 273.15
       when FAHRENHEIT
         (self.degrees + 459.67) * (5 / 9r)

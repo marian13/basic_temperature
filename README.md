@@ -6,7 +6,7 @@
 
 ![alt text](https://raw.githubusercontent.com/marian13/basic_temperature/master/logo.png)
 
-Basic Temperature is a Ruby library which provides a simple value object to work with temperatures and allows to perform basic operations like conversion from Celcius to Kelvin, from Kelvin to Fahrenheit etc.
+Basic Temperature is a Ruby library which provides a simple value object to work with temperatures and allows to perform basic operations like conversion from Celsius to Kelvin, from Kelvin to Fahrenheit etc.
 
 ### Features
 - Provides a `BasicTemperature` class which encapsulates all information about a certain
@@ -45,11 +45,11 @@ Or install it yourself as:
 ```ruby
 require 'basic_temperature'
 
-temperature = BasicTemperature.new(degrees: 20, scale: :celcius)
-# Scale can be one of celcius, kelvin or fahrenheit.
+temperature = BasicTemperature.new(degrees: 20, scale: :celsius)
+# Scale can be one of celsius, kelvin or fahrenheit.
 
-temperature.to_celcius
-# => 20 Celcius
+temperature.to_celsius
+# => 20 Celsius
 
 temperature.to_kelvin
 # => 293 Kelvin
@@ -67,9 +67,9 @@ temperature.to_scale(scale)
 Temperatures can be compared between each other.
 
 ```ruby
-temperature = BasicTemperature.new(degress: 0, scale: :celcius)
+temperature = BasicTemperature.new(degress: 0, scale: :celsius)
 
-other = BasicTemperature.new(degress: 0, scale: :celcius)
+other = BasicTemperature.new(degress: 0, scale: :celsius)
 
 temperature == other
 # => true
@@ -77,7 +77,7 @@ temperature == other
 
 When temperatures have different scales - conversion to common scale is handled under the hood.
 ```ruby
-temperature = BasicTemperature.new(degress: 0, scale: :celcius)
+temperature = BasicTemperature.new(degress: 0, scale: :celsius)
 
 other = BasicTemperature.new(degress: 273.15, scale: :kelvin)
 
