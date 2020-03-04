@@ -23,6 +23,8 @@ GEM
       ast (~> 2.4.0)
     rainbow (3.0.0)
     rake (12.3.3)
+    reverse_coverage (0.1.1)
+      rspec (~> 3.8)
     rexml (3.2.4)
     rspec (3.9.0)
       rspec-core (~> 3.9.0)
@@ -67,6 +69,7 @@ DEPENDENCIES
   byebug (~> 10.0)
   coveralls
   rake (~> 12.0)
+  reverse_coverage
   rspec (~> 3.0)
   rubocop (~> 0.80.0)
   simplecov
