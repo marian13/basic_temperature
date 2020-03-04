@@ -635,5 +635,9 @@ RSpec.describe BasicTemperature do
         expect(first_temperature <=> second_temperature).to eq(1)
       end
     end
+
+    it 'includes Comparable module' do
+      expect(BasicTemperature.ancestors).to include(Comparable)
+    end
   end
 end
