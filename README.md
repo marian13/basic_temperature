@@ -23,6 +23,14 @@ Add this line to your application's Gemfile:
 gem 'basic_temperature'
 ```
 
+#### Warning
+
+Since this gem is under active development and there are often backward-incompatible changes between minor releases, you might want to use a conservative version lock in your Gemfile:
+
+```ruby
+gem 'basic_temperature', '~> 0.2.1'
+```
+
 And then execute:
 
     $ bundle install
@@ -41,8 +49,10 @@ temperature = BasicTemperature.new(degrees: 20, scale: :celcius)
 
 temperature.to_celcius
 # => 20 Celcius
+
 temperature.to_kelvin
 # => 293 Kelvin
+
 temperature.to_fahrenheit
 # => 68 Fahrenheit
 ```
@@ -57,6 +67,7 @@ Temperatures can be compared between each other.
 
 ```ruby
 temperature = BasicTemperature.new(degress: 0, scale: :celcius)
+
 other = BasicTemperature.new(degress: 0, scale: :celcius)
 
 temperature == other
@@ -66,6 +77,7 @@ temperature == other
 When temperatures have different scales - conversion to common scale is handled under the hood.
 ```ruby
 temperature = BasicTemperature.new(degress: 0, scale: :celcius)
+
 other = BasicTemperature.new(degress: 273.15, scale: :kelvin)
 
 temperature == other
