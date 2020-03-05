@@ -1,28 +1,32 @@
-require 'basic_temperature'
+require 'basic_temperature/temperature'
 
-RSpec.describe BasicTemperature do
+RSpec.describe Temperature do
   it 'has a version number' do
-    expect(BasicTemperature::VERSION).not_to be nil
+    expect(Temperature::VERSION).not_to be_nil
+  end
+
+  it 'includes Comparable module' do
+    expect(Temperature.ancestors).to include(Comparable)
   end
 
   describe '.new' do
     context 'when only positional arguments are passed' do
       it 'creates an instance of temperature' do
-        temperature = BasicTemperature.new(0, 'celsius')
+        temperature = Temperature.new(0, 'celsius')
 
-        expect(temperature).to be_instance_of(BasicTemperature)
+        expect(temperature).to be_instance_of(Temperature)
       end
 
       it 'casts scale to string' do
-        temperature = BasicTemperature.new(0, :celsius)
+        temperature = Temperature.new(0, :celsius)
 
         expect(temperature.scale).to eq('celsius')
       end
 
       context 'and degrees is NOT a numeric value' do
         it 'raises InvalidDegreesError' do
-          expect { BasicTemperature.new('0', 'celsius') }
-            .to raise_error(BasicTemperature::InvalidDegreesError)
+          expect { Temperature.new('0', 'celsius') }
+            .to raise_error(Temperature::InvalidDegreesError)
             .with_message('degree is NOT a numeric value.')
         end
       end
@@ -33,8 +37,8 @@ RSpec.describe BasicTemperature do
             'scale has invalid value, ' \
             'valid values are \'celsius\', \'fahrenheit\', \'kelvin\'.'
 
-          expect { BasicTemperature.new(0, 'abc') }
-            .to raise_error(BasicTemperature::InvalidScaleError)
+          expect { Temperature.new(0, 'abc') }
+            .to raise_error(Temperature::InvalidScaleError)
             .with_message(message)
         end
       end
@@ -42,21 +46,21 @@ RSpec.describe BasicTemperature do
 
     context 'when only keyword arguments are passed' do
       it 'creates an instance of Temperature' do
-        temperature = BasicTemperature.new(degrees: 0, scale: 'celsius')
+        temperature = Temperature.new(degrees: 0, scale: 'celsius')
 
-        expect(temperature).to be_instance_of(BasicTemperature)
+        expect(temperature).to be_instance_of(Temperature)
       end
 
       it 'casts scale to string' do
-        temperature = BasicTemperature.new(degrees: 0, scale: :celsius)
+        temperature = Temperature.new(degrees: 0, scale: :celsius)
 
-        expect(temperature).to be_instance_of(BasicTemperature)
+        expect(temperature).to be_instance_of(Temperature)
       end
 
       context 'and degrees is NOT a numeric value' do
         it 'raises InvalidDegreesError' do
-          expect { BasicTemperature.new(degrees: '0', scale: 'celsius') }
-            .to raise_error(BasicTemperature::InvalidDegreesError)
+          expect { Temperature.new(degrees: '0', scale: 'celsius') }
+            .to raise_error(Temperature::InvalidDegreesError)
             .with_message('degree is NOT a numeric value.')
         end
       end
@@ -67,8 +71,8 @@ RSpec.describe BasicTemperature do
             'scale has invalid value, ' \
             'valid values are \'celsius\', \'fahrenheit\', \'kelvin\'.'
 
-          expect { BasicTemperature.new(degrees: 0, scale: 'abc') }
-            .to raise_error(BasicTemperature::InvalidScaleError)
+          expect { Temperature.new(degrees: 0, scale: 'abc') }
+            .to raise_error(Temperature::InvalidScaleError)
             .with_message(message)
         end
       end
@@ -80,8 +84,8 @@ RSpec.describe BasicTemperature do
           'Positional and keyword arguments are mixed or ' \
           'neither positional nor keyword arguments are passed.'
 
-        expect { BasicTemperature.new(0, 'celsius', degrees: 0, scale: 'celsius') }
-          .to raise_error(BasicTemperature::InitializationArgumentsError)
+        expect { Temperature.new(0, 'celsius', degrees: 0, scale: 'celsius') }
+          .to raise_error(Temperature::InitializationArgumentsError)
           .with_message(message)
       end
     end
@@ -92,8 +96,8 @@ RSpec.describe BasicTemperature do
           'Positional and keyword arguments are mixed or ' \
           'neither positional nor keyword arguments are passed.'
 
-        expect { BasicTemperature.new }
-          .to raise_error(BasicTemperature::InitializationArgumentsError)
+        expect { Temperature.new }
+          .to raise_error(Temperature::InitializationArgumentsError)
           .with_message(message)
       end
     end
@@ -102,20 +106,20 @@ RSpec.describe BasicTemperature do
   describe '#to_celsius' do
     context 'when temperature scale is celsius' do
       it 'returns temperature in celsius' do
-        temperature = BasicTemperature.new(0, 'celsius')
+        temperature = Temperature.new(0, 'celsius')
 
         expect(temperature.to_celsius.degrees).to eq(0)
         expect(temperature.to_celsius.scale).to eq('celsius')
       end
 
       it 'memoizes temperature in celsius' do
-        temperature = BasicTemperature.new(0, 'celsius')
+        temperature = Temperature.new(0, 'celsius')
 
         expect(temperature.to_celsius.object_id).to eq(temperature.to_celsius.object_id)
       end
 
       it 'returns original temperature object' do
-        temperature = BasicTemperature.new(0, 'celsius')
+        temperature = Temperature.new(0, 'celsius')
 
         expect(temperature.to_celsius.object_id).to eq(temperature.object_id)
       end
@@ -123,14 +127,14 @@ RSpec.describe BasicTemperature do
 
     context 'when temperature scale is fahrenheit' do
       it 'returns temperature in celsius' do
-        temperature = BasicTemperature.new(122, 'fahrenheit')
+        temperature = Temperature.new(122, 'fahrenheit')
 
         expect(temperature.to_celsius.degrees).to eq(50)
         expect(temperature.to_celsius.scale).to eq('celsius')
       end
 
       it 'memoizes temperature in celsius' do
-        temperature = BasicTemperature.new(122, 'fahrenheit')
+        temperature = Temperature.new(122, 'fahrenheit')
 
         expect(temperature.to_celsius.object_id).to eq(temperature.to_celsius.object_id)
       end
@@ -138,14 +142,14 @@ RSpec.describe BasicTemperature do
 
     context 'when temperatute scale is kelvin' do
       it 'returns temperature in celsius' do
-        temperature = BasicTemperature.new(273.15, 'kelvin')
+        temperature = Temperature.new(273.15, 'kelvin')
 
         expect(temperature.to_celsius.degrees).to eq(0)
         expect(temperature.to_celsius.scale).to eq('celsius')
       end
 
       it 'memoizes temperature in celsius' do
-        temperature = BasicTemperature.new(273.15, 'kelvin')
+        temperature = Temperature.new(273.15, 'kelvin')
 
         expect(temperature.to_celsius.object_id).to eq(temperature.to_celsius.object_id)
       end
@@ -155,20 +159,20 @@ RSpec.describe BasicTemperature do
   describe '#to_fahrenheit' do
     context 'when temperature scale is fahrenheit' do
       it 'returns temperature in fahrenheit' do
-        temperature = BasicTemperature.new(0, 'fahrenheit')
+        temperature = Temperature.new(0, 'fahrenheit')
 
         expect(temperature.to_fahrenheit.degrees).to eq(0)
         expect(temperature.to_fahrenheit.scale).to eq('fahrenheit')
       end
 
       it 'memoizes temperature in fahrenheit' do
-        temperature = BasicTemperature.new(0, 'fahrenheit')
+        temperature = Temperature.new(0, 'fahrenheit')
 
         expect(temperature.to_fahrenheit.object_id).to eq(temperature.to_fahrenheit.object_id)
       end
 
       it 'returns original temperature object' do
-        temperature = BasicTemperature.new(0, 'fahrenheit')
+        temperature = Temperature.new(0, 'fahrenheit')
 
         expect(temperature.to_fahrenheit.object_id).to eq(temperature.object_id)
       end
@@ -176,14 +180,14 @@ RSpec.describe BasicTemperature do
 
     context 'when temperature scale is celsius' do
       it 'returns temperature in fahrenheit' do
-        temperature = BasicTemperature.new(50, 'celsius')
+        temperature = Temperature.new(50, 'celsius')
 
         expect(temperature.to_fahrenheit.degrees).to eq(122)
         expect(temperature.to_fahrenheit.scale).to eq('fahrenheit')
       end
 
       it 'memoizes temperature in fahrenheit' do
-        temperature = BasicTemperature.new(50, 'celsius')
+        temperature = Temperature.new(50, 'celsius')
 
         expect(temperature.to_fahrenheit.object_id).to eq(temperature.to_fahrenheit.object_id)
       end
@@ -191,14 +195,14 @@ RSpec.describe BasicTemperature do
 
     context 'when temperatute scale is kelvin' do
       it 'returns new temperature in fahrenheit' do
-        temperature = BasicTemperature.new(288.71, 'kelvin')
+        temperature = Temperature.new(288.71, 'kelvin')
 
         expect(temperature.to_fahrenheit.degrees).to eq(60.00799999999998)
         expect(temperature.to_fahrenheit.scale).to eq('fahrenheit')
       end
 
       it 'memoizes temperature in fahrenheit' do
-        temperature = BasicTemperature.new(288.71, 'kelvin')
+        temperature = Temperature.new(288.71, 'kelvin')
 
         expect(temperature.to_fahrenheit.object_id).to eq(temperature.to_fahrenheit.object_id)
       end
@@ -208,20 +212,20 @@ RSpec.describe BasicTemperature do
   describe '#to_kelvin' do
     context 'when temperature scale is kelvin' do
       it 'returns temperature in kelvin' do
-        temperature = BasicTemperature.new(0, 'kelvin')
+        temperature = Temperature.new(0, 'kelvin')
 
         expect(temperature.to_kelvin.degrees).to eq(0)
         expect(temperature.to_kelvin.scale).to eq('kelvin')
       end
 
       it 'memoizes temperature in kelvin' do
-        temperature = BasicTemperature.new(0, 'celsius')
+        temperature = Temperature.new(0, 'celsius')
 
         expect(temperature.to_kelvin.object_id).to eq(temperature.to_kelvin.object_id)
       end
 
       it 'returns original temperature object' do
-        temperature = BasicTemperature.new(0, 'kelvin')
+        temperature = Temperature.new(0, 'kelvin')
 
         expect(temperature.to_kelvin.object_id).to eq(temperature.object_id)
       end
@@ -229,14 +233,14 @@ RSpec.describe BasicTemperature do
 
     context 'when temperature scale is celsius' do
       it 'returns temperature in kelvin' do
-        temperature = BasicTemperature.new(0, 'celsius')
+        temperature = Temperature.new(0, 'celsius')
 
         expect(temperature.to_kelvin.degrees).to eq(273.15)
         expect(temperature.to_kelvin.scale).to eq('kelvin')
       end
 
       it 'memoizes temperature in kelvin' do
-        temperature = BasicTemperature.new(0, 'celsius')
+        temperature = Temperature.new(0, 'celsius')
 
         expect(temperature.to_kelvin.object_id).to eq(temperature.to_kelvin.object_id)
       end
@@ -244,14 +248,14 @@ RSpec.describe BasicTemperature do
 
     context 'when temperatute scale is fahrenheit' do
       it 'returns temperature in kelvin' do
-        temperature = BasicTemperature.new(60.00799999999998, 'fahrenheit')
+        temperature = Temperature.new(60.00799999999998, 'fahrenheit')
 
         expect(temperature.to_kelvin.degrees).to eq(288.71000000000004)
         expect(temperature.to_kelvin.scale).to eq('kelvin')
       end
 
       it 'memoizes temperature in kelvin' do
-        temperature = BasicTemperature.new(60.00799999999998, 'fahrenheit')
+        temperature = Temperature.new(60.00799999999998, 'fahrenheit')
 
         expect(temperature.to_kelvin.object_id).to eq(temperature.to_kelvin.object_id)
       end
@@ -260,14 +264,14 @@ RSpec.describe BasicTemperature do
 
   describe '#to_scale' do
     it 'casts scale to string' do
-      temperature = BasicTemperature.new(0, :celsius)
+      temperature = Temperature.new(0, :celsius)
 
       expect(temperature.to_scale(:fahrenheit).scale).to eq('fahrenheit')
     end
 
     context 'when scale is celsius' do
       it 'returns temperature in celsius' do
-        temperature = BasicTemperature.new(0, 'celsius')
+        temperature = Temperature.new(0, 'celsius')
 
         expect(temperature.to_scale('celsius').scale).to eq('celsius')
       end
@@ -275,7 +279,7 @@ RSpec.describe BasicTemperature do
 
     context 'when scale is fahrenheit' do
       it 'returns temperature in fahrenheit' do
-        temperature = BasicTemperature.new(0, 'celsius')
+        temperature = Temperature.new(0, 'celsius')
 
         expect(temperature.to_scale('fahrenheit').scale).to eq('fahrenheit')
       end
@@ -283,7 +287,7 @@ RSpec.describe BasicTemperature do
 
     context 'when scale is kelvin' do
       it 'returns temperature in kelvin' do
-        temperature = BasicTemperature.new(0, 'celsius')
+        temperature = Temperature.new(0, 'celsius')
 
         expect(temperature.to_scale('kelvin').scale).to eq('kelvin')
       end
@@ -291,14 +295,14 @@ RSpec.describe BasicTemperature do
 
     context 'when scale is NOT valid (can not be casted to \'celsius\', \'fahrenheit\', \'kelvin\')' do
       it 'raises InvalidScaleError' do
-        temperature = BasicTemperature.new(0, 'celsius')
+        temperature = Temperature.new(0, 'celsius')
 
         message =
           'scale has invalid value, ' \
           'valid values are \'celsius\', \'fahrenheit\', \'kelvin\'.'
 
         expect { temperature.to_scale('abc') }
-          .to raise_error(BasicTemperature::InvalidScaleError)
+          .to raise_error(Temperature::InvalidScaleError)
           .with_message(message)
       end
     end
@@ -307,7 +311,7 @@ RSpec.describe BasicTemperature do
   describe '#==' do
     context 'when other temperature is NOT an instance of Temperature' do
       it 'returns false' do
-        temperature = BasicTemperature.new(0, 'celsius')
+        temperature = Temperature.new(0, 'celsius')
 
         other = nil
 
@@ -318,8 +322,8 @@ RSpec.describe BasicTemperature do
     context 'when temperatures have the same scale' do
       context 'when temperatures have different degrees' do
         it 'returns false' do
-          temperature = BasicTemperature.new(0, 'celsius')
-          other = BasicTemperature.new(15, 'celsius')
+          temperature = Temperature.new(0, 'celsius')
+          other = Temperature.new(15, 'celsius')
 
           expect(temperature == other).to eq(false)
         end
@@ -327,8 +331,8 @@ RSpec.describe BasicTemperature do
 
       context 'when temperatures have the same degrees' do
         it 'returns true' do
-          temperature = BasicTemperature.new(0, 'celsius')
-          other = BasicTemperature.new(0, 'celsius')
+          temperature = Temperature.new(0, 'celsius')
+          other = Temperature.new(0, 'celsius')
 
           expect(temperature == other).to eq(true)
         end
@@ -338,8 +342,8 @@ RSpec.describe BasicTemperature do
     context 'when temperatures have different scales' do
       context 'when converted first temperature does NOT have the same degrees as second temperature' do
         it 'returns false' do
-          temperature = BasicTemperature.new(0, 'celsius')
-          other = BasicTemperature.new(0, 'kelvin')
+          temperature = Temperature.new(0, 'celsius')
+          other = Temperature.new(0, 'kelvin')
 
           expect(temperature == other).to eq(false)
         end
@@ -347,18 +351,24 @@ RSpec.describe BasicTemperature do
 
       context 'when converted first temperature has the same degrees as second temperature' do
         it 'returns true' do
-          temperature = BasicTemperature.new(0, 'celsius')
-          other = BasicTemperature.new(273.15, 'kelvin')
+          temperature = Temperature.new(0, 'celsius')
+          other = Temperature.new(273.15, 'kelvin')
 
           expect(temperature == other).to eq(true)
         end
       end
     end
+
+    it 'rounds degrees up to 2 digits after decimal dot' do
+      expect(Temperature.new(0.1, 'celsius') == Temperature.new(0.2, 'celsius')).to eq(false)
+      expect(Temperature.new(0.01, 'celsius') == Temperature.new(0.02, 'celsius')).to eq(false)
+      expect(Temperature.new(0.001, 'celsius') == Temperature.new(0.002, 'celsius')).to eq(true)
+    end
   end
 
   describe '#set_degrees' do
     it 'returns a new temperature with updated degrees' do
-      temperature = BasicTemperature.new(0, 'celsius')
+      temperature = Temperature.new(0, 'celsius')
 
       new_temperature = temperature.set_degrees(25)
 
@@ -367,7 +377,7 @@ RSpec.describe BasicTemperature do
     end
 
     it 'preserves previous scale of temperature' do
-      temperature = BasicTemperature.new(0, 'celsius')
+      temperature = Temperature.new(0, 'celsius')
 
       new_temperature = temperature.set_degrees(25)
 
@@ -376,10 +386,10 @@ RSpec.describe BasicTemperature do
 
     context 'when degrees is NOT a numeric value' do
       it 'raises InvalidDegreesError' do
-        temperature = BasicTemperature.new(0, 'celsius')
+        temperature = Temperature.new(0, 'celsius')
 
         expect { new_temperature = temperature.set_degrees('abc') }
-          .to raise_error(BasicTemperature::InvalidDegreesError)
+          .to raise_error(Temperature::InvalidDegreesError)
           .with_message('degree is NOT a numeric value.')
       end
     end
@@ -387,7 +397,7 @@ RSpec.describe BasicTemperature do
 
   describe '#set_scale' do
     it 'returns a new temperature with updated scale' do
-      temperature = BasicTemperature.new(0, 'celsius')
+      temperature = Temperature.new(0, 'celsius')
 
       new_temperature = temperature.set_scale('kelvin')
 
@@ -396,7 +406,7 @@ RSpec.describe BasicTemperature do
     end
 
     it 'converts previous degrees of temperature' do
-      temperature = BasicTemperature.new(0, 'celsius')
+      temperature = Temperature.new(0, 'celsius')
 
       new_temperature = temperature.set_scale('kelvin')
 
@@ -405,14 +415,14 @@ RSpec.describe BasicTemperature do
 
     context 'when scale is NOT valid (can not be casted to \'celsius\', \'fahrenheit\', \'kelvin\')' do
       it 'raises InvalidScaleError' do
-        temperature = BasicTemperature.new(0, 'celsius')
+        temperature = Temperature.new(0, 'celsius')
 
         message =
           'scale has invalid value, ' \
           'valid values are \'celsius\', \'fahrenheit\', \'kelvin\'.'
 
         expect { new_temperature = temperature.set_scale('abc') }
-          .to raise_error(BasicTemperature::InvalidScaleError)
+          .to raise_error(Temperature::InvalidScaleError)
           .with_message(message)
       end
     end
@@ -421,7 +431,7 @@ RSpec.describe BasicTemperature do
   describe '#+' do
     context 'when other is a Numeric' do
       it 'returns temperature, where degrees = self.degress + other' do
-        temperature = BasicTemperature.new(0, 'celsius')
+        temperature = Temperature.new(0, 'celsius')
 
         new_temperature = temperature + 25
 
@@ -429,7 +439,7 @@ RSpec.describe BasicTemperature do
       end
 
       it 'supports coercion mechanism' do
-        temperature = BasicTemperature.new(0, 'celsius')
+        temperature = Temperature.new(0, 'celsius')
 
         new_temperature = 25 + temperature
 
@@ -439,8 +449,8 @@ RSpec.describe BasicTemperature do
 
     context 'when other is a Temperature' do
       it 'returns temperature, where degrees = self.degress + other.degrees' do
-        temperature = BasicTemperature.new(0, 'celsius')
-        other = BasicTemperature.new(30, 'celsius')
+        temperature = Temperature.new(0, 'celsius')
+        other = Temperature.new(30, 'celsius')
 
         new_temperature = temperature + other
 
@@ -449,8 +459,8 @@ RSpec.describe BasicTemperature do
 
       context 'and other has different scale than temperature' do
         it 'returns temperature, where degrees = self.to_scale(other.scale).degress + other.degrees' do
-          temperature = BasicTemperature.new(0, 'celsius')
-          other = BasicTemperature.new(30, 'kelvin')
+          temperature = Temperature.new(0, 'celsius')
+          other = Temperature.new(30, 'kelvin')
 
           new_temperature = temperature + other
 
@@ -461,12 +471,12 @@ RSpec.describe BasicTemperature do
     end
 
     context 'when other is neither Numeric nor Temperature' do
-      it 'raises CoersionError' do
-        temperature = BasicTemperature.new(0, 'celsius')
+      it 'raises InvalidNumericOrTemperatureError' do
+        temperature = Temperature.new(0, 'celsius')
         other = 'abc'
 
         expect { new_temperature = temperature + other }
-          .to raise_error(BasicTemperature::InvalidOtherError)
+          .to raise_error(Temperature::InvalidNumericOrTemperatureError)
           .with_message("`#{other}` is neither Numeric nor Temperature.")
       end
     end
@@ -475,7 +485,7 @@ RSpec.describe BasicTemperature do
   describe '#+' do
     context 'when other is a Numeric' do
       it 'returns temperature, where degrees = self.degress + other' do
-        temperature = BasicTemperature.new(0, 'celsius')
+        temperature = Temperature.new(0, 'celsius')
 
         new_temperature = temperature + 25
 
@@ -483,7 +493,7 @@ RSpec.describe BasicTemperature do
       end
 
       it 'supports coercion mechanism' do
-        temperature = BasicTemperature.new(0, 'celsius')
+        temperature = Temperature.new(0, 'celsius')
 
         new_temperature = 25 + temperature
 
@@ -493,8 +503,8 @@ RSpec.describe BasicTemperature do
 
     context 'when other is a Temperature' do
       it 'returns temperature, where degrees = self.degress + other.degrees' do
-        temperature = BasicTemperature.new(0, 'celsius')
-        other = BasicTemperature.new(30, 'celsius')
+        temperature = Temperature.new(0, 'celsius')
+        other = Temperature.new(30, 'celsius')
 
         new_temperature = temperature + other
 
@@ -503,8 +513,8 @@ RSpec.describe BasicTemperature do
 
       context 'and other has different scale than temperature' do
         it 'returns temperature, where degrees = self.to_scale(other.scale).degress + other.degrees' do
-          temperature = BasicTemperature.new(0, 'celsius')
-          other = BasicTemperature.new(30, 'kelvin')
+          temperature = Temperature.new(0, 'celsius')
+          other = Temperature.new(30, 'kelvin')
 
           new_temperature = temperature + other
 
@@ -516,11 +526,11 @@ RSpec.describe BasicTemperature do
 
     context 'when other is neither Numeric nor Temperature' do
       it 'raises InvalidotherError' do
-        temperature = BasicTemperature.new(0, 'celsius')
+        temperature = Temperature.new(0, 'celsius')
         other = 'abc'
 
         expect { new_temperature = temperature + other }
-          .to raise_error(BasicTemperature::InvalidOtherError)
+          .to raise_error(Temperature::InvalidNumericOrTemperatureError)
           .with_message("`#{other}` is neither Numeric nor Temperature.")
       end
     end
@@ -529,7 +539,7 @@ RSpec.describe BasicTemperature do
   describe '#-' do
     context 'when other is a Numeric' do
       it 'returns temperature, where degrees = self.degress - other' do
-        temperature = BasicTemperature.new(0, 'celsius')
+        temperature = Temperature.new(0, 'celsius')
 
         new_temperature = temperature - 25
 
@@ -537,7 +547,7 @@ RSpec.describe BasicTemperature do
       end
 
       it 'supports coercion mechanism' do
-        temperature = BasicTemperature.new(0, 'celsius')
+        temperature = Temperature.new(0, 'celsius')
 
         new_temperature = 25 - temperature
 
@@ -547,8 +557,8 @@ RSpec.describe BasicTemperature do
 
     context 'when other is a Temperature' do
       it 'returns temperature, where degrees = self.degress - other.degrees' do
-        temperature = BasicTemperature.new(0, 'celsius')
-        other = BasicTemperature.new(30, 'celsius')
+        temperature = Temperature.new(0, 'celsius')
+        other = Temperature.new(30, 'celsius')
 
         new_temperature = temperature - other
 
@@ -557,8 +567,8 @@ RSpec.describe BasicTemperature do
 
       context 'and other has different scale than temperature' do
         it 'returns temperature, where degrees = self.to_scale(other.scale).degress - other.degrees' do
-          temperature = BasicTemperature.new(0, 'celsius')
-          other = BasicTemperature.new(30, 'kelvin')
+          temperature = Temperature.new(0, 'celsius')
+          other = Temperature.new(30, 'kelvin')
 
           new_temperature = temperature - other
 
@@ -570,11 +580,11 @@ RSpec.describe BasicTemperature do
 
     context 'when other is neither Numeric nor Temperature' do
       it 'raises InvalidotherError' do
-        temperature = BasicTemperature.new(0, 'celsius')
+        temperature = Temperature.new(0, 'celsius')
         other = 'abc'
 
         expect { new_temperature = temperature - other }
-          .to raise_error(BasicTemperature::InvalidOtherError)
+          .to raise_error(Temperature::InvalidNumericOrTemperatureError)
           .with_message("`#{other}` is neither Numeric nor Temperature.")
       end
     end
@@ -582,7 +592,7 @@ RSpec.describe BasicTemperature do
 
   describe '#-@' do
     it 'returns temperature, where degrees = -self.degress' do
-      temperature = BasicTemperature.new(20, 'celsius')
+      temperature = Temperature.new(20, 'celsius')
 
       new_temperature = -temperature
 
@@ -593,8 +603,8 @@ RSpec.describe BasicTemperature do
   describe '#<=>' do
     context 'when first temperature is greater than second temperature' do
       it 'returns 1' do
-        first_temperature = BasicTemperature.new(21, 'celsius')
-        second_temperature = BasicTemperature.new(20, 'celsius')
+        first_temperature = Temperature.new(21, 'celsius')
+        second_temperature = Temperature.new(20, 'celsius')
 
         expect(first_temperature <=> second_temperature).to eq(1)
       end
@@ -602,8 +612,8 @@ RSpec.describe BasicTemperature do
 
     context 'when first temperature is lower than second temperature' do
       it 'returns -1' do
-        first_temperature = BasicTemperature.new(20, 'celsius')
-        second_temperature = BasicTemperature.new(21, 'celsius')
+        first_temperature = Temperature.new(20, 'celsius')
+        second_temperature = Temperature.new(21, 'celsius')
 
         expect(first_temperature <=> second_temperature).to eq(-1)
       end
@@ -611,8 +621,8 @@ RSpec.describe BasicTemperature do
 
     context 'when first temperature equals second temperature' do
       it 'returns 0' do
-        first_temperature = BasicTemperature.new(20, 'celsius')
-        second_temperature = BasicTemperature.new(20, 'celsius')
+        first_temperature = Temperature.new(20, 'celsius')
+        second_temperature = Temperature.new(20, 'celsius')
 
         expect(first_temperature <=> second_temperature).to eq(0)
       end
@@ -620,7 +630,7 @@ RSpec.describe BasicTemperature do
 
     context 'when second temperature is NOT a Temperature' do
       it 'returns nil' do
-        first_temperature = BasicTemperature.new(20, 'celsius')
+        first_temperature = Temperature.new(20, 'celsius')
         second_temperature = 'abc'
 
         expect(first_temperature <=> second_temperature).to be_nil
@@ -629,15 +639,25 @@ RSpec.describe BasicTemperature do
 
     context 'when first and second temperatures have different scales' do
       it 'converts first temperature to second temperature scale' do
-        first_temperature = BasicTemperature.new(20, 'celsius')
-        second_temperature = BasicTemperature.new(250, 'kelvin')
+        first_temperature = Temperature.new(20, 'celsius')
+        second_temperature = Temperature.new(250, 'kelvin')
 
         expect(first_temperature <=> second_temperature).to eq(1)
       end
     end
 
-    it 'includes Comparable module' do
-      expect(BasicTemperature.ancestors).to include(Comparable)
+    it 'rounds degrees up to 2 digits after decimal dot' do
+      expect(Temperature.new(0.1, 'celsius') == Temperature.new(0.2, 'celsius')).to eq(false)
+      expect(Temperature.new(0.01, 'celsius') == Temperature.new(0.02, 'celsius')).to eq(false)
+      expect(Temperature.new(0.001, 'celsius') == Temperature.new(0.002, 'celsius')).to eq(true)
+    end
+  end
+
+  describe '#inspect' do
+    it 'returns tempeture as string in special format' do
+      temperature = Temperature.new(0.1, 'celsius')
+
+      expect(temperature.inspect).to eq("#{temperature.degrees.to_i} #{temperature.scale.capitalize}")
     end
   end
 end

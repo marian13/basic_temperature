@@ -9,5 +9,11 @@ AllCops:
 Layout/LineLength:
   Max: 110
 
+Metrics/MethodLength:
+  Max: 15
+
+Style/Lambda:
+  EnforcedStyle: literal
+
 Style/RedundantSelf:
   Enabled: No
