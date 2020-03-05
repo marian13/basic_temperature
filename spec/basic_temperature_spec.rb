@@ -31,11 +31,11 @@ RSpec.describe Temperature do
         end
       end
 
-      context 'and scale is NOT valid (can not be casted to \'celsius\', \'fahrenheit\', \'kelvin\')' do
+      context 'and scale is NOT valid (can not be casted to \'celsius\', \'fahrenheit\', \'kelvin\', \'rankine\')' do
         it 'raises InvalidScaleError' do
           message =
             'scale has invalid value, ' \
-            'valid values are \'celsius\', \'fahrenheit\', \'kelvin\'.'
+            'valid values are \'celsius\', \'fahrenheit\', \'kelvin\', \'rankine\'.'
 
           expect { Temperature.new(0, 'abc') }
             .to raise_error(Temperature::InvalidScaleError)
@@ -65,11 +65,11 @@ RSpec.describe Temperature do
         end
       end
 
-      context 'and scale is NOT valid (can not be casted to \'celsius\', \'fahrenheit\', \'kelvin\')' do
+      context 'and scale is NOT valid (can not be casted to \'celsius\', \'fahrenheit\', \'kelvin\', \'rankine\')' do
         it 'raises InvalidScaleError' do
           message =
             'scale has invalid value, ' \
-            'valid values are \'celsius\', \'fahrenheit\', \'kelvin\'.'
+            'valid values are \'celsius\', \'fahrenheit\', \'kelvin\', \'rankine\'.'
 
           expect { Temperature.new(degrees: 0, scale: 'abc') }
             .to raise_error(Temperature::InvalidScaleError)
@@ -160,6 +160,21 @@ RSpec.describe Temperature do
         expect(temperature.to_celsius.object_id).to eq(temperature.to_celsius.object_id)
       end
     end
+
+    context 'when temperatute scale is rankine' do
+      it 'returns temperature in celsius' do
+        temperature = Temperature.new(300, 'rankine')
+
+        expect(temperature.to_celsius.degrees).to be_within(0.01).of(-106.48)
+        expect(temperature.to_celsius.scale).to eq('celsius')
+      end
+
+      it 'memoizes temperature in celsius' do
+        temperature = Temperature.new(300, 'rankine')
+
+        expect(temperature.to_celsius.object_id).to eq(temperature.to_celsius.object_id)
+      end
+    end
   end
 
   describe '#to_fahrenheit' do
@@ -209,6 +224,21 @@ RSpec.describe Temperature do
 
       it 'memoizes temperature in fahrenheit' do
         temperature = Temperature.new(288.71, 'kelvin')
+
+        expect(temperature.to_fahrenheit.object_id).to eq(temperature.to_fahrenheit.object_id)
+      end
+    end
+
+    context 'when temperatute scale is rankine' do
+      it 'returns temperature in fahrenheit' do
+        temperature = Temperature.new(300, 'rankine')
+
+        expect(temperature.to_fahrenheit.degrees).to be_within(0.01).of(-159.67)
+        expect(temperature.to_fahrenheit.scale).to eq('fahrenheit')
+      end
+
+      it 'memoizes temperature in fahrenheit' do
+        temperature = Temperature.new(300, 'rankine')
 
         expect(temperature.to_fahrenheit.object_id).to eq(temperature.to_fahrenheit.object_id)
       end
@@ -266,6 +296,89 @@ RSpec.describe Temperature do
         expect(temperature.to_kelvin.object_id).to eq(temperature.to_kelvin.object_id)
       end
     end
+
+    context 'when temperatute scale is rankine' do
+      it 'returns temperature in kelvin' do
+        temperature = Temperature.new(300, 'rankine')
+
+        expect(temperature.to_kelvin.degrees).to be_within(0.01).of(166.67)
+        expect(temperature.to_kelvin.scale).to eq('kelvin')
+      end
+
+      it 'memoizes temperature in kelvin' do
+        temperature = Temperature.new(300, 'rankine')
+
+        expect(temperature.to_kelvin.object_id).to eq(temperature.to_kelvin.object_id)
+      end
+    end
+  end
+
+  describe '#to_rankine' do
+    context 'when temperature scale is rankine' do
+      it 'returns temperature in rankine' do
+        temperature = Temperature.new(0, 'rankine')
+
+        expect(temperature.to_rankine.degrees).to eq(0)
+        expect(temperature.to_rankine.scale).to eq('rankine')
+      end
+
+      it 'memoizes temperature in rankine' do
+        temperature = Temperature.new(0, 'rankine')
+
+        expect(temperature.to_rankine.object_id).to eq(temperature.to_rankine.object_id)
+      end
+
+      it 'returns original temperature object' do
+        temperature = Temperature.new(0, 'rankine')
+
+        expect(temperature.to_rankine.object_id).to eq(temperature.object_id)
+      end
+    end
+
+    context 'when temperature scale is celsius' do
+      it 'returns temperature in rankine' do
+        temperature = Temperature.new(20, 'celsius')
+
+        expect(temperature.to_rankine.degrees).to be_within(0.01).of(527.67)
+        expect(temperature.to_rankine.scale).to eq('rankine')
+      end
+
+      it 'memoizes temperature in rankine' do
+        temperature = Temperature.new(20, 'celsius')
+
+        expect(temperature.to_rankine.object_id).to eq(temperature.to_rankine.object_id)
+      end
+    end
+
+    context 'when temperature scale is fahrenheit' do
+      it 'returns temperature in rankine' do
+        temperature = Temperature.new(68, 'fahrenheit')
+
+        expect(temperature.to_rankine.degrees).to be_within(0.01).of(527.67)
+        expect(temperature.to_rankine.scale).to eq('rankine')
+      end
+
+      it 'memoizes temperature in rankine' do
+        temperature = Temperature.new(68, 'fahrenheit')
+
+        expect(temperature.to_rankine.object_id).to eq(temperature.to_rankine.object_id)
+      end
+    end
+
+    context 'when temperatute scale is kelvin' do
+      it 'returns temperature in rankine' do
+        temperature = Temperature.new(300, 'kelvin')
+
+        expect(temperature.to_rankine.degrees).to be_within(0.01).of(540)
+        expect(temperature.to_rankine.scale).to eq('rankine')
+      end
+
+      it 'memoizes temperature in celsius' do
+        temperature = Temperature.new(300, 'kelvin')
+
+        expect(temperature.to_rankine.object_id).to eq(temperature.to_rankine.object_id)
+      end
+    end
   end
 
   describe '#to_scale' do
@@ -299,13 +412,21 @@ RSpec.describe Temperature do
       end
     end
 
-    context 'when scale is NOT valid (can not be casted to \'celsius\', \'fahrenheit\', \'kelvin\')' do
+    context 'when scale is rankine' do
+      it 'returns temperature in rankine' do
+        temperature = Temperature.new(0, 'celsius')
+
+        expect(temperature.to_scale('rankine').scale).to eq('rankine')
+      end
+    end
+
+    context 'when scale is NOT valid (can not be casted to \'celsius\', \'fahrenheit\', \'kelvin\', \'rankine\')' do
       it 'raises InvalidScaleError' do
         temperature = Temperature.new(0, 'celsius')
 
         message =
           'scale has invalid value, ' \
-          'valid values are \'celsius\', \'fahrenheit\', \'kelvin\'.'
+          'valid values are \'celsius\', \'fahrenheit\', \'kelvin\', \'rankine\'.'
 
         expect { temperature.to_scale('abc') }
           .to raise_error(Temperature::InvalidScaleError)
@@ -419,13 +540,13 @@ RSpec.describe Temperature do
       expect(new_temperature.degrees).to eq(273.15)
     end
 
-    context 'when scale is NOT valid (can not be casted to \'celsius\', \'fahrenheit\', \'kelvin\')' do
+    context 'when scale is NOT valid (can not be casted to \'celsius\', \'fahrenheit\', \'kelvin\', \'rankine\')' do
       it 'raises InvalidScaleError' do
         temperature = Temperature.new(0, 'celsius')
 
         message =
           'scale has invalid value, ' \
-          'valid values are \'celsius\', \'fahrenheit\', \'kelvin\'.'
+          'valid values are \'celsius\', \'fahrenheit\', \'kelvin\', \'rankine\'.'
 
         expect { new_temperature = temperature.set_scale('abc') }
           .to raise_error(Temperature::InvalidScaleError)
