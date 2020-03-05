@@ -16,7 +16,8 @@ class BasicTemperature
     [
       CELSIUS = 'celsius',
       FAHRENHEIT = 'fahrenheit',
-      KELVIN = 'kelvin'
+      KELVIN = 'kelvin',
+      RANKINE = 'rankine'
     ]
     .freeze
 
@@ -60,6 +61,8 @@ class BasicTemperature
       to_fahrenheit
     when KELVIN
       to_kelvin
+    when RANKINE
+      to_rankine
     end
   end
 
@@ -73,6 +76,8 @@ class BasicTemperature
           (self.degrees - 32) * (5 / 9r)
         when KELVIN
           self.degrees - 273.15
+        when RANKINE
+          (self.degrees - 491.67) * (5 / 9r)
         end
 
       BasicTemperature.new(degrees, CELSIUS)
@@ -89,6 +94,8 @@ class BasicTemperature
           self.degrees * (9 / 5r) + 32
         when KELVIN
           self.degrees * (9 / 5r) - 459.67
+        when RANKINE
+          self.degrees - 459.67
         end
 
       BasicTemperature.new(degrees, FAHRENHEIT)
@@ -105,9 +112,29 @@ class BasicTemperature
           self.degrees + 273.15
         when FAHRENHEIT
           (self.degrees + 459.67) * (5 / 9r)
+        when RANKINE
+          self.degrees * (5 / 9r)
         end
 
       BasicTemperature.new(degrees, KELVIN)
+    })
+  end
+
+  def to_rankine
+    memoized(:to_rankine) || memoize(:to_rankine, -> {
+      return self if self.scale == RANKINE
+
+      degrees =
+        case self.scale
+        when CELSIUS
+          (self.degrees + 273.15) * (9 / 5r)
+        when FAHRENHEIT
+          self.degrees + 459.67
+        when KELVIN
+          self.degrees * (9 / 5r)
+        end
+
+      BasicTemperature.new(degrees, RANKINE)
     })
   end
 
