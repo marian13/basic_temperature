@@ -22,6 +22,10 @@ class BasicTemperature
 
   attr_reader :degrees, :scale
 
+  class << self
+    alias [] new
+  end
+
   def initialize(*positional_arguments, **keyword_arguments)
     assert_either_positional_arguments_or_keyword_arguments!(positional_arguments, keyword_arguments)
 

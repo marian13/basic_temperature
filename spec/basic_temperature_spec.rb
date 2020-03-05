@@ -103,6 +103,12 @@ RSpec.describe Temperature do
     end
   end
 
+  describe '.[]' do
+    it 'is an alias of .new' do
+      Temperature.method(:[]) == Temperature.method(:new)
+    end
+  end
+
   describe '#to_celsius' do
     context 'when temperature scale is celsius' do
       it 'returns temperature in celsius' do
