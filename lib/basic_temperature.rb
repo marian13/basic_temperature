@@ -177,7 +177,28 @@ class BasicTemperature
   end
 
   def inspect
-    "#{degrees.to_i} #{scale.capitalize}"
+    rounded_degrees = round_degrees(degrees)
+
+    printable_degrees =
+      if has_decimal?(rounded_degrees)
+        rounded_degrees
+      else
+        rounded_degrees.to_i
+      end
+
+    scale_symbol =
+      case self.scale
+      when CELSIUS
+        '°C'
+      when FAHRENHEIT
+        '°F'
+      when KELVIN
+        'K'
+      when RANKINE
+        '°R'
+      end
+
+    "#{printable_degrees} #{scale_symbol}"
   end
 
   def <=>(other)
@@ -280,6 +301,10 @@ class BasicTemperature
 
   def compare_degrees(first_degrees, second_degrees)
     round_degrees(first_degrees) <=> round_degrees(second_degrees)
+  end
+
+  def has_decimal?(number)
+    number % 1 != 0
   end
 
   # Memoization

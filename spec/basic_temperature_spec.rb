@@ -133,14 +133,14 @@ RSpec.describe Temperature do
 
     context 'when temperature scale is fahrenheit' do
       it 'returns temperature in celsius' do
-        temperature = Temperature.new(122, 'fahrenheit')
+        temperature = Temperature.new(68, 'fahrenheit')
 
-        expect(temperature.to_celsius.degrees).to eq(50)
+        expect(temperature.to_celsius.degrees).to be_within(0.01).of(20)
         expect(temperature.to_celsius.scale).to eq('celsius')
       end
 
       it 'memoizes temperature in celsius' do
-        temperature = Temperature.new(122, 'fahrenheit')
+        temperature = Temperature.new(68, 'fahrenheit')
 
         expect(temperature.to_celsius.object_id).to eq(temperature.to_celsius.object_id)
       end
@@ -148,14 +148,14 @@ RSpec.describe Temperature do
 
     context 'when temperatute scale is kelvin' do
       it 'returns temperature in celsius' do
-        temperature = Temperature.new(273.15, 'kelvin')
+        temperature = Temperature.new(300, 'kelvin')
 
-        expect(temperature.to_celsius.degrees).to eq(0)
+        expect(temperature.to_celsius.degrees).to be_within(0.01).of(26.85)
         expect(temperature.to_celsius.scale).to eq('celsius')
       end
 
       it 'memoizes temperature in celsius' do
-        temperature = Temperature.new(273.15, 'kelvin')
+        temperature = Temperature.new(300, 'kelvin')
 
         expect(temperature.to_celsius.object_id).to eq(temperature.to_celsius.object_id)
       end
@@ -201,14 +201,14 @@ RSpec.describe Temperature do
 
     context 'when temperature scale is celsius' do
       it 'returns temperature in fahrenheit' do
-        temperature = Temperature.new(50, 'celsius')
+        temperature = Temperature.new(20, 'celsius')
 
-        expect(temperature.to_fahrenheit.degrees).to eq(122)
+        expect(temperature.to_fahrenheit.degrees).to be_within(0.01).of(68)
         expect(temperature.to_fahrenheit.scale).to eq('fahrenheit')
       end
 
       it 'memoizes temperature in fahrenheit' do
-        temperature = Temperature.new(50, 'celsius')
+        temperature = Temperature.new(20, 'celsius')
 
         expect(temperature.to_fahrenheit.object_id).to eq(temperature.to_fahrenheit.object_id)
       end
@@ -216,14 +216,14 @@ RSpec.describe Temperature do
 
     context 'when temperatute scale is kelvin' do
       it 'returns new temperature in fahrenheit' do
-        temperature = Temperature.new(288.71, 'kelvin')
+        temperature = Temperature.new(300, 'kelvin')
 
-        expect(temperature.to_fahrenheit.degrees).to eq(60.00799999999998)
+        expect(temperature.to_fahrenheit.degrees).to be_within(0.01).of(80.33)
         expect(temperature.to_fahrenheit.scale).to eq('fahrenheit')
       end
 
       it 'memoizes temperature in fahrenheit' do
-        temperature = Temperature.new(288.71, 'kelvin')
+        temperature = Temperature.new(300, 'kelvin')
 
         expect(temperature.to_fahrenheit.object_id).to eq(temperature.to_fahrenheit.object_id)
       end
@@ -269,14 +269,14 @@ RSpec.describe Temperature do
 
     context 'when temperature scale is celsius' do
       it 'returns temperature in kelvin' do
-        temperature = Temperature.new(0, 'celsius')
+        temperature = Temperature.new(20, 'celsius')
 
-        expect(temperature.to_kelvin.degrees).to eq(273.15)
+        expect(temperature.to_kelvin.degrees).to be_within(0.01).of(293.15)
         expect(temperature.to_kelvin.scale).to eq('kelvin')
       end
 
       it 'memoizes temperature in kelvin' do
-        temperature = Temperature.new(0, 'celsius')
+        temperature = Temperature.new(20, 'celsius')
 
         expect(temperature.to_kelvin.object_id).to eq(temperature.to_kelvin.object_id)
       end
@@ -284,14 +284,14 @@ RSpec.describe Temperature do
 
     context 'when temperatute scale is fahrenheit' do
       it 'returns temperature in kelvin' do
-        temperature = Temperature.new(60.00799999999998, 'fahrenheit')
+        temperature = Temperature.new(60, 'fahrenheit')
 
-        expect(temperature.to_kelvin.degrees).to eq(288.71000000000004)
+        expect(temperature.to_kelvin.degrees).to be_within(0.01).of(288.71)
         expect(temperature.to_kelvin.scale).to eq('kelvin')
       end
 
       it 'memoizes temperature in kelvin' do
-        temperature = Temperature.new(60.00799999999998, 'fahrenheit')
+        temperature = Temperature.new(60, 'fahrenheit')
 
         expect(temperature.to_kelvin.object_id).to eq(temperature.to_kelvin.object_id)
       end
@@ -781,10 +781,76 @@ RSpec.describe Temperature do
   end
 
   describe '#inspect' do
-    it 'returns tempeture as string in special format' do
-      temperature = Temperature.new(0.1, 'celsius')
+    context 'when scale is celcius' do
+      it 'returns tempeture as string in special format' do
+        temperature = Temperature.new(0, 'celsius')
 
-      expect(temperature.inspect).to eq("#{temperature.degrees.to_i} #{temperature.scale.capitalize}")
+        expect(temperature.inspect).to eq('0 °C')
+      end
+
+      it 'rounds degrees up to 2 digits after decimal dot' do
+        expect(Temperature.new(0.1, 'celsius').inspect).to eq('0.1 °C')
+        expect(Temperature.new(0.01, 'celsius').inspect).to eq('0.01 °C')
+        expect(Temperature.new(0.001, 'celsius').inspect).to eq('0 °C')
+      end
+
+      it 'prints float without decimal part as integer' do
+        expect(Temperature.new(0.0, 'celsius').inspect).to eq('0 °C')
+      end
+    end
+
+    context 'when scale is fahrenheit' do
+      it 'returns tempeture as string in special format' do
+        temperature = Temperature.new(0, 'fahrenheit')
+
+        expect(temperature.inspect).to eq('0 °F')
+      end
+
+      it 'rounds degrees up to 2 digits after decimal dot' do
+        expect(Temperature.new(0.1, 'fahrenheit').inspect).to eq('0.1 °F')
+        expect(Temperature.new(0.01, 'fahrenheit').inspect).to eq('0.01 °F')
+        expect(Temperature.new(0.001, 'fahrenheit').inspect).to eq('0 °F')
+      end
+
+      it 'prints float without decimal part as integer' do
+        expect(Temperature.new(0.0, 'fahrenheit').inspect).to eq('0 °F')
+      end
+    end
+
+    context 'when scale is kelvin' do
+      it 'returns tempeture as string in special format' do
+        temperature = Temperature.new(0, 'kelvin')
+
+        expect(temperature.inspect).to eq('0 K')
+      end
+
+      it 'rounds degrees up to 2 digits after decimal dot' do
+        expect(Temperature.new(0.1, 'kelvin').inspect).to eq('0.1 K')
+        expect(Temperature.new(0.01, 'kelvin').inspect).to eq('0.01 K')
+        expect(Temperature.new(0.001, 'kelvin').inspect).to eq('0 K')
+      end
+
+      it 'prints float without decimal part as integer' do
+        expect(Temperature.new(0.0, 'kelvin').inspect).to eq('0 K')
+      end
+    end
+
+    context 'when scale is rankine' do
+      it 'returns tempeture as string in special format' do
+        temperature = Temperature.new(0, 'rankine')
+
+        expect(temperature.inspect).to eq('0 °R')
+      end
+
+      it 'rounds degrees up to 2 digits after decimal dot' do
+        expect(Temperature.new(0.1, 'rankine').inspect).to eq('0.1 °R')
+        expect(Temperature.new(0.01, 'rankine').inspect).to eq('0.01 °R')
+        expect(Temperature.new(0.001, 'rankine').inspect).to eq('0 °R')
+      end
+
+      it 'prints float without decimal part as integer' do
+        expect(Temperature.new(0.0, 'rankine').inspect).to eq('0 °R')
+      end
     end
   end
 end
