@@ -179,12 +179,7 @@ class BasicTemperature
   def inspect
     rounded_degrees = round_degrees(degrees)
 
-    printable_degrees =
-      if has_decimal?(rounded_degrees)
-        rounded_degrees
-      else
-        rounded_degrees.to_i
-      end
+    printable_degrees = degrees_without_decimal?(rounded_degrees) ? rounded_degrees.to_i : rounded_degrees
 
     scale_symbol =
       case self.scale
@@ -303,8 +298,12 @@ class BasicTemperature
     round_degrees(first_degrees) <=> round_degrees(second_degrees)
   end
 
-  def has_decimal?(number)
-    number % 1 != 0
+  def degrees_with_decimal?(degrees)
+    degrees % 1 != 0
+  end
+
+  def degrees_without_decimal?(degrees)
+    !degrees_with_decimal?(degrees)
   end
 
   # Memoization
