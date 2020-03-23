@@ -107,7 +107,7 @@ require 'basic_temperature/version'
 #   # => true
 #
 #   # Starting from Ruby 2.4.6
-#   Temperature[20, :celsius].clamp?(Temperature[20, :celsius], Temperature[25, :celsius])
+#   Temperature[20, :celsius].clamp(Temperature[20, :celsius], Temperature[25, :celsius])
 #   # => 20 °C
 #
 # Please note, if <tt>other</tt> temperature has a different scale, temperature is automatically converted

@@ -22,6 +22,10 @@ Rankine).
 [.travis-ci.yml](https://github.com/marian13/basic_temperature/blob/9b13cb9909b57c51bb5dc05a8989d07a314e67d6/.travis.yml)
 for the exact versions.
 
+### Dependecies
+
+* None.
+
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -152,7 +156,7 @@ Temperature[20, :celsius].between?(Temperature[15, :celsius], Temperature[25, :c
 # => true
 
 # Starting from Ruby 2.4.6
-Temperature[20, :celsius].clamp?(Temperature[20, :celsius], Temperature[25, :celsius])
+Temperature[20, :celsius].clamp(Temperature[20, :celsius], Temperature[25, :celsius])
 # => 20 °C
 ```
 
