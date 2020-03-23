@@ -20,10 +20,6 @@ script:
   - bundle exec rspec
 
 # DOCS: https://gist.github.com/maxpou/bc3eb944aa727d352f85bc0ce8bc082c
-before_deploy:
-  - rm -rf sdoc/
-  - bundle exec sdoc lib -T rails -o sdoc
-
 deploy:
   provider: pages
   cleanup: true
