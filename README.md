@@ -6,15 +6,21 @@
 
 ![alt text](https://raw.githubusercontent.com/marian13/basic_temperature/master/logo.png)
 
-Basic Temperature is a Ruby library which provides a simple value object to work with temperatures and allows to perform basic operations like conversion from Celsius to Kelvin, from Kelvin to Fahrenheit etc.
+`basic_temperature` is a Ruby library which provides a simple [value object](https://martinfowler.com/bliki/ValueObject.html) to work with temperatures and 
+allows to perform basic operations like conversion from Celsius to Kelvin, from Kelvin to Fahrenheit etc.
+
 
 ### Features
-- Provides a `BasicTemperature` class which encapsulates all information about a certain
-  temperature, such as its amount of degrees and its scale.
-- Provides APIs for exchanging temperatures from one scale to another (currently Celsius, Kelvin and Fahrenheit).
+- Provides a `BasicTemperature` class which encapsulates all information about a certain  temperature, such
+as its amount of degrees and its scale.
+- Provides APIs for exchanging temperatures from one scale to another (currently Celsius, Fahrenheit, Kelvin and
+Rankine).
+
 - Allows comparing temperatures between each other.
 - Supports basic math operations like addition and subtraction.
-- Tested against Ruby 2.3, 2.4, 2.5, 2.6 & 2.7. See [.travis-ci.yml](https://github.com/marian13/basic_temperature/blob/9b13cb9909b57c51bb5dc05a8989d07a314e67d6/.travis.yml) for the exact versions.
+- Tested against Ruby 2.3, 2.4, 2.5, 2.6 & 2.7. See
+[.travis-ci.yml](https://github.com/marian13/basic_temperature/blob/9b13cb9909b57c51bb5dc05a8989d07a314e67d6/.travis.yml)
+for the exact versions.
 
 ## Installation
 
@@ -42,47 +48,192 @@ Or install it yourself as:
 
 ## Usage
 
+### Creating Temperatures
+
+A new temperature can be created in multiple ways:
+
+- Using keyword arguments:
+
 ```ruby
-require 'basic_temperature'
-
-temperature = BasicTemperature.new(degrees: 20, scale: :celsius)
-# Scale can be one of celsius, kelvin or fahrenheit.
-
-temperature.to_celsius
-# => 20 Celsius
-
-temperature.to_kelvin
-# => 293 Kelvin
-
-temperature.to_fahrenheit
-# => 68 Fahrenheit
+Temperature.new(degrees: 0, scale: :celsius)
 ```
 
-You can try to utilize `BasicTemperature#to_scale` if you need to convert temperatures dynamically, for example:
+- Using positional arguments:
 
 ```ruby
-temperature.to_scale(scale)
+Temperature.new(0, :celsius)
 ```
 
-Temperatures can be compared between each other.
+- Even more concise way using `Temperature.[]` (an alias of `Temperature.new`):
 
 ```ruby
-temperature = BasicTemperature.new(degress: 0, scale: :celsius)
+Temperature[0, :celsius]
+```
 
-other = BasicTemperature.new(degress: 0, scale: :celsius)
+### Creating Temperatures from already existing temperature objects
 
-temperature == other
+Sometimes it is useful to create a new temperature from already existing one.
+
+For such cases, there are `set_degrees` and `set_scale`.
+
+Since temperatures are [value objects](https://martinfowler.com/bliki/ValueObject.html), both methods returns
+new instances.
+
+Examples:
+
+```ruby
+temperature = Temperature[0, :celsius]
+# => 0 °C
+
+new_temperature = temperature.set_degrees(15)
+# => 15 °C
+
+temperature = Temperature[0, :celsius]
+# => 0 °C
+
+new_temperature = temperature.set_scale(:kelvin)
+# => 0 K
+```
+
+### Conversions
+
+Temperatures can be converted to diffirent scales.
+
+Currently, the following scales are supported: `Celsius`, `Fahrenheit`, `Kelvin` and `Rankine`.
+
+```ruby
+Temperature[20, :celsius].to_celsius
+# => 20 °C
+
+Temperature[20, :celsius].to_fahrenheit
+# => 68 °F
+
+Temperature[20, :celsius].to_kelvin
+# => 293.15 K
+
+Temperature[20, :celsius].to_rankine
+# => 527.67 °R
+```
+
+If it is necessary to convert scale dynamically, `to_scale` method is available.
+
+```ruby
+Temperature[20, :celsius].to_scale(scale)
+```
+
+All conversion formulas are taken from
+[RapidTables](https://www.rapidtables.com/convert/temperature/index.html).
+
+Conversion precision: 2 accurate digits after the decimal dot.
+
+### Comparison
+
+Temperature implements idiomatic [<=> spaceship operator](https://ruby-doc.org/core/Comparable.html) and mixes in [Comparable](https://ruby-doc.org/core/Comparable.html) module.
+
+As a result, all methods from [Comparable](https://ruby-doc.org/core/Comparable.html) are available, e.g:
+
+```ruby
+Temperature[20, :celsius] < Temperature[25, :celsius]
+# => true
+
+Temperature[20, :celsius] <= Temperature[25, :celsius]
+# => true
+
+Temperature[20, :celsius] == Temperature[25, :celsius]
+# => false
+
+Temperature[20, :celsius] > Temperature[25, :celsius]
+# => false
+
+Temperature[20, :celsius] >= Temperature[25, :celsius]
+# => false
+
+Temperature[20, :celsius].between?(Temperature[15, :celsius], Temperature[25, :celsius])
+# => true
+
+# Starting from Ruby 2.4.6
+Temperature[20, :celsius].clamp?(Temperature[20, :celsius], Temperature[25, :celsius])
+# => 20 °C
+```
+
+Please note, if the second temperature has a different scale, the first temperature is automatically
+converted to that scale before comparison.
+
+```ruby
+Temperature[20, :celsius] == Temperature[293.15, :kelvin]
 # => true
 ```
 
-When temperatures have different scales - conversion to common scale is handled under the hood.
+#### IMPORTANT !!!
+
+`degrees` are rounded to the nearest value with a precision of 2 decimal digits before comparison.
+
+This means the following temperatures are considered as equal:
+
 ```ruby
-temperature = BasicTemperature.new(degress: 0, scale: :celsius)
-
-other = BasicTemperature.new(degress: 273.15, scale: :kelvin)
-
-temperature == other
+Temperature[20.020, :celsius] == Temperature[20.024, :celsius]
 # => true
+
+Temperature[20.025, :celsius] == Temperature[20.029, :celsius]
+# => true
+```
+
+while these ones are treated as NOT equal:
+
+```ruby
+Temperature[20.024, :celsius] == Temperature[20.029, :celsius]
+# => false
+```
+
+### Math
+
+#### Addition/Subtraction.
+
+```ruby
+Temperature[20, :celsius] + Temperature[10, :celsius]
+# => 30 °C
+
+Temperature[20, :celsius] - Temperature[10, :celsius]
+# => 10 °C
+```
+
+If second temperature has a different scale, first temperature is automatically converted to that scale
+before `degrees` addition/subtraction.
+
+```ruby
+Temperature[283.15, :kelvin] + Temperature[10, :celsius]
+# => 10 °C
+```
+
+Returned temperature will have the same scale as the second temperature.
+
+It is possible to add/subtract numerics.
+
+```ruby
+Temperature[20, :celsius] + 10
+# => 30 °C
+
+Temperature[20, :celsius] - 10
+# => 10 °C
+```
+
+In such cases, returned temperature will have the same scale as the first temperature.
+
+Also [Ruby coersion mechanism](https://ruby-doc.org/core/Numeric.html#method-i-coerce) is supported.
+
+```ruby
+10 + Temperature[20, :celsius]
+# => 30 °C
+
+10 - Temperature[20, :celsius]
+# => -10 °C
+```
+
+#### Negation
+
+```ruby
+-Temperature[20, :celsius]
+# => -20 °C
 ```
 
 ## Versioning

@@ -12,3 +12,6 @@
 
 # Hide `byebug` history
 .byebug_history
+
+# Ignore `Gemfile.lock`
+Gemfile.lock

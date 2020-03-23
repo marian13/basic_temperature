@@ -15,6 +15,9 @@ Metrics/AbcSize:
 Metrics/MethodLength:
   Max: 15
 
+Style/AsciiComments:
+  Enabled: No
+
 Style/Lambda:
   EnforcedStyle: literal
 
