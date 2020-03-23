@@ -17,15 +17,21 @@ RSpec.describe Temperature do
         expect(temperature).to be_instance_of(Temperature)
       end
 
+      it 'casts degrees to float' do
+        temperature = Temperature.new('0', :celsius)
+
+        expect(temperature.degrees).to eq(0.0)
+      end
+
       it 'casts scale to string' do
         temperature = Temperature.new(0, :celsius)
 
         expect(temperature.scale).to eq('celsius')
       end
 
-      context 'and degrees is NOT a numeric value' do
+      context 'and degrees is NOT valid (can not be casted to float)' do
         it 'raises InvalidDegreesError' do
-          expect { Temperature.new('0', 'celsius') }
+          expect { Temperature.new('abc', 'celsius') }
             .to raise_error(Temperature::InvalidDegreesError)
             .with_message('degree is NOT a numeric value.')
         end
@@ -51,15 +57,21 @@ RSpec.describe Temperature do
         expect(temperature).to be_instance_of(Temperature)
       end
 
+      it 'casts degrees to float' do
+        temperature = Temperature.new('0', :celsius)
+
+        expect(temperature.degrees).to eq(0.0)
+      end
+
       it 'casts scale to string' do
         temperature = Temperature.new(degrees: 0, scale: :celsius)
 
         expect(temperature).to be_instance_of(Temperature)
       end
 
-      context 'and degrees is NOT a numeric value' do
+      context 'and degrees is NOT valid (can not be casted to float)' do
         it 'raises InvalidDegreesError' do
-          expect { Temperature.new(degrees: '0', scale: 'celsius') }
+          expect { Temperature.new(degrees: 'abc', scale: 'celsius') }
             .to raise_error(Temperature::InvalidDegreesError)
             .with_message('degree is NOT a numeric value.')
         end
@@ -104,8 +116,11 @@ RSpec.describe Temperature do
   end
 
   describe '.[]' do
-    it 'is an alias of .new' do
-      Temperature.method(:[]) == Temperature.method(:new)
+    it 'acts as an alias of .new' do
+      # TODO shared examples for .new and .[]
+      expect(Temperature).to receive(:new)
+
+      temperature = Temperature[0, 'celsius']
     end
   end
 
@@ -537,7 +552,7 @@ RSpec.describe Temperature do
 
       new_temperature = temperature.set_scale('kelvin')
 
-      expect(new_temperature.degrees).to eq(273.15)
+      expect(new_temperature.degrees).to eq(0)
     end
 
     context 'when scale is NOT valid (can not be casted to \'celsius\', \'fahrenheit\', \'kelvin\', \'rankine\')' do

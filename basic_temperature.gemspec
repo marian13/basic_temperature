@@ -35,8 +35,10 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'byebug', '~> 10.0'
   spec.add_development_dependency 'coveralls'
   spec.add_development_dependency 'rake', '~> 12.0'
+  spec.add_development_dependency 'rerun'
   spec.add_development_dependency 'reverse_coverage'
   spec.add_development_dependency 'rspec', '~> 3.0'
   spec.add_development_dependency 'rubocop', '~> 0.80.0'
+  spec.add_development_dependency 'sdoc'
   spec.add_development_dependency 'simplecov'
 end
