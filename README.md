@@ -26,6 +26,10 @@ for the exact versions.
 
 * None.
 
+### Documentation
+
+* Visit https://marian13.github.io/basic_temperature/ to view the documentation.
+
 ## Installation
 
 Add this line to your application's Gemfile:
