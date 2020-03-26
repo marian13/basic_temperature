@@ -39,7 +39,7 @@ module BasicTemperature
   #
   # Sometimes it is useful to create a new temperature from already existing one.
   #
-  # For such cases, there are {set_degrees}[rdoc-ref:Temperature#set_degrees and
+  # For such cases, there are {set_degrees}[rdoc-ref:Temperature#set_degrees] and
   # {set_scale}[rdoc-ref:Temperature#set_scale].
   #
   # Since temperatures are {Value Objects}[https://martinfowler.com/bliki/ValueObject.html], both methods
