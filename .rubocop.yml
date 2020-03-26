@@ -18,6 +18,9 @@ Metrics/MethodLength:
 Style/AsciiComments:
   Enabled: No
 
+Style/Documentation:
+  Severity: warning
+
 Style/Lambda:
   EnforcedStyle: literal
 
