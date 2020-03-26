@@ -251,6 +251,14 @@ Basic Temperature follows the [Semantic Versioning](https://semver.org/) standar
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/marian13/basic_temperature.
 
+## Development
+
+* Check specs: `bundle exec rspec`.
+
+* Check linter: `bundle exec rubocop`.
+
+* Update docs: `bundle exec sdoc lib -T rails -o docs`.
+
 ## License
 
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).

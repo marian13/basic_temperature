@@ -35,7 +35,7 @@
         </h1>
         <ul class="files">
             
-            <li><a href="../files/lib/basic_temperature/temperature_rb.html">lib/basic_temperature/temperature.rb</a></li>
+            <li><a href="../files/lib/basic_temperature/alias_rb.html">lib/basic_temperature/alias.rb</a></li>
             
         </ul>
     </div>
@@ -74,184 +74,12 @@
           <tr valign='top'>
             <td class="attr-name">Temperature</td>
             <td>=</td>
-            <td class="attr-value">BasicTemperature</td>
+            <td class="attr-value">BasicTemperature::Temperature</td>
           </tr>
           
             <tr valign='top'>
               <td>&nbsp;</td>
-              <td colspan="2" class="attr-desc"><p><a href="Temperature.html"><code>Temperature</code></a> is a simple <a href="https://martinfowler.com/bliki/ValueObject.html">Value Object</a> for basic temperature operations like conversions from <code>Celsius</code> to <code>Fahrenhait</code> or <code>Kelvin</code> etc.</p>
-
-<p>Supported scales: <code>Celsius</code>, <code>Fahrenheit</code>, <code>Kelvin</code> and <code>Rankine</code>.</p>
-
-<h2 id="label-Creating+Temperatures">Creating Temperatures</h2>
-
-<p>A new temperature can be created in multiple ways:</p>
-<ul><li>
-<p>Using keyword arguments:</p>
-
-<pre><code>Temperature.new(degrees: 0, scale: :celsius)
-</code></pre>
-</li><li>
-<p>Using positional arguments:</p>
-
-<pre><code>Temperature.new(0, :celsius)
-</code></pre>
-</li><li>
-<p>Even more concise way using <code>Temperature.[]</code> (an alias of <code>Temperature.new</code>):</p>
-
-<pre><code>Temperature[0, :celsius]
-</code></pre>
-</li></ul>
-
-<h2 id="label-Creating+Temperatures+from+already+existing+temperature+objects">Creating Temperatures from already existing temperature objects</h2>
-
-<p>Sometimes it is useful to create a new temperature from already existing one.</p>
-
-<p>For such cases, there are <a href="BasicTemperature.html#method-i-set_scale">set_degrees}[rdoc-ref:BasicTemperature#set_degrees and {set_scale</a>.</p>
-
-<p>Since temperatures are <a href="https://martinfowler.com/bliki/ValueObject.html">Value Objects</a>, both methods returns new instances.</p>
-
-<p>Examples:</p>
-
-<pre><code>temperature = Temperature[0, :celsius]
-# =&gt; 0 °C
-
-new_temperature = temperature.set_degrees(15)
-# =&gt; 15 °C
-
-temperature = Temperature[0, :celsius]
-# =&gt; 0 °C
-
-new_temperature = temperature.set_scale(:kelvin)
-# =&gt; 0 K
-</code></pre>
-
-<h2 id="label-Conversions">Conversions</h2>
-
-<p>Temperatures can be converted to diffirent scales.</p>
-
-<p>Currently, the following scales are supported: <code>Celsius</code>, <code>Fahrenheit</code>, <code>Kelvin</code> and <code>Rankine</code>.</p>
-
-<pre><code>Temperature[20, :celsius].to_celsius
-# =&gt; 20 °C
-
-Temperature[20, :celsius].to_fahrenheit
-# =&gt; 68 °F
-
-Temperature[20, :celsius].to_kelvin
-# =&gt; 293.15 K
-
-Temperature[20, :celsius].to_rankine
-# =&gt; 527.67 °R
-</code></pre>
-
-<p>If it is necessary to convert scale dynamically, <a href="BasicTemperature.html#method-i-to_scale">to_scale</a> method is available.</p>
-
-<pre><code>Temperature[20, :celsius].to_scale(scale)
-</code></pre>
-
-<p>All conversion formulas are taken from <a href="https://www.rapidtables.com/convert/temperature/index.html">RapidTables</a>.</p>
-
-<p>Conversion precision: 2 accurate digits after the decimal dot.</p>
-
-<h2 id="label-Comparison">Comparison</h2>
-
-<p><a href="Temperature.html"><code>Temperature</code></a> implements idiomatic <a href="https://ruby-doc.org/core/Comparable.html"><=> spaceship operator</a> and mixes in <a href="https://ruby-doc.org/core/Comparable.html">Comparable</a> module.</p>
-
-<p>As a result, all methods from Comparable are available, e.g:</p>
-
-<pre><code>Temperature[20, :celsius] &lt; Temperature[25, :celsius]
-# =&gt; true
-
-Temperature[20, :celsius] &lt;= Temperature[25, :celsius]
-# =&gt; true
-
-Temperature[20, :celsius] == Temperature[25, :celsius]
-# =&gt; false
-
-Temperature[20, :celsius] &gt; Temperature[25, :celsius]
-# =&gt; false
-
-Temperature[20, :celsius] &gt;= Temperature[25, :celsius]
-# =&gt; false
-
-Temperature[20, :celsius].between?(Temperature[15, :celsius], Temperature[25, :celsius])
-# =&gt; true
-
-# Starting from Ruby 2.4.6
-Temperature[20, :celsius].clamp(Temperature[20, :celsius], Temperature[25, :celsius])
-# =&gt; 20 °C
-</code></pre>
-
-<p>Please note, if <code>other</code> temperature has a different scale, temperature is automatically converted to that scale before comparison.</p>
-
-<pre><code>Temperature[20, :celsius] == Temperature[293.15, :kelvin]
-# =&gt; true
-</code></pre>
-
-<p>IMPORTANT !!!</p>
-
-<p><code>degrees</code> are rounded to the nearest value with a precision of 2 decimal digits before comparison.</p>
-
-<p>This means the following temperatures are considered as equal:</p>
-
-<pre><code>Temperature[20.020, :celsius] == Temperature[20.024, :celsius]
-# =&gt; true
-
-Temperature[20.025, :celsius] == Temperature[20.029, :celsius]
-# =&gt; true
-</code></pre>
-
-<p>while these ones are treated as NOT equal:</p>
-
-<pre><code>Temperature[20.024, :celsius] == Temperature[20.029, :celsius]
-# =&gt; false
-</code></pre>
-
-<h2 id="label-Math">Math</h2>
-
-<h4 id="label-Addition-2FSubtraction.">Addition/Subtraction.</h4>
-
-<pre><code>Temperature[20, :celsius] + Temperature[10, :celsius]
-# =&gt; 30 °C
-
-Temperature[20, :celsius] - Temperature[10, :celsius]
-# =&gt; 10 °C
-</code></pre>
-
-<p>If second temperature has a different scale, first temperature is automatically converted to that scale before <code>degrees</code> addition/subtraction.</p>
-
-<pre><code>Temperature[283.15, :kelvin] + Temperature[10, :celsius]
-# =&gt; 10 °C
-</code></pre>
-
-<p>Returned temperature will have the same scale as the second temperature.</p>
-
-<p>It is possible to add/subtract numerics.</p>
-
-<pre><code>Temperature[20, :celsius] + 10
-# =&gt; 30 °C
-
-Temperature[20, :celsius] - 10
-# =&gt; 10 °C
-</code></pre>
-
-<p>In such cases, returned temperature will have the same scale as the first temperature.</p>
-
-<p>Also <a href="https://ruby-doc.org/core/Numeric.html#method-i-coerce">Ruby coersion mechanism</a> is supported.</p>
-
-<pre><code>10 + Temperature[20, :celsius]
-# =&gt; 30 °C
-
-10 - Temperature[20, :celsius]
-# =&gt; -10 °C
-</code></pre>
-
-<h4 id="label-Negation">Negation</h4>
-
-<pre><code>-Temperature[20, :celsius]
-# =&gt; -20 °C
-</code></pre></td>
+              <td colspan="2" class="attr-desc"></td>
             </tr>
           
         
