@@ -11,7 +11,7 @@ allows to perform basic operations like conversion from Celsius to Kelvin, from 
 
 
 ### Features
-- Provides a `BasicTemperature` class which encapsulates all information about a certain  temperature, such
+- Provides a `Temperature` class which encapsulates all information about a certain  temperature, such
 as its amount of degrees and its scale.
 - Provides APIs for exchanging temperatures from one scale to another (currently Celsius, Fahrenheit, Kelvin and
 Rankine).
@@ -261,7 +261,7 @@ Temperature[0, :celsius].freeze_water?
 ```
 
 ## Versioning
-Basic Temperature follows the [Semantic Versioning](https://semver.org/) standard.
+`basic_temperature` follows the [Semantic Versioning](https://semver.org/) standard.
 
 ## Contributing
 
