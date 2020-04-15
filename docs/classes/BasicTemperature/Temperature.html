@@ -21,7 +21,7 @@
 
     <meta name="keywords" content="BasicTemperature::Temperature class">
   
-    <meta name="keywords" content="[], new, set_degrees, set_scale, to_scale, to_celsius, to_fahrenheit, to_kelvin, to_rankine, <=>, +, -, -@">
+    <meta name="keywords" content="[], new, set_degrees, set_scale, to_scale, to_celsius, to_fahrenheit, to_kelvin, to_rankine, <=>, +, -, -@, boil_water?, freeze_water?">
   
 </head>
 
@@ -238,6 +238,15 @@ Temperature[20, :celsius] - 10
 # =&gt; -20 °C
 </code></pre>
 
+<h2 id="class-BasicTemperature::Temperature-label-Queries">Queries</h2>
+
+<pre><code>Temperature[0, :celsius].boil_water?
+# =&gt; false
+
+Temperature[0, :celsius].freeze_water?
+# =&gt; true
+</code></pre>
+
     </div>
   
 
@@ -325,6 +334,30 @@ Temperature[20, :celsius] - 10
               
               <li>
                 <a href="#method-c-5B-5D">[]</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>B</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-boil_water-3F">boil_water?</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>F</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-freeze_water-3F">freeze_water?</a>
               </li>
             
           </ul>
@@ -598,7 +631,7 @@ Temperature[20, :celsius] - 10
                 
               </p>
               <div id="method-c-5B-5D_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/basic_temperature/temperature.rb, line 216</span>
+                <pre><span class="ruby-comment"># File lib/basic_temperature/temperature.rb, line 224</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">[]</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">kwargs</span>)
   <span class="ruby-identifier">new</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">kwargs</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -635,7 +668,7 @@ Temperature[20, :celsius] - 10
                 
               </p>
               <div id="method-c-new_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/basic_temperature/temperature.rb, line 227</span>
+                <pre><span class="ruby-comment"># File lib/basic_temperature/temperature.rb, line 235</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">positional_arguments</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">keyword_arguments</span>)
   <span class="ruby-identifier">assert_either_positional_arguments_or_keyword_arguments!</span>(<span class="ruby-identifier">positional_arguments</span>, <span class="ruby-identifier">keyword_arguments</span>)
 
@@ -708,7 +741,7 @@ Temperature[20, :celsius] - 10
                 
               </p>
               <div id="method-i-2B_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/basic_temperature/temperature.rb, line 494</span>
+                <pre><span class="ruby-comment"># File lib/basic_temperature/temperature.rb, line 502</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">+</span>(<span class="ruby-identifier">other</span>)
   <span class="ruby-identifier">assert_numeric_or_temperature!</span>(<span class="ruby-identifier">other</span>)
 
@@ -781,7 +814,7 @@ Temperature[20, :celsius] - 10
                 
               </p>
               <div id="method-i-2D_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/basic_temperature/temperature.rb, line 538</span>
+                <pre><span class="ruby-comment"># File lib/basic_temperature/temperature.rb, line 546</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">-</span>(<span class="ruby-identifier">other</span>)
   <span class="ruby-keyword">self</span> <span class="ruby-operator">+</span> <span class="ruby-operator">-</span><span class="ruby-identifier">other</span>
 <span class="ruby-keyword">end</span></pre>
@@ -822,7 +855,7 @@ Temperature[20, :celsius] - 10
                 
               </p>
               <div id="method-i-2D-40_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/basic_temperature/temperature.rb, line 548</span>
+                <pre><span class="ruby-comment"># File lib/basic_temperature/temperature.rb, line 556</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">-@</span>
   <span class="ruby-constant">Temperature</span>.<span class="ruby-identifier">new</span>(<span class="ruby-operator">-</span><span class="ruby-keyword">self</span>.<span class="ruby-identifier">degrees</span>, <span class="ruby-keyword">self</span>.<span class="ruby-identifier">scale</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -892,11 +925,85 @@ Temperature[20.024, :celsius] &lt;=&gt; Temperature[20.029, :celsius]
                 
               </p>
               <div id="method-i-3C-3D-3E_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/basic_temperature/temperature.rb, line 458</span>
+                <pre><span class="ruby-comment"># File lib/basic_temperature/temperature.rb, line 466</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">&lt;=&gt;</span>(<span class="ruby-identifier">other</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">assert_temperature</span>(<span class="ruby-identifier">other</span>)
 
   <span class="ruby-identifier">round_degrees</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">to_scale</span>(<span class="ruby-identifier">other</span>.<span class="ruby-identifier">scale</span>).<span class="ruby-identifier">degrees</span>) <span class="ruby-operator">&lt;=&gt;</span> <span class="ruby-identifier">round_degrees</span>(<span class="ruby-identifier">other</span>.<span class="ruby-identifier">degrees</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-boil_water-3F">
+            
+              <b>boil_water?</b>()
+            
+            <a href="../../classes/BasicTemperature/Temperature.html#method-i-boil_water-3F" name="method-i-boil_water-3F" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              <p>Returns true when temperature boils water (is greater than or equal to 100 °C), false otherwise.</p>
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-boil_water-3F_source')" id="l_method-i-boil_water-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-boil_water-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/basic_temperature/temperature.rb, line 564</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">boil_water?</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">to_celsius</span>.<span class="ruby-identifier">degrees</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-value">100</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-freeze_water-3F">
+            
+              <b>freeze_water?</b>()
+            
+            <a href="../../classes/BasicTemperature/Temperature.html#method-i-freeze_water-3F" name="method-i-freeze_water-3F" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              <p>Returns true when temperature freezes water (is less than or equal to 0 °C), false otherwise.</p>
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-freeze_water-3F_source')" id="l_method-i-freeze_water-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-freeze_water-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/basic_temperature/temperature.rb, line 572</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">freeze_water?</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">to_celsius</span>.<span class="ruby-identifier">degrees</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-value">0</span>
 <span class="ruby-keyword">end</span></pre>
               </div>
             </div>
@@ -938,7 +1045,7 @@ new_temperature = temperature.set_degrees(15)
                 
               </p>
               <div id="method-i-set_degrees_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/basic_temperature/temperature.rb, line 247</span>
+                <pre><span class="ruby-comment"># File lib/basic_temperature/temperature.rb, line 255</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">set_degrees</span>(<span class="ruby-identifier">degrees</span>)
   <span class="ruby-constant">Temperature</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">degrees</span>, <span class="ruby-identifier">scale</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -982,7 +1089,7 @@ new_temperature = temperature.set_scale(:kelvin)
                 
               </p>
               <div id="method-i-set_scale_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/basic_temperature/temperature.rb, line 262</span>
+                <pre><span class="ruby-comment"># File lib/basic_temperature/temperature.rb, line 270</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">set_scale</span>(<span class="ruby-identifier">scale</span>)
   <span class="ruby-constant">Temperature</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">degrees</span>, <span class="ruby-identifier">scale</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -1034,7 +1141,7 @@ new_temperature = temperature.set_scale(:kelvin)
                 
               </p>
               <div id="method-i-to_celsius_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/basic_temperature/temperature.rb, line 309</span>
+                <pre><span class="ruby-comment"># File lib/basic_temperature/temperature.rb, line 317</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_celsius</span>
   <span class="ruby-identifier">memoized</span>(<span class="ruby-value">:to_celsius</span>) <span class="ruby-operator">||</span> <span class="ruby-identifier">memoize</span>(<span class="ruby-value">:to_celsius</span>, <span class="ruby-operator">-&gt;</span> {
     <span class="ruby-keyword">return</span> <span class="ruby-keyword">self</span> <span class="ruby-keyword">if</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">scale</span> <span class="ruby-operator">==</span> <span class="ruby-constant">CELSIUS</span>
@@ -1100,7 +1207,7 @@ new_temperature = temperature.set_scale(:kelvin)
                 
               </p>
               <div id="method-i-to_fahrenheit_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/basic_temperature/temperature.rb, line 341</span>
+                <pre><span class="ruby-comment"># File lib/basic_temperature/temperature.rb, line 349</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_fahrenheit</span>
   <span class="ruby-identifier">memoized</span>(<span class="ruby-value">:to_fahrenheit</span>) <span class="ruby-operator">||</span> <span class="ruby-identifier">memoize</span>(<span class="ruby-value">:to_fahrenheit</span>, <span class="ruby-operator">-&gt;</span> {
     <span class="ruby-keyword">return</span> <span class="ruby-keyword">self</span> <span class="ruby-keyword">if</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">scale</span> <span class="ruby-operator">==</span> <span class="ruby-constant">FAHRENHEIT</span>
@@ -1169,7 +1276,7 @@ new_temperature = temperature.set_scale(:kelvin)
                 
               </p>
               <div id="method-i-to_kelvin_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/basic_temperature/temperature.rb, line 373</span>
+                <pre><span class="ruby-comment"># File lib/basic_temperature/temperature.rb, line 381</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_kelvin</span>
   <span class="ruby-identifier">memoized</span>(<span class="ruby-value">:to_kelvin</span>) <span class="ruby-operator">||</span> <span class="ruby-identifier">memoize</span>(<span class="ruby-value">:to_kelvin</span>, <span class="ruby-operator">-&gt;</span> {
     <span class="ruby-keyword">return</span> <span class="ruby-keyword">self</span> <span class="ruby-keyword">if</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">scale</span> <span class="ruby-operator">==</span> <span class="ruby-constant">KELVIN</span>
@@ -1235,7 +1342,7 @@ new_temperature = temperature.set_scale(:kelvin)
                 
               </p>
               <div id="method-i-to_rankine_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/basic_temperature/temperature.rb, line 405</span>
+                <pre><span class="ruby-comment"># File lib/basic_temperature/temperature.rb, line 413</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_rankine</span>
   <span class="ruby-identifier">memoized</span>(<span class="ruby-value">:to_rankine</span>) <span class="ruby-operator">||</span> <span class="ruby-identifier">memoize</span>(<span class="ruby-value">:to_rankine</span>, <span class="ruby-operator">-&gt;</span> {
     <span class="ruby-keyword">return</span> <span class="ruby-keyword">self</span> <span class="ruby-keyword">if</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">scale</span> <span class="ruby-operator">==</span> <span class="ruby-constant">RANKINE</span>
@@ -1292,7 +1399,7 @@ new_temperature = temperature.set_scale(:kelvin)
                 
               </p>
               <div id="method-i-to_scale_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/basic_temperature/temperature.rb, line 278</span>
+                <pre><span class="ruby-comment"># File lib/basic_temperature/temperature.rb, line 286</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_scale</span>(<span class="ruby-identifier">scale</span>)
   <span class="ruby-identifier">casted_scale</span> = <span class="ruby-identifier">cast_scale</span>(<span class="ruby-identifier">scale</span>)
 
