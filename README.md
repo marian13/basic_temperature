@@ -18,6 +18,7 @@ Rankine).
 
 - Allows comparing temperatures between each other.
 - Supports basic math operations like addition and subtraction.
+- Queries like `boil_water?`, `freeze_water?`.
 - Tested against Ruby 2.3, 2.4, 2.5, 2.6 & 2.7. See
 [.travis-ci.yml](https://github.com/marian13/basic_temperature/blob/9b13cb9909b57c51bb5dc05a8989d07a314e67d6/.travis.yml)
 for the exact versions.
@@ -32,27 +33,33 @@ for the exact versions.
 
 ## Installation
 
-Add this line to your application's Gemfile:
+Gemfile:
 
 ```ruby
-gem 'basic_temperature'
+gem 'basic_temperature', '~> 0.2.2'
 ```
 
-#### Warning
-
-Since this gem is under active development and there are often backward-incompatible changes between minor releases, you might want to use a conservative version lock in your Gemfile:
-
-```ruby
-gem 'basic_temperature', '~> 0.2.1'
-```
-
-And then execute:
+And then run:
 
     $ bundle install
 
-Or install it yourself as:
+And that's it.
 
-    $ gem install basic_temperature
+You can access all the features of `basic_temperature` by creating instances of `BasicTemperature::Temperature`.
+
+But there is a shorter form.
+
+If `Temperature` constant was not used before in your app, you can add this line to your Gemfile:
+
+```ruby
+gem 'basic_temperature', '~> 0.2.2', require: ['basic_temperature/alias']
+```
+
+This way `BasicTemperature::Temperature` class will be accesible simply by `Temperature`.
+
+The following guide assumes you have chosen the shorter form.
+
+If not, just replace all `Temperature` to `BasicTemperature::Temperature`.
 
 ## Usage
 

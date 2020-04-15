@@ -181,6 +181,14 @@ module BasicTemperature
   #   -Temperature[20, :celsius]
   #   # => -20 °C
   #
+  # == Queries
+  #
+  #   Temperature[0, :celsius].boil_water?
+  #   # => false
+  #
+  #   Temperature[0, :celsius].freeze_water?
+  #   # => true
+  #
   class Temperature
     include Comparable
 
