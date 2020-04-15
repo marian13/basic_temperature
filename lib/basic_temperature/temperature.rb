@@ -549,6 +549,22 @@ module BasicTemperature
       Temperature.new(-self.degrees, self.scale)
     end
 
+    ##
+    # Returns true when temperature boils water (is greater than or equal to 100 °C),
+    # false otherwise.
+    #
+    def boil_water?
+      self.to_celsius.degrees >= 100
+    end
+
+    ##
+    # Returns true when temperature freezes water (is less than or equal to 0 °C),
+    # false otherwise.
+    #
+    def freeze_water?
+      self.to_celsius.degrees <= 0
+    end
+
     # Is used by {+}[rdoc-ref:Temperature#+] and {-}[rdoc-ref:Temperature#-]
     # for {Ruby coersion mechanism}[https://ruby-doc.org/core/Numeric.html#method-i-coerce].
     def coerce(numeric) #:nodoc:

@@ -244,6 +244,15 @@ Also [Ruby coersion mechanism](https://ruby-doc.org/core/Numeric.html#method-i-c
 # => -20 °C
 ```
 
+### Queries
+```ruby
+Temperature[0, :celsius].boil_water?
+# => false
+
+Temperature[0, :celsius].freeze_water?
+# => true
+```
+
 ## Versioning
 Basic Temperature follows the [Semantic Versioning](https://semver.org/) standard.
 
