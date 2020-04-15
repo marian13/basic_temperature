@@ -1,10 +1,14 @@
-## Basic Temperature ##
+<h1 align="center">
+  Basic Temperature
+</h1>
 
 [![Gem Version](https://badge.fury.io/rb/basic_temperature.svg)](https://rubygems.org/gems/basic_temperature) [![Build Status](https://travis-ci.com/marian13/basic_temperature.svg?branch=master)](https://travis-ci.com/marian13/basic_temperature) [![Maintainability](https://api.codeclimate.com/v1/badges/21dc5d50cf5de8346a3c/maintainability)](https://codeclimate.com/github/marian13/basic_temperature/maintainability) [![Coverage Status](https://coveralls.io/repos/github/marian13/basic_temperature/badge.svg)](https://coveralls.io/github/marian13/basic_temperature) [![Inline docs](http://inch-ci.org/github/marian13/basic_temperature.svg?branch=master)](http://inch-ci.org/github/marian13/basic_temperature)
 [![Patreon](https://img.shields.io/badge/patreon-donate-orange.svg)](https://www.patreon.com/user?u=31435716&fan_landing=true)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-![alt text](https://raw.githubusercontent.com/marian13/basic_temperature/master/logo.png)
+<p align="center">
+  <img src="https://raw.githubusercontent.com/marian13/basic_temperature/master/logo.png">
+</p>
 
 `basic_temperature` is a Ruby library which provides a simple [value object](https://martinfowler.com/bliki/ValueObject.html) to work with temperatures and 
 allows to perform basic operations like conversion from Celsius to Kelvin, from Kelvin to Fahrenheit etc.
