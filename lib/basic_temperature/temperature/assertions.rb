@@ -25,7 +25,7 @@ module BasicTemperature
       end
 
       def assert_numeric!(numeric)
-        raise_invalid_numeric unless numeric.is_a?(Numeric)
+        raise_invalid_numeric(numeric) unless numeric.is_a?(Numeric)
       end
 
       def assert_temperature(temperature)

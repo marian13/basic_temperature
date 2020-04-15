@@ -791,8 +791,86 @@ RSpec.describe Temperature do
     end
   end
 
+  describe '#boil_water?' do
+    context 'when temperature is greater than 100 °C' do
+      it 'returns true' do
+        expect(Temperature.new(101, 'celsius').boil_water?).to eq(true)
+      end
+    end
+
+    context 'when temperature is equal to 100 °C' do
+      it 'returns true' do
+        expect(Temperature.new(100, 'celsius').boil_water?).to eq(true)
+      end
+    end
+
+    context 'when tempreture is less than 100 °C' do
+      it 'returns false' do
+        expect(Temperature.new(99, 'celsius').boil_water?).to eq(false)
+      end
+    end
+
+    it 'converts temperature to celsius before comparison' do
+      expect(Temperature.new(0, 'kelvin').boil_water?).to eq(false)
+    end
+  end
+
+  describe '#freeze_water?' do
+    context 'when temperature is greater than 0 °C' do
+      it 'returns false' do
+        expect(Temperature.new(1, 'celsius').freeze_water?).to eq(false)
+      end
+    end
+
+    context 'when temperature is equal to 0 °C' do
+      it 'returns true' do
+        expect(Temperature.new(0, 'celsius').freeze_water?).to eq(true)
+      end
+    end
+
+    context 'when tempreture is less than 0 °C' do
+      it 'returns true' do
+        expect(Temperature.new(-1, 'celsius').freeze_water?).to eq(true)
+      end
+    end
+
+    it 'converts temperature to celsius before comparison' do
+      expect(Temperature.new(0, 'kelvin').freeze_water?).to eq(true)
+    end
+  end
+
+  describe '#coerce' do
+    context 'when other is a Numeric' do
+      it (
+        <<~DESCRIPTION
+          returns two elements array,
+          where first element is other converted to Temperature
+          and has the same scale as temperature,
+          second - is temperature itself
+        DESCRIPTION
+      ) do
+        temperature = Temperature.new(0, 'celsius')
+
+        coerce = temperature.coerce(10)
+
+        expect(coerce.first.degrees).to eq(10)
+        expect(coerce.first.scale).to eq('celsius')
+
+        expect(coerce.last).to eq(temperature)
+      end
+    end
+
+    context 'when other is NOT a Numeric' do
+      it 'raises Errors::InvalidNumeric' do
+        expect { Temperature.new(0, 'celsius').coerce('abc') }
+          .to raise_error(Temperature::Errors::InvalidNumeric)
+          .with_message('`abc` is not a Numeric.')
+      end
+    end
+  end
+
   describe '#inspect' do
-    context 'when scale is celcius' do
+    context 'when scale is celsius' do
       it 'returns tempeture as string in special format' do
         temperature = Temperature.new(0, 'celsius')
 

@@ -14,8 +14,11 @@ module BasicTemperature
       # See {SCALES}[rdoc-ref:Temperature::SCALES].
       class InvalidScale < StandardError; end
 
-      # Raised when <tt>other</tt> is not a Numeric or Temperature in math operations.
+      # Raised when <tt>other</tt> is neither Numeric nor Temperature in math operations.
       class InvalidNumericOrTemperature < StandardError; end
+
+      # Raised when <tt>other</tt> is not a Numeric in math operations.
+      class InvalidNumeric < StandardError; end
 
       private
 
@@ -41,6 +44,10 @@ module BasicTemperature
 
       def raise_invalid_numeric_or_temperature_error(numeric_or_temperature)
         raise InvalidNumericOrTemperature, "`#{numeric_or_temperature}` is neither Numeric nor Temperature."
+      end
+
+      def raise_invalid_numeric(numeric)
+        raise InvalidNumeric, "`#{numeric}` is not a Numeric."
       end
     end
   end
