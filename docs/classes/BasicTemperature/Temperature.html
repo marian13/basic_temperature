@@ -21,7 +21,7 @@
 
     <meta name="keywords" content="BasicTemperature::Temperature class">
   
-    <meta name="keywords" content="[], new, set_degrees, set_scale, to_scale, to_celsius, to_fahrenheit, to_kelvin, to_rankine, <=>, +, -, -@, boil_water?, freeze_water?">
+    <meta name="keywords" content="[], new, set_degrees, set_scale, to_scale, to_celsius, to_fahrenheit, to_kelvin, to_rankine, <=>, boil_water?, freeze_water?">
   
 </head>
 
@@ -310,21 +310,6 @@ Temperature[0, :celsius].freeze_water?
         <dt>#</dt>
         <dd>
           <ul>
-            
-              
-              <li>
-                <a href="#method-i-2B">+</a>,
-              </li>
-            
-              
-              <li>
-                <a href="#method-i-2D">-</a>,
-              </li>
-            
-              
-              <li>
-                <a href="#method-i-2D-40">-@</a>,
-              </li>
             
               
               <li>
@@ -688,183 +673,6 @@ Temperature[0, :celsius].freeze_water?
       <div class="sectiontitle">Instance Public methods</div>
       
         <div class="method">
-          <div class="title method-title" id="method-i-2B">
-            
-              <b>+(temperature)<br />+(numeric)</b>
-            
-            <a href="../../classes/BasicTemperature/Temperature.html#method-i-2B" name="method-i-2B" class="permalink">Link</a>
-          </div>
-
-          
-            <div class="description">
-              <p>Performs addition. Returns a new <a href="Temperature.html"><code>Temperature</code></a>.</p>
-
-<pre><code>Temperature[20, :celsius] + Temperature[10, :celsius]
-# =&gt; 30 °C
-</code></pre>
-
-<p>If the second temperature has a different scale, the first temperature is automatically converted to that scale before <code>degrees</code> addition.</p>
-
-<pre><code>Temperature[283.15, :kelvin] + Temperature[20, :celsius]
-# =&gt; 30 °C
-</code></pre>
-
-<p>Returned temperature will have the same scale as the second temperature.</p>
-
-<p>It is possible to add numerics.</p>
-
-<pre><code>Temperature[20, :celsius] + 10
-# =&gt; 30 °C
-</code></pre>
-
-<p>In such cases, returned temperature will have the same scale as the first temperature.</p>
-
-<p>Also <a href="https://ruby-doc.org/core/Numeric.html#method-i-coerce">Ruby coersion mechanism</a> is supported.</p>
-
-<pre><code>10 + Temperature[20, :celsius]
-# =&gt; 30 °C
-</code></pre>
-            </div>
-          
-
-          
-
-          
-
-          
-            
-            <div class="sourcecode">
-              
-              <p class="source-link">
-                Source:
-                <a href="javascript:toggleSource('method-i-2B_source')" id="l_method-i-2B_source">show</a>
-                
-              </p>
-              <div id="method-i-2B_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/basic_temperature/temperature.rb, line 502</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">+</span>(<span class="ruby-identifier">other</span>)
-  <span class="ruby-identifier">assert_numeric_or_temperature!</span>(<span class="ruby-identifier">other</span>)
-
-  <span class="ruby-identifier">degrees</span>, <span class="ruby-identifier">scale</span> =
-    <span class="ruby-keyword">case</span> <span class="ruby-identifier">other</span>
-    <span class="ruby-keyword">when</span> <span class="ruby-constant">Numeric</span>
-      [<span class="ruby-keyword">self</span>.<span class="ruby-identifier">degrees</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">other</span>, <span class="ruby-keyword">self</span>.<span class="ruby-identifier">scale</span>]
-    <span class="ruby-keyword">when</span> <span class="ruby-constant">Temperature</span>
-      [<span class="ruby-keyword">self</span>.<span class="ruby-identifier">to_scale</span>(<span class="ruby-identifier">other</span>.<span class="ruby-identifier">scale</span>).<span class="ruby-identifier">degrees</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">degrees</span>, <span class="ruby-identifier">other</span>.<span class="ruby-identifier">scale</span>]
-    <span class="ruby-keyword">end</span>
-
-  <span class="ruby-constant">Temperature</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">degrees</span>, <span class="ruby-identifier">scale</span>)
-<span class="ruby-keyword">end</span></pre>
-              </div>
-            </div>
-            
-          </div>
-        
-        <div class="method">
-          <div class="title method-title" id="method-i-2D">
-            
-              <b>-(temperature)<br />-(numeric)</b>
-            
-            <a href="../../classes/BasicTemperature/Temperature.html#method-i-2D" name="method-i-2D" class="permalink">Link</a>
-          </div>
-
-          
-            <div class="description">
-              <p>Performs subtraction. Returns a new <a href="Temperature.html"><code>Temperature</code></a>.</p>
-
-<pre><code>Temperature[20, :celsius] - Temperature[10, :celsius]
-# =&gt; 10 °C
-</code></pre>
-
-<p>If the second temperature has a different scale, the first temperature is automatically converted to that scale before <code>degrees</code> subtraction.</p>
-
-<pre><code>Temperature[283.15, :kelvin] + Temperature[10, :celsius]
-# =&gt; 10 °C
-</code></pre>
-
-<p>Returned temperature will have the same scale as the second temperature.</p>
-
-<p>It is possible to subtract numerics.</p>
-
-<pre><code>Temperature[20, :celsius] - 10
-# =&gt; 10 °C
-</code></pre>
-
-<p>In such cases, returned temperature will have the same scale as the first temperature.</p>
-
-<p>Also <a href="https://ruby-doc.org/core/Numeric.html#method-i-coerce">Ruby coersion mechanism</a> is supported.</p>
-
-<pre><code>10 - Temperature[20, :celsius]
-# =&gt; -10 °C
-</code></pre>
-            </div>
-          
-
-          
-
-          
-
-          
-            
-            <div class="sourcecode">
-              
-              <p class="source-link">
-                Source:
-                <a href="javascript:toggleSource('method-i-2D_source')" id="l_method-i-2D_source">show</a>
-                
-              </p>
-              <div id="method-i-2D_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/basic_temperature/temperature.rb, line 546</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">-</span>(<span class="ruby-identifier">other</span>)
-  <span class="ruby-keyword">self</span> <span class="ruby-operator">+</span> <span class="ruby-operator">-</span><span class="ruby-identifier">other</span>
-<span class="ruby-keyword">end</span></pre>
-              </div>
-            </div>
-            
-          </div>
-        
-        <div class="method">
-          <div class="title method-title" id="method-i-2D-40">
-            
-              <b>-@</b>()
-            
-            <a href="../../classes/BasicTemperature/Temperature.html#method-i-2D-40" name="method-i-2D-40" class="permalink">Link</a>
-          </div>
-
-          
-            <div class="description">
-              <p>Returns a new <a href="Temperature.html"><code>Temperature</code></a> with negated <code>degrees</code>.</p>
-
-<pre><code>-Temperature[20, :celsius]
-# =&gt; -20 °C
-</code></pre>
-            </div>
-          
-
-          
-
-          
-
-          
-            
-            <div class="sourcecode">
-              
-              <p class="source-link">
-                Source:
-                <a href="javascript:toggleSource('method-i-2D-40_source')" id="l_method-i-2D-40_source">show</a>
-                
-              </p>
-              <div id="method-i-2D-40_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/basic_temperature/temperature.rb, line 556</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">-@</span>
-  <span class="ruby-constant">Temperature</span>.<span class="ruby-identifier">new</span>(<span class="ruby-operator">-</span><span class="ruby-keyword">self</span>.<span class="ruby-identifier">degrees</span>, <span class="ruby-keyword">self</span>.<span class="ruby-identifier">scale</span>)
-<span class="ruby-keyword">end</span></pre>
-              </div>
-            </div>
-            
-          </div>
-        
-        <div class="method">
           <div class="title method-title" id="method-i-3C-3D-3E">
             
               <b>&lt;=&gt;</b>(other)
@@ -964,7 +772,7 @@ Temperature[20.024, :celsius] &lt;=&gt; Temperature[20.029, :celsius]
                 
               </p>
               <div id="method-i-boil_water-3F_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/basic_temperature/temperature.rb, line 564</span>
+                <pre><span class="ruby-comment"># File lib/basic_temperature/temperature.rb, line 476</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">boil_water?</span>
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">to_celsius</span>.<span class="ruby-identifier">degrees</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-value">100</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1001,7 +809,7 @@ Temperature[20.024, :celsius] &lt;=&gt; Temperature[20.029, :celsius]
                 
               </p>
               <div id="method-i-freeze_water-3F_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/basic_temperature/temperature.rb, line 572</span>
+                <pre><span class="ruby-comment"># File lib/basic_temperature/temperature.rb, line 484</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">freeze_water?</span>
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">to_celsius</span>.<span class="ruby-identifier">degrees</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-value">0</span>
 <span class="ruby-keyword">end</span></pre>
