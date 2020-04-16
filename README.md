@@ -15,13 +15,12 @@ allows to perform basic operations like conversion from Celsius to Kelvin, from 
 
 
 ### Features
-- Provides a `BasicTemperature` class which encapsulates all information about a certain  temperature, such
+- Provides a `Temperature` class which encapsulates all information about a certain  temperature, such
 as its amount of degrees and its scale.
 - Provides APIs for exchanging temperatures from one scale to another (currently Celsius, Fahrenheit, Kelvin and
 Rankine).
 
 - Allows comparing temperatures between each other.
-- Supports basic math operations like addition and subtraction.
 - Queries like `boil_water?`, `freeze_water?`.
 - Tested against Ruby 2.3, 2.4, 2.5, 2.6 & 2.7. See
 [.travis-ci.yml](https://github.com/marian13/basic_temperature/blob/9b13cb9909b57c51bb5dc05a8989d07a314e67d6/.travis.yml)
@@ -202,57 +201,6 @@ while these ones are treated as NOT equal:
 ```ruby
 Temperature[20.024, :celsius] == Temperature[20.029, :celsius]
 # => false
-```
-
-### Math
-
-#### Addition/Subtraction.
-
-```ruby
-Temperature[20, :celsius] + Temperature[10, :celsius]
-# => 30 °C
-
-Temperature[20, :celsius] - Temperature[10, :celsius]
-# => 10 °C
-```
-
-If second temperature has a different scale, first temperature is automatically converted to that scale
-before `degrees` addition/subtraction.
-
-```ruby
-Temperature[283.15, :kelvin] + Temperature[10, :celsius]
-# => 10 °C
-```
-
-Returned temperature will have the same scale as the second temperature.
-
-It is possible to add/subtract numerics.
-
-```ruby
-Temperature[20, :celsius] + 10
-# => 30 °C
-
-Temperature[20, :celsius] - 10
-# => 10 °C
-```
-
-In such cases, returned temperature will have the same scale as the first temperature.
-
-Also [Ruby coersion mechanism](https://ruby-doc.org/core/Numeric.html#method-i-coerce) is supported.
-
-```ruby
-10 + Temperature[20, :celsius]
-# => 30 °C
-
-10 - Temperature[20, :celsius]
-# => -10 °C
-```
-
-#### Negation
-
-```ruby
--Temperature[20, :celsius]
-# => -20 °C
 ```
 
 ### Queries

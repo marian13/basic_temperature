@@ -18,12 +18,6 @@ module BasicTemperature
         raise_invalid_scale_error unless SCALES.include?(scale)
       end
 
-      def assert_numeric_or_temperature!(numeric_or_temperature)
-        return if numeric_or_temperature.is_a?(Numeric) || numeric_or_temperature.instance_of?(Temperature)
-
-        raise_invalid_numeric_or_temperature_error(numeric_or_temperature)
-      end
-
       def assert_numeric!(numeric)
         raise_invalid_numeric(numeric) unless numeric.is_a?(Numeric)
       end
