@@ -1,12 +1,12 @@
-Wed, 15 Apr 2020 18:28:28 -0000
+Thu, 16 Apr 2020 14:45:35 -0000
 lib/basic_temperature.rb	Thu, 26 Mar 2020 17:27:15 +0200
-lib/basic_temperature/temperature.rb	Wed, 15 Apr 2020 21:23:59 +0300
+lib/basic_temperature/temperature.rb	Thu, 16 Apr 2020 17:45:21 +0300
 lib/basic_temperature/version.rb	Thu, 26 Mar 2020 17:27:15 +0200
 lib/basic_temperature/alias.rb	Thu, 26 Mar 2020 17:27:15 +0200
-lib/basic_temperature/temperature/errors.rb	Wed, 15 Apr 2020 20:22:25 +0300
+lib/basic_temperature/temperature/errors.rb	Thu, 16 Apr 2020 17:45:21 +0300
 lib/basic_temperature/temperature/initialization.rb	Thu, 26 Mar 2020 17:27:15 +0200
 lib/basic_temperature/temperature/casting.rb	Thu, 26 Mar 2020 17:27:15 +0200
 lib/basic_temperature/temperature/additional_helpers.rb	Thu, 26 Mar 2020 17:27:15 +0200
 lib/basic_temperature/temperature/rounding.rb	Thu, 26 Mar 2020 17:27:15 +0200
 lib/basic_temperature/temperature/memoization.rb	Thu, 26 Mar 2020 17:27:15 +0200
-lib/basic_temperature/temperature/assertions.rb	Wed, 15 Apr 2020 20:22:25 +0300
+lib/basic_temperature/temperature/assertions.rb	Thu, 16 Apr 2020 17:45:21 +0300
