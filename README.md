@@ -39,7 +39,7 @@ for the exact versions.
 Gemfile:
 
 ```ruby
-gem 'basic_temperature', '~> 0.2.2'
+gem 'basic_temperature', '~> 1.0.0'
 ```
 
 And then run:
@@ -55,7 +55,7 @@ But there is a shorter form.
 If `Temperature` constant was not used before in your app, you can add this line to your Gemfile:
 
 ```ruby
-gem 'basic_temperature', '~> 0.2.2', require: ['basic_temperature/alias']
+gem 'basic_temperature', '~> 1.0.0', require: ['basic_temperature/alias']
 ```
 
 This way `BasicTemperature::Temperature` class will be accesible simply by `Temperature`.
