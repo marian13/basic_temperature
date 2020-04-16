@@ -94,7 +94,7 @@ Sometimes it is useful to create a new temperature from already existing one.
 
 For such cases, there are `set_degrees` and `set_scale`.
 
-Since temperatures are [value objects](https://martinfowler.com/bliki/ValueObject.html), both methods returns
+Since temperatures are [value objects](https://martinfowler.com/bliki/ValueObject.html), both methods return
 new instances.
 
 Examples:
