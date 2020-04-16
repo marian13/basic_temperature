@@ -42,10 +42,6 @@ module BasicTemperature
         raise InvalidScale, message
       end
 
-      def raise_invalid_numeric_or_temperature_error(numeric_or_temperature)
-        raise InvalidNumericOrTemperature, "`#{numeric_or_temperature}` is neither Numeric nor Temperature."
-      end
-
       def raise_invalid_numeric(numeric)
         raise InvalidNumeric, "`#{numeric}` is not a Numeric."
       end
