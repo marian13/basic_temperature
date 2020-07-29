@@ -20,6 +20,7 @@ Style/AsciiComments:
 
 Style/Documentation:
   Severity: warning
+  Enabled: No
 
 Style/Lambda:
   EnforcedStyle: literal
