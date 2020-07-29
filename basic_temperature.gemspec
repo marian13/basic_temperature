@@ -32,6 +32,7 @@ Gem::Specification.new do |spec|
 
   spec.require_paths = ['lib']
 
+  spec.add_development_dependency 'bundler-audit'
   spec.add_development_dependency 'byebug', '~> 10.0'
   spec.add_development_dependency 'coveralls'
   spec.add_development_dependency 'rake', '~> 12.0'
