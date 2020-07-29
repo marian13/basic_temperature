@@ -18,3 +18,4 @@ rvm:
 
 script:
   - bundle exec rspec
+  - bundle exec bundle-audit check --update
