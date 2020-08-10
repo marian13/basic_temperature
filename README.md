@@ -227,6 +227,16 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/marian
 
 * Update docs: `bundle exec sdoc lib -T rails -o docs`.
 
+## Development with Docker
+
+* Build container `docker build . -f docker/Dockerfile-2.3 -t basic_temperature_2.3`.
+
+* Run specs inside container `docker run -it basic_temperature_2.3:latest bundle exec rspec`.
+
+* Interactive shell inside container `docker run -it basic_temperature_2.3:latest bash`.
+
+* 2.3 can be replaced by 2.4, 2.5, 2.6 and 2.7.
+
 ## License
 
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
