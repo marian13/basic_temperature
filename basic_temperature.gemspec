@@ -1,20 +1,17 @@
 # frozen_string_literal: true
 
+require_relative 'lib/basic_temperature/specification'
 require_relative 'lib/basic_temperature/version'
 
 Gem::Specification.new do |spec|
-  spec.name = 'basic_temperature'
+  spec.name        = BasicTemperature::Specification::NAME
+  spec.authors     = BasicTemperature::Specification::AUTHORS
+  spec.email       = BasicTemperature::Specification::EMAIL
+  spec.homepage    = BasicTemperature::Specification::HOMEPAGE
+  spec.summary     = BasicTemperature::Specification::SUMMARY
+  spec.description = BasicTemperature::Specification::DESCRIPTION
+
   spec.version = BasicTemperature::VERSION
-
-  spec.authors = ['Marian Kostyk']
-  spec.email = ['mariankostyk13895@gmail.com']
-
-  spec.summary = 'Value object for basic temperature operations.'
-  spec.description =
-    'Value object for basic temperature operations like ' \
-    'conversions from Celsius to Fahrenhait or Kelvin etc.'
-
-  spec.homepage = 'https://github.com/marian13/basic_temperature'
 
   spec.license = 'MIT'
 
