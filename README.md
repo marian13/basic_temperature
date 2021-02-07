@@ -219,7 +219,7 @@ Basic Temperature follows the [Semantic Versioning](https://semver.org/) standar
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/marian13/basic_temperature.
 
-## Development
+## Development on the local machine
 
 * Check specs: `bundle exec rspec`.
 
@@ -235,7 +235,7 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/marian
 
 * Interactive shell inside container: `docker run -it basic_temperature_2.3:latest bash`.
 
-* 2.3 can be replaced by 2.4, 2.5, 2.6 and 2.7.
+* 2.3 can be replaced by 2.4, 2.5, 2.6, 2.7 and 3.0.
 
 ## License
 
