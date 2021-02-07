@@ -1,7 +1,8 @@
 /.bundle/
 /.yardoc
 /_yardoc/
-/coverage/
+/coverage/*
+!/coverage/.gitkeep
 /doc/
 /pkg/
 /spec/reports/
