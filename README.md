@@ -1,19 +1,27 @@
+<!-- header:start -->
 <h1 align="center">
   Basic Temperature
 </h1>
+<!-- header:end -->
 
+<!-- badges:start -->
 [![Gem Version](https://badge.fury.io/rb/basic_temperature.svg)](https://rubygems.org/gems/basic_temperature) [![Build Status](https://travis-ci.com/marian13/basic_temperature.svg?branch=master)](https://travis-ci.com/marian13/basic_temperature) [![Maintainability](https://api.codeclimate.com/v1/badges/21dc5d50cf5de8346a3c/maintainability)](https://codeclimate.com/github/marian13/basic_temperature/maintainability) [![Coverage Status](https://coveralls.io/repos/github/marian13/basic_temperature/badge.svg)](https://coveralls.io/github/marian13/basic_temperature) [![Inline docs](http://inch-ci.org/github/marian13/basic_temperature.svg?branch=master)](http://inch-ci.org/github/marian13/basic_temperature)
 [![Patreon](https://img.shields.io/badge/patreon-donate-orange.svg)](https://www.patreon.com/user?u=31435716&fan_landing=true)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+<!-- badges:end -->
 
+<!-- logo:start -->
 <p align="center">
   <img src="https://raw.githubusercontent.com/marian13/basic_temperature/master/logo.png">
 </p>
+<!-- logo:end -->
 
+<!-- general_description:start -->
 `basic_temperature` is a Ruby library which provides a simple [value object](https://martinfowler.com/bliki/ValueObject.html) to work with temperatures and 
 allows to perform basic operations like conversion from Celsius to Kelvin, from Kelvin to Fahrenheit etc.
+<!-- general_description:end -->
 
-
+<!-- features:start -->
 ### Features
 - Provides a `Temperature` class which encapsulates all information about a certain  temperature, such
 as its amount of degrees and its scale.
@@ -25,15 +33,21 @@ Rankine).
 - Tested against Ruby 2.3, 2.4, 2.5, 2.6 & 2.7. See
 [.travis-ci.yml](https://github.com/marian13/basic_temperature/blob/9b13cb9909b57c51bb5dc05a8989d07a314e67d6/.travis.yml)
 for the exact versions.
+<!-- features:end -->
 
+<!-- dependecies:start -->
 ### Dependecies
 
 * None.
+<!-- dependecies:end -->
 
+<!-- documentation:start -->
 ### Documentation
 
 * Visit https://marian13.github.io/basic_temperature/ to view the documentation.
+<!-- documentation:end -->
 
+<!-- installation:start -->
 ## Installation
 
 Gemfile:
@@ -63,7 +77,9 @@ This way `BasicTemperature::Temperature` class will be accesible simply by `Temp
 The following guide assumes you have chosen the shorter form.
 
 If not, just replace all `Temperature` to `BasicTemperature::Temperature`.
+<!-- installation:end -->
 
+<!-- usage:start -->
 ## Usage
 
 ### Creating Temperatures
@@ -211,14 +227,20 @@ Temperature[0, :celsius].boil_water?
 Temperature[0, :celsius].freeze_water?
 # => true
 ```
+<!-- usage:end -->
 
+<!-- versioning:start -->
 ## Versioning
 Basic Temperature follows the [Semantic Versioning](https://semver.org/) standard.
+<!-- versioning:end -->
 
+<!-- contributing:start -->
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/marian13/basic_temperature.
+<!-- contributing:end -->
 
+<!-- development_local_machine:start -->
 ## Development on the local machine
 
 * Check specs: `bundle exec rspec`.
@@ -226,7 +248,9 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/marian
 * Check linter: `bundle exec rubocop`.
 
 * Update docs: `bundle exec sdoc lib -T rails -o docs`.
+<!-- development_local_machine:end -->
 
+<!-- development_docker:start -->
 ## Development with Docker
 
 * Build container: `docker build . -f docker/Dockerfile-2.3 -t basic_temperature_2.3`.
@@ -236,9 +260,14 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/marian
 * Interactive shell inside container: `docker run -it basic_temperature_2.3:latest bash`.
 
 * 2.3 can be replaced by 2.4, 2.5, 2.6, 2.7 and 3.0.
+<!-- development_docker:end -->
 
+<!-- license:start -->
 ## License
 
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+<!-- license:end -->
 
+<!-- author:start -->
 Copyright (c) 2020 [Marian Kostyk](http://mariankostyk.com).
+<!-- author:end -->
