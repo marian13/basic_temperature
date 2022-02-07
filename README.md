@@ -35,11 +35,11 @@ Rankine).
 for the exact versions.
 <!-- features:end -->
 
-<!-- dependecies:start -->
-### Dependecies
+<!-- dependencies:start -->
+### Dependencies
 
 * None.
-<!-- dependecies:end -->
+<!-- dependencies:end -->
 
 <!-- documentation:start -->
 ### Documentation
@@ -106,7 +106,7 @@ Temperature[0, :celsius]
 
 ### Creating Temperatures from already existing temperature objects
 
-Sometimes it is useful to create a new temperature from already existing one.
+Sometimes it is useful to create a new temperature from an already existing one.
 
 For such cases, there are `set_degrees` and `set_scale`.
 
@@ -131,7 +131,7 @@ new_temperature = temperature.set_scale(:kelvin)
 
 ### Conversions
 
-Temperatures can be converted to diffirent scales.
+Temperatures can be converted to different scales.
 
 Currently, the following scales are supported: `Celsius`, `Fahrenheit`, `Kelvin` and `Rankine`.
 
@@ -265,7 +265,7 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/marian
 <!-- license:start -->
 ## License
 
-The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+The gem is available as open-source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
 <!-- license:end -->
 
 <!-- author:start -->
