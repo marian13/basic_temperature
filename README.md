@@ -269,5 +269,5 @@ The gem is available as open-source under the terms of the [MIT License](https:/
 <!-- license:end -->
 
 <!-- author:start -->
-Copyright (c) 2020 [Marian Kostyk](http://mariankostyk.com).
+Copyright (c) 2022 [Marian Kostyk](http://mariankostyk.com).
 <!-- author:end -->
