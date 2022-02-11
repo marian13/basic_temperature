@@ -23,6 +23,11 @@
 # NOTE: Virtual Environments.
 # - https://github.com/actions/virtual-environments
 #
+# NOTE: How to collect and upload coverage reports for Coveralls?
+# - https://github.com/marketplace/actions/coveralls-github-action#complete-parallel-job-example
+# - https://github.com/coverallsapp/github-action/issues/29
+# - https://github.com/coverallsapp/github-action/issues/29#issuecomment-704366557
+#
 # IMPORTANT: This workflow is heavily based on Shopify/packwerk workflow.
 # - https://github.com/Shopify/packwerk/blob/main/.github/workflows/ci.yml
 # - https://github.com/Shopify/packwerk/actions/runs/331834549/workflow
@@ -32,10 +37,10 @@ name: CI
 on:
   pull_request:
     branches:
-      - master
+      - main
   push:
     branches:
-      - master
+      - main
 
 jobs:
   lint:
@@ -94,3 +99,22 @@ jobs:
           bundler-cache: true
       - name: Run RSpec
         run: bundle exec rspec
+      - name: Collect coverage reports for Coveralls
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.github_token }}
+          flag-name: run-${{ matrix.ruby }}-${{ matrix.gemfile }}
+          parallel: true
+          path-to-lcov: "./coverage/lcov.info"
+
+  coverage:
+    name: Gather coverage
+    needs:
+      - test
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Upload coverage reports to Coveralls
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.github_token }}
+          parallel-finished: true
