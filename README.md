@@ -5,7 +5,7 @@
 <!-- header:end -->
 
 <!-- badges:start -->
-[![Gem Version](https://badge.fury.io/rb/basic_temperature.svg)](https://rubygems.org/gems/basic_temperature) [![Maintainability](https://api.codeclimate.com/v1/badges/21dc5d50cf5de8346a3c/maintainability)](https://codeclimate.com/github/marian13/basic_temperature/maintainability) [![Coverage Status](https://coveralls.io/repos/github/marian13/basic_temperature/badge.svg)](https://coveralls.io/github/marian13/basic_temperature?branch=main) [![Inline docs](http://inch-ci.org/github/marian13/basic_temperature.svg?branch=master)](http://inch-ci.org/github/marian13/basic_temperature)
+[![Gem Version](https://badge.fury.io/rb/basic_temperature.svg)](https://rubygems.org/gems/basic_temperature) [![GitHub Actions CI](https://github.com/marian13/basic_temperature/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/marian13/basic_temperature/actions/workflows/ci.yml) [![Maintainability](https://api.codeclimate.com/v1/badges/21dc5d50cf5de8346a3c/maintainability)](https://codeclimate.com/github/marian13/basic_temperature/maintainability) [![Coverage Status](https://coveralls.io/repos/github/marian13/basic_temperature/badge.svg)](https://coveralls.io/github/marian13/basic_temperature?branch=main) [![Inline docs](http://inch-ci.org/github/marian13/basic_temperature.svg?branch=master)](http://inch-ci.org/github/marian13/basic_temperature)
 [![Patreon](https://img.shields.io/badge/patreon-donate-orange.svg)](https://www.patreon.com/user?u=31435716&fan_landing=true)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 <!-- badges:end -->
@@ -30,8 +30,7 @@ Rankine).
 
 - Allows comparing temperatures between each other.
 - Queries like `boil_water?`, `freeze_water?`.
-- Tested against Ruby 2.3, 2.4, 2.5, 2.6 & 2.7.
-for the exact versions.
+- Tested against Ruby 2.3, 2.4, 2.5, 2.6,2.7, 3.0 and 3.1. See [.github/workflows/ci.yml](https://github.com/marian13/basic_temperature/blob/main/.github/workflows/ci.yml).
 <!-- features:end -->
 
 <!-- dependencies:start -->
