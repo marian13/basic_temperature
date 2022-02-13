@@ -552,13 +552,10 @@ RSpec.describe Temperature do
     end
 
     context "when scale is NOT valid (can not be casted to 'celsius', 'fahrenheit', 'kelvin', 'rankine')" do
+      let(:temperature) { described_class.new(0, "celsius") }
+      let(:message) { "scale has invalid value, valid values are 'celsius', 'fahrenheit', 'kelvin', 'rankine'." }
+
       it "raises Errors::InvalidScale" do
-        temperature = described_class.new(0, "celsius")
-
-        message =
-          "scale has invalid value, " \
-          "valid values are 'celsius', 'fahrenheit', 'kelvin', 'rankine'."
-
         expect { temperature.set_scale("abc") }
           .to raise_error(Temperature::Errors::InvalidScale)
           .with_message(message)
