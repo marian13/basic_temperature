@@ -122,37 +122,31 @@ RSpec.describe Temperature do
 
   describe "#to_celsius" do
     context "when temperature scale is celsius" do
-      it "returns temperature in celsius" do
-        temperature = described_class.new(0, "celsius")
+      let(:temperature) { described_class.new(0, "celsius") }
 
+      it "returns temperature in celsius" do
         expect(temperature.to_celsius.degrees).to eq(0)
         expect(temperature.to_celsius.scale).to eq("celsius")
       end
 
       it "memoizes temperature in celsius" do
-        temperature = described_class.new(0, "celsius")
-
         expect(temperature.to_celsius.object_id).to eq(temperature.to_celsius.object_id)
       end
 
       it "returns original temperature object" do
-        temperature = described_class.new(0, "celsius")
-
         expect(temperature.to_celsius.object_id).to eq(temperature.object_id)
       end
     end
 
     context "when temperature scale is fahrenheit" do
-      it "returns temperature in celsius" do
-        temperature = described_class.new(68, "fahrenheit")
+      let(:temperature) { described_class.new(68, "fahrenheit") }
 
+      it "returns temperature in celsius" do
         expect(temperature.to_celsius.degrees).to be_within(0.01).of(20)
         expect(temperature.to_celsius.scale).to eq("celsius")
       end
 
       it "memoizes temperature in celsius" do
-        temperature = described_class.new(68, "fahrenheit")
-
         expect(temperature.to_celsius.object_id).to eq(temperature.to_celsius.object_id)
       end
     end
@@ -192,37 +186,31 @@ RSpec.describe Temperature do
 
   describe "#to_fahrenheit" do
     context "when temperature scale is fahrenheit" do
-      it "returns temperature in fahrenheit" do
-        temperature = described_class.new(0, "fahrenheit")
+      let(:temperature) { described_class.new(0, "fahrenheit") }
 
+      it "returns temperature in fahrenheit" do
         expect(temperature.to_fahrenheit.degrees).to eq(0)
         expect(temperature.to_fahrenheit.scale).to eq("fahrenheit")
       end
 
       it "memoizes temperature in fahrenheit" do
-        temperature = described_class.new(0, "fahrenheit")
-
         expect(temperature.to_fahrenheit.object_id).to eq(temperature.to_fahrenheit.object_id)
       end
 
       it "returns original temperature object" do
-        temperature = described_class.new(0, "fahrenheit")
-
         expect(temperature.to_fahrenheit.object_id).to eq(temperature.object_id)
       end
     end
 
     context "when temperature scale is celsius" do
-      it "returns temperature in fahrenheit" do
-        temperature = described_class.new(20, "celsius")
+      let(:temperature) { described_class.new(20, "celsius") }
 
+      it "returns temperature in fahrenheit" do
         expect(temperature.to_fahrenheit.degrees).to be_within(0.01).of(68)
         expect(temperature.to_fahrenheit.scale).to eq("fahrenheit")
       end
 
       it "memoizes temperature in fahrenheit" do
-        temperature = described_class.new(20, "celsius")
-
         expect(temperature.to_fahrenheit.object_id).to eq(temperature.to_fahrenheit.object_id)
       end
     end
@@ -262,37 +250,31 @@ RSpec.describe Temperature do
 
   describe "#to_kelvin" do
     context "when temperature scale is kelvin" do
-      it "returns temperature in kelvin" do
-        temperature = described_class.new(0, "kelvin")
+      let(:temperature) { described_class.new(0, "kelvin") }
 
+      it "returns temperature in kelvin" do
         expect(temperature.to_kelvin.degrees).to eq(0)
         expect(temperature.to_kelvin.scale).to eq("kelvin")
       end
 
       it "memoizes temperature in kelvin" do
-        temperature = described_class.new(0, "celsius")
-
         expect(temperature.to_kelvin.object_id).to eq(temperature.to_kelvin.object_id)
       end
 
       it "returns original temperature object" do
-        temperature = described_class.new(0, "kelvin")
-
         expect(temperature.to_kelvin.object_id).to eq(temperature.object_id)
       end
     end
 
     context "when temperature scale is celsius" do
-      it "returns temperature in kelvin" do
-        temperature = described_class.new(20, "celsius")
+      let(:temperature) { described_class.new(20, "celsius") }
 
+      it "returns temperature in kelvin" do
         expect(temperature.to_kelvin.degrees).to be_within(0.01).of(293.15)
         expect(temperature.to_kelvin.scale).to eq("kelvin")
       end
 
       it "memoizes temperature in kelvin" do
-        temperature = described_class.new(20, "celsius")
-
         expect(temperature.to_kelvin.object_id).to eq(temperature.to_kelvin.object_id)
       end
     end
@@ -332,52 +314,44 @@ RSpec.describe Temperature do
 
   describe "#to_rankine" do
     context "when temperature scale is rankine" do
-      it "returns temperature in rankine" do
-        temperature = described_class.new(0, "rankine")
+      let(:temperature) { described_class.new(0, "rankine") }
 
+      it "returns temperature in rankine" do
         expect(temperature.to_rankine.degrees).to eq(0)
         expect(temperature.to_rankine.scale).to eq("rankine")
       end
 
       it "memoizes temperature in rankine" do
-        temperature = described_class.new(0, "rankine")
-
         expect(temperature.to_rankine.object_id).to eq(temperature.to_rankine.object_id)
       end
 
       it "returns original temperature object" do
-        temperature = described_class.new(0, "rankine")
-
         expect(temperature.to_rankine.object_id).to eq(temperature.object_id)
       end
     end
 
     context "when temperature scale is celsius" do
-      it "returns temperature in rankine" do
-        temperature = described_class.new(20, "celsius")
+      let(:temperature) { described_class.new(20, "celsius") }
 
+      it "returns temperature in rankine" do
         expect(temperature.to_rankine.degrees).to be_within(0.01).of(527.67)
         expect(temperature.to_rankine.scale).to eq("rankine")
       end
 
       it "memoizes temperature in rankine" do
-        temperature = described_class.new(20, "celsius")
-
         expect(temperature.to_rankine.object_id).to eq(temperature.to_rankine.object_id)
       end
     end
 
     context "when temperature scale is fahrenheit" do
-      it "returns temperature in rankine" do
-        temperature = described_class.new(68, "fahrenheit")
+      let(:temperature) { described_class.new(68, "fahrenheit") }
 
+      it "returns temperature in rankine" do
         expect(temperature.to_rankine.degrees).to be_within(0.01).of(527.67)
         expect(temperature.to_rankine.scale).to eq("rankine")
       end
 
       it "memoizes temperature in rankine" do
-        temperature = described_class.new(68, "fahrenheit")
-
         expect(temperature.to_rankine.object_id).to eq(temperature.to_rankine.object_id)
       end
     end
