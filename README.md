@@ -258,6 +258,11 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/marian
   bundle exec sdoc lib -T rails -o docs
   ```
 
+* Find missed docs:
+  ```bash
+  bundle exec inch
+  ```
+
 ### Docker
 
 * Build container:
