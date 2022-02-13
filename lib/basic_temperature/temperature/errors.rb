@@ -24,20 +24,20 @@ module BasicTemperature
 
       def raise_initialization_arguments_error
         message =
-          'Positional and keyword arguments are mixed or ' \
-          'neither positional nor keyword arguments are passed.'
+          "Positional and keyword arguments are mixed or " \
+          "neither positional nor keyword arguments are passed."
 
         raise InitializationArguments, message
       end
 
       def raise_invalid_degrees_error
-        raise InvalidDegrees, 'degree is NOT a numeric value.'
+        raise InvalidDegrees, "degree is NOT a numeric value."
       end
 
       def raise_invalid_scale_error
         message =
-          'scale has invalid value, ' \
-          "valid values are #{SCALES.map { |scale| "'#{scale}'" }.join(', ')}."
+          "scale has invalid value, " \
+          "valid values are #{SCALES.map { |scale| "'#{scale}'" }.join(", ")}."
 
         raise InvalidScale, message
       end

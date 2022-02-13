@@ -2,13 +2,13 @@
 
 module BasicTemperature
   module Specification
-    NAME = 'basic_temperature'
+    NAME = "basic_temperature"
 
-    AUTHORS = ['Marian Kostyk'].freeze
+    AUTHORS = ["Marian Kostyk"].freeze
 
-    EMAIL = ['mariankostyk13895@gmail.com'].freeze
+    EMAIL = ["mariankostyk13895@gmail.com"].freeze
 
-    HOMEPAGE = 'https://github.com/marian13/basic_temperature'
+    HOMEPAGE = "https://github.com/marian13/basic_temperature"
 
     SUMMARY = <<~TEXT
       Value object for basic temperature operations.

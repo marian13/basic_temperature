@@ -1,16 +1,14 @@
 # frozen_string_literal: true
 
-require_relative 'temperature/additional_helpers'
-require_relative 'temperature/assertions'
-require_relative 'temperature/casting'
-require_relative 'temperature/errors'
-require_relative 'temperature/initialization'
-require_relative 'temperature/memoization'
-require_relative 'temperature/rounding'
+require_relative "temperature/additional_helpers"
+require_relative "temperature/assertions"
+require_relative "temperature/casting"
+require_relative "temperature/errors"
+require_relative "temperature/initialization"
+require_relative "temperature/memoization"
+require_relative "temperature/rounding"
 
 module BasicTemperature
-  # rubocop:disable Metrics/ClassLength
-
   ##
   # Temperature is a simple {Value Object}[https://martinfowler.com/bliki/ValueObject.html] for basic
   # temperature operations like conversions from <tt>Celsius</tt> to <tt>Fahrenhait</tt> or <tt>Kelvin</tt>
@@ -200,10 +198,10 @@ module BasicTemperature
     include Memoization
     include Rounding
 
-    CELSIUS    = 'celsius'
-    FAHRENHEIT = 'fahrenheit'
-    KELVIN     = 'kelvin'
-    RANKINE    = 'rankine'
+    CELSIUS = "celsius"
+    FAHRENHEIT = "fahrenheit"
+    KELVIN = "kelvin"
+    RANKINE = "rankine"
 
     # A list of all currently supported scale values.
     SCALES = [CELSIUS, FAHRENHEIT, KELVIN, RANKINE].freeze
@@ -242,8 +240,6 @@ module BasicTemperature
       end
     end
 
-    # rubocop:disable Naming/AccessorMethodName
-
     # Returns a new Temperature with updated <tt>degrees</tt>.
     #
     #   temperature = Temperature[0, :celsius]
@@ -255,9 +251,6 @@ module BasicTemperature
     def set_degrees(degrees)
       Temperature.new(degrees, scale)
     end
-    # rubocop:enable Naming/AccessorMethodName
-
-    # rubocop:disable Naming/AccessorMethodName
 
     # Returns a new Temperature with updated <tt>scale</tt>.
     #
@@ -270,7 +263,6 @@ module BasicTemperature
     def set_scale(scale)
       Temperature.new(degrees, scale)
     end
-    # rubocop:enable Naming/AccessorMethodName
 
     ##
     # Converts temperature to specific <tt>scale</tt>.
@@ -316,10 +308,10 @@ module BasicTemperature
     #
     def to_celsius
       memoized(:to_celsius) || memoize(:to_celsius, -> {
-        return self if self.scale == CELSIUS
+        return self if scale == CELSIUS
 
         degrees =
-          case self.scale
+          case scale
           when FAHRENHEIT
             (self.degrees - 32) * (5 / 9r)
           when KELVIN
@@ -348,10 +340,10 @@ module BasicTemperature
     #
     def to_fahrenheit
       memoized(:to_fahrenheit) || memoize(:to_fahrenheit, -> {
-        return self if self.scale == FAHRENHEIT
+        return self if scale == FAHRENHEIT
 
         degrees =
-          case self.scale
+          case scale
           when CELSIUS
             self.degrees * (9 / 5r) + 32
           when KELVIN
@@ -380,10 +372,10 @@ module BasicTemperature
     #
     def to_kelvin
       memoized(:to_kelvin) || memoize(:to_kelvin, -> {
-        return self if self.scale == KELVIN
+        return self if scale == KELVIN
 
         degrees =
-          case self.scale
+          case scale
           when CELSIUS
             self.degrees + 273.15
           when FAHRENHEIT
@@ -412,10 +404,10 @@ module BasicTemperature
     #
     def to_rankine
       memoized(:to_rankine) || memoize(:to_rankine, -> {
-        return self if self.scale == RANKINE
+        return self if scale == RANKINE
 
         degrees =
-          case self.scale
+          case scale
           when CELSIUS
             (self.degrees + 273.15) * (9 / 5r)
           when FAHRENHEIT
@@ -466,7 +458,7 @@ module BasicTemperature
     def <=>(other)
       return unless assert_temperature(other)
 
-      round_degrees(self.to_scale(other.scale).degrees) <=> round_degrees(other.degrees)
+      round_degrees(to_scale(other.scale).degrees) <=> round_degrees(other.degrees)
     end
 
     ##
@@ -474,7 +466,7 @@ module BasicTemperature
     # false otherwise.
     #
     def boil_water?
-      self.to_celsius.degrees >= 100
+      to_celsius.degrees >= 100
     end
 
     ##
@@ -482,33 +474,33 @@ module BasicTemperature
     # false otherwise.
     #
     def freeze_water?
-      self.to_celsius.degrees <= 0
+      to_celsius.degrees <= 0
     end
 
     # Is used by {+}[rdoc-ref:Temperature#+] and {-}[rdoc-ref:Temperature#-]
     # for {Ruby coersion mechanism}[https://ruby-doc.org/core/Numeric.html#method-i-coerce].
-    def coerce(numeric) #:nodoc:
+    def coerce(numeric) # :nodoc:
       assert_numeric!(numeric)
 
-      [Temperature.new(numeric, self.scale), self]
+      [Temperature.new(numeric, scale), self]
     end
 
     # Returns a string containing a human-readable representation of temperature.
-    def inspect #:nodoc:
+    def inspect # :nodoc:
       rounded_degrees = round_degrees(degrees)
 
       printable_degrees = degrees_without_decimal?(rounded_degrees) ? rounded_degrees.to_i : rounded_degrees
 
       scale_symbol =
-        case self.scale
+        case scale
         when CELSIUS
-          '°C'
+          "°C"
         when FAHRENHEIT
-          '°F'
+          "°F"
         when KELVIN
-          'K'
+          "K"
         when RANKINE
-          '°R'
+          "°R"
         end
 
       "#{printable_degrees} #{scale_symbol}"
