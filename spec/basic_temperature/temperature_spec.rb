@@ -158,31 +158,33 @@ RSpec.describe Temperature do
     end
 
     context "when temperatute scale is kelvin" do
-      it "returns temperature in celsius" do
-        temperature = described_class.new(300, "kelvin")
+      let(:temperature) { described_class.new(300, "kelvin") }
 
-        expect(temperature.to_celsius.degrees).to be_within(0.01).of(26.85)
+      it "returns temperature in celsius" do
         expect(temperature.to_celsius.scale).to eq("celsius")
       end
 
-      it "memoizes temperature in celsius" do
-        temperature = described_class.new(300, "kelvin")
+      it "returns temperature with converted degrees" do
+        expect(temperature.to_celsius.degrees).to be_within(0.01).of(26.85)
+      end
 
+      it "memoizes temperature in celsius" do
         expect(temperature.to_celsius.object_id).to eq(temperature.to_celsius.object_id)
       end
     end
 
     context "when temperatute scale is rankine" do
-      it "returns temperature in celsius" do
-        temperature = described_class.new(300, "rankine")
+      let(:temperature) { described_class.new(300, "rankine") }
 
-        expect(temperature.to_celsius.degrees).to be_within(0.01).of(-106.48)
+      it "returns temperature in celsius" do
         expect(temperature.to_celsius.scale).to eq("celsius")
       end
 
-      it "memoizes temperature in celsius" do
-        temperature = described_class.new(300, "rankine")
+      it "returns temperature with converted degrees" do
+        expect(temperature.to_celsius.degrees).to be_within(0.01).of(-106.48)
+      end
 
+      it "memoizes temperature in celsius" do
         expect(temperature.to_celsius.object_id).to eq(temperature.to_celsius.object_id)
       end
     end
@@ -226,31 +228,33 @@ RSpec.describe Temperature do
     end
 
     context "when temperatute scale is kelvin" do
-      it "returns new temperature in fahrenheit" do
-        temperature = described_class.new(300, "kelvin")
+      let(:temperature) { described_class.new(300, "kelvin") }
 
-        expect(temperature.to_fahrenheit.degrees).to be_within(0.01).of(80.33)
+      it "returns new temperature in fahrenheit" do
         expect(temperature.to_fahrenheit.scale).to eq("fahrenheit")
       end
 
-      it "memoizes temperature in fahrenheit" do
-        temperature = described_class.new(300, "kelvin")
+      it "returns temperature with converted degrees" do
+        expect(temperature.to_fahrenheit.degrees).to be_within(0.01).of(80.33)
+      end
 
+      it "memoizes temperature in fahrenheit" do
         expect(temperature.to_fahrenheit.object_id).to eq(temperature.to_fahrenheit.object_id)
       end
     end
 
     context "when temperatute scale is rankine" do
-      it "returns temperature in fahrenheit" do
-        temperature = described_class.new(300, "rankine")
+      let(:temperature) { described_class.new(300, "rankine") }
 
-        expect(temperature.to_fahrenheit.degrees).to be_within(0.01).of(-159.67)
+      it "returns temperature in fahrenheit" do
         expect(temperature.to_fahrenheit.scale).to eq("fahrenheit")
       end
 
-      it "memoizes temperature in fahrenheit" do
-        temperature = described_class.new(300, "rankine")
+      it "returns temperature with converted degrees" do
+        expect(temperature.to_fahrenheit.degrees).to be_within(0.01).of(-159.67)
+      end
 
+      it "memoizes temperature in fahrenheit" do
         expect(temperature.to_fahrenheit.object_id).to eq(temperature.to_fahrenheit.object_id)
       end
     end
@@ -294,31 +298,33 @@ RSpec.describe Temperature do
     end
 
     context "when temperatute scale is fahrenheit" do
-      it "returns temperature in kelvin" do
-        temperature = described_class.new(60, "fahrenheit")
+      let(:temperature) { described_class.new(60, "fahrenheit") }
 
-        expect(temperature.to_kelvin.degrees).to be_within(0.01).of(288.71)
+      it "returns temperature in kelvin" do
         expect(temperature.to_kelvin.scale).to eq("kelvin")
       end
 
-      it "memoizes temperature in kelvin" do
-        temperature = described_class.new(60, "fahrenheit")
+      it "returns temperature with converted degrees" do
+        expect(temperature.to_kelvin.degrees).to be_within(0.01).of(288.71)
+      end
 
+      it "memoizes temperature in kelvin" do
         expect(temperature.to_kelvin.object_id).to eq(temperature.to_kelvin.object_id)
       end
     end
 
     context "when temperatute scale is rankine" do
-      it "returns temperature in kelvin" do
-        temperature = described_class.new(300, "rankine")
+      let(:temperature) { described_class.new(300, "rankine") }
 
-        expect(temperature.to_kelvin.degrees).to be_within(0.01).of(166.67)
+      it "returns temperature in kelvin" do
         expect(temperature.to_kelvin.scale).to eq("kelvin")
       end
 
-      it "memoizes temperature in kelvin" do
-        temperature = described_class.new(300, "rankine")
+      it "returns temperature with converted degrees" do
+        expect(temperature.to_kelvin.degrees).to be_within(0.01).of(166.67)
+      end
 
+      it "memoizes temperature in kelvin" do
         expect(temperature.to_kelvin.object_id).to eq(temperature.to_kelvin.object_id)
       end
     end
@@ -377,16 +383,17 @@ RSpec.describe Temperature do
     end
 
     context "when temperatute scale is kelvin" do
-      it "returns temperature in rankine" do
-        temperature = described_class.new(300, "kelvin")
+      let(:temperature) { described_class.new(300, "kelvin") }
 
-        expect(temperature.to_rankine.degrees).to be_within(0.01).of(540)
+      it "returns temperature in rankine" do
         expect(temperature.to_rankine.scale).to eq("rankine")
       end
 
-      it "memoizes temperature in celsius" do
-        temperature = described_class.new(300, "kelvin")
+      it "returns temperature with converted degrees" do
+        expect(temperature.to_rankine.degrees).to be_within(0.01).of(540)
+      end
 
+      it "memoizes temperature in celsius" do
         expect(temperature.to_rankine.object_id).to eq(temperature.to_rankine.object_id)
       end
     end
