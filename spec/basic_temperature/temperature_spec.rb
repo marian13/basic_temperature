@@ -689,7 +689,7 @@ RSpec.describe Temperature do
 
   describe "#inspect" do
     context "when scale is celsius" do
-      it "returns tempeture as string in special format" do
+      it "returns temperature as string in special format" do
         expect(described_class.new(0, "celsius").inspect).to eq("0 °C")
       end
 
@@ -707,7 +707,7 @@ RSpec.describe Temperature do
     end
 
     context "when scale is fahrenheit" do
-      it "returns tempeture as string in special format" do
+      it "returns temperature as string in special format" do
         expect(described_class.new(0, "fahrenheit").inspect).to eq("0 °F")
       end
 
@@ -725,7 +725,7 @@ RSpec.describe Temperature do
     end
 
     context "when scale is kelvin" do
-      it "returns tempeture as string in special format" do
+      it "returns temperature as string in special format" do
         expect(described_class.new(0, "kelvin").inspect).to eq("0 K")
       end
 
@@ -743,7 +743,7 @@ RSpec.describe Temperature do
     end
 
     context "when scale is rankine" do
-      it "returns tempeture as string in special format" do
+      it "returns temperature as string in special format" do
         expect(described_class.new(0, "rankine").inspect).to eq("0 °R")
       end
 
