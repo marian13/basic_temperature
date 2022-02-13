@@ -117,8 +117,11 @@ RSpec.describe Temperature do
       let(:temperature) { described_class.new(0, "celsius") }
 
       it "returns temperature in celsius" do
-        expect(temperature.to_celsius.degrees).to eq(0)
         expect(temperature.to_celsius.scale).to eq("celsius")
+      end
+
+      it "returns temperature with same degrees" do
+        expect(temperature.to_celsius.degrees).to eq(0)
       end
 
       it "memoizes temperature in celsius" do
@@ -184,8 +187,11 @@ RSpec.describe Temperature do
       let(:temperature) { described_class.new(0, "fahrenheit") }
 
       it "returns temperature in fahrenheit" do
-        expect(temperature.to_fahrenheit.degrees).to eq(0)
         expect(temperature.to_fahrenheit.scale).to eq("fahrenheit")
+      end
+
+      it "returns temperature with same degrees" do
+        expect(temperature.to_fahrenheit.degrees).to eq(0)
       end
 
       it "memoizes temperature in fahrenheit" do
@@ -251,8 +257,11 @@ RSpec.describe Temperature do
       let(:temperature) { described_class.new(0, "kelvin") }
 
       it "returns temperature in kelvin" do
-        expect(temperature.to_kelvin.degrees).to eq(0)
         expect(temperature.to_kelvin.scale).to eq("kelvin")
+      end
+
+      it "returns temperature with same degrees" do
+        expect(temperature.to_kelvin.degrees).to eq(0)
       end
 
       it "memoizes temperature in kelvin" do
@@ -268,8 +277,11 @@ RSpec.describe Temperature do
       let(:temperature) { described_class.new(20, "celsius") }
 
       it "returns temperature in kelvin" do
-        expect(temperature.to_kelvin.degrees).to be_within(0.01).of(293.15)
         expect(temperature.to_kelvin.scale).to eq("kelvin")
+      end
+
+      it "returns temperature with converted degrees" do
+        expect(temperature.to_kelvin.degrees).to be_within(0.01).of(293.15)
       end
 
       it "memoizes temperature in kelvin" do
@@ -315,8 +327,11 @@ RSpec.describe Temperature do
       let(:temperature) { described_class.new(0, "rankine") }
 
       it "returns temperature in rankine" do
-        expect(temperature.to_rankine.degrees).to eq(0)
         expect(temperature.to_rankine.scale).to eq("rankine")
+      end
+
+      it "returns temperature with same degrees" do
+        expect(temperature.to_rankine.degrees).to eq(0)
       end
 
       it "memoizes temperature in rankine" do
@@ -332,8 +347,11 @@ RSpec.describe Temperature do
       let(:temperature) { described_class.new(20, "celsius") }
 
       it "returns temperature in rankine" do
-        expect(temperature.to_rankine.degrees).to be_within(0.01).of(527.67)
         expect(temperature.to_rankine.scale).to eq("rankine")
+      end
+
+      it "returns temperature with converted degrees" do
+        expect(temperature.to_rankine.degrees).to be_within(0.01).of(527.67)
       end
 
       it "memoizes temperature in rankine" do
@@ -345,8 +363,11 @@ RSpec.describe Temperature do
       let(:temperature) { described_class.new(68, "fahrenheit") }
 
       it "returns temperature in rankine" do
-        expect(temperature.to_rankine.degrees).to be_within(0.01).of(527.67)
         expect(temperature.to_rankine.scale).to eq("rankine")
+      end
+
+      it "returns temperature with converted degrees" do
+        expect(temperature.to_rankine.degrees).to be_within(0.01).of(527.67)
       end
 
       it "memoizes temperature in rankine" do
