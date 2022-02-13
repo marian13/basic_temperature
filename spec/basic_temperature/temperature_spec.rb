@@ -679,12 +679,7 @@ RSpec.describe Temperature do
       ) do
         temperature = described_class.new(0, "celsius")
 
-        coerce = temperature.coerce(10)
-
-        expect(coerce.first.degrees).to eq(10)
-        expect(coerce.first.scale).to eq("celsius")
-
-        expect(coerce.last).to eq(temperature)
+        expect(temperature.coerce(10)).to eq([described_class.new(10, :celsius), temperature])
       end
     end
 
