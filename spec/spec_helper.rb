@@ -1,8 +1,4 @@
-if ENV["REVERSE_COVERAGE"]
-  require_relative "reverse_coverage_helper"
-else
-  require_relative "coverage_helper"
-end
+require_relative "coverage_helper"
 
 require "bundler/setup"
 require "basic_temperature"
