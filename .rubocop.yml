@@ -24,3 +24,11 @@ AllCops:
   # https://github.com/testdouble/standard#how-do-i-specify-a-ruby-version-what-is-supported
   #
   TargetRubyVersion: 2.5
+
+  ##
+  # NOTE: Excludes vendor from linting. Needed by GitHub Actions.
+  # - https://github.com/rubocop/rubocop/issues/9832
+  # - https://github.com/rubocop/rubocop/issues/9832#issuecomment-873398952
+  #
+  Exclude:
+    - vendor/**/*
