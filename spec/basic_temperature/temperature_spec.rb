@@ -512,30 +512,28 @@ RSpec.describe Temperature do
   end
 
   describe "#set_degrees" do
-    it "returns a new temperature with updated degrees" do
-      temperature = described_class.new(0, "celsius")
+    let(:temperature) { described_class.new(0, "celsius") }
+    let(:new_temperature) { temperature.set_degrees(25) }
 
-      new_temperature = temperature.set_degrees(25)
-
+    it "returns a temperature with updated degrees" do
       expect(new_temperature.degrees).to eq(25)
+    end
+
+    it "returns a new temperature" do
       expect(new_temperature.object_id).not_to eq(temperature.object_id)
     end
 
     it "preserves previous scale of temperature" do
-      temperature = described_class.new(0, "celsius")
-
-      new_temperature = temperature.set_degrees(25)
-
       expect(new_temperature.scale).to eq(temperature.scale)
     end
 
     context "when degrees is NOT a numeric value" do
-      it "raises Errors::InvalidDegrees" do
-        temperature = described_class.new(0, "celsius")
+      let(:message) { "degree is NOT a numeric value." }
 
+      it "raises Errors::InvalidDegrees" do
         expect { temperature.set_degrees("abc") }
           .to raise_error(Temperature::Errors::InvalidDegrees)
-          .with_message("degree is NOT a numeric value.")
+          .with_message(message)
       end
     end
   end
