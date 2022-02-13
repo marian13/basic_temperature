@@ -263,6 +263,11 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/marian
   bundle exec inch
   ```
 
+* Check for vulnerable gem versions, insecure gem sources, etc...
+  ```bash
+  bundle exec bundle-audit check --update
+  ```
+
 ### Docker
 
 * Build container:
