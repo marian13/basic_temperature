@@ -705,14 +705,16 @@ RSpec.describe Temperature do
         expect(temperature.inspect).to eq("0 °C")
       end
 
-      it "rounds degrees up to 2 digits after decimal dot" do
-        expect(described_class.new(0.1, "celsius").inspect).to eq("0.1 °C")
-        expect(described_class.new(0.01, "celsius").inspect).to eq("0.01 °C")
-        expect(described_class.new(0.001, "celsius").inspect).to eq("0 °C")
-      end
-
       it "prints float without decimal part as integer" do
         expect(described_class.new(0.0, "celsius").inspect).to eq("0 °C")
+      end
+
+      it "prints float with decimal part as float" do
+        expect(described_class.new(0.01, "celsius").inspect).to eq("0.01 °C")
+      end
+
+      it "rounds degrees up to 2 digits after decimal dot" do
+        expect(described_class.new(0.001, "celsius").inspect).to eq("0 °C")
       end
     end
 
@@ -723,14 +725,16 @@ RSpec.describe Temperature do
         expect(temperature.inspect).to eq("0 °F")
       end
 
-      it "rounds degrees up to 2 digits after decimal dot" do
-        expect(described_class.new(0.1, "fahrenheit").inspect).to eq("0.1 °F")
-        expect(described_class.new(0.01, "fahrenheit").inspect).to eq("0.01 °F")
-        expect(described_class.new(0.001, "fahrenheit").inspect).to eq("0 °F")
-      end
-
       it "prints float without decimal part as integer" do
         expect(described_class.new(0.0, "fahrenheit").inspect).to eq("0 °F")
+      end
+
+      it "prints float with decimal part as float" do
+        expect(described_class.new(0.01, "fahrenheit").inspect).to eq("0.01 °F")
+      end
+
+      it "rounds degrees up to 2 digits after decimal dot" do
+        expect(described_class.new(0.001, "fahrenheit").inspect).to eq("0 °F")
       end
     end
 
@@ -741,14 +745,16 @@ RSpec.describe Temperature do
         expect(temperature.inspect).to eq("0 K")
       end
 
-      it "rounds degrees up to 2 digits after decimal dot" do
-        expect(described_class.new(0.1, "kelvin").inspect).to eq("0.1 K")
-        expect(described_class.new(0.01, "kelvin").inspect).to eq("0.01 K")
-        expect(described_class.new(0.001, "kelvin").inspect).to eq("0 K")
-      end
-
       it "prints float without decimal part as integer" do
         expect(described_class.new(0.0, "kelvin").inspect).to eq("0 K")
+      end
+
+      it "prints float with decimal part as float" do
+        expect(described_class.new(0.01, "kelvin").inspect).to eq("0.01 K")
+      end
+
+      it "rounds degrees up to 2 digits after decimal dot" do
+        expect(described_class.new(0.001, "kelvin").inspect).to eq("0 K")
       end
     end
 
@@ -759,14 +765,16 @@ RSpec.describe Temperature do
         expect(temperature.inspect).to eq("0 °R")
       end
 
-      it "rounds degrees up to 2 digits after decimal dot" do
-        expect(described_class.new(0.1, "rankine").inspect).to eq("0.1 °R")
-        expect(described_class.new(0.01, "rankine").inspect).to eq("0.01 °R")
-        expect(described_class.new(0.001, "rankine").inspect).to eq("0 °R")
-      end
-
       it "prints float without decimal part as integer" do
         expect(described_class.new(0.0, "rankine").inspect).to eq("0 °R")
+      end
+
+      it "prints float with decimal part as float" do
+        expect(described_class.new(0.01, "rankine").inspect).to eq("0.01 °R")
+      end
+
+      it "rounds degrees up to 2 digits after decimal dot" do
+        expect(described_class.new(0.001, "rankine").inspect).to eq("0 °R")
       end
     end
   end
