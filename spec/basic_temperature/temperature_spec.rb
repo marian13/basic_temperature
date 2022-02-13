@@ -1,5 +1,10 @@
 require "basic_temperature/alias"
 
+##
+# TODO: Find a way to avoid deeply nested contexts.
+# https://dev.to/hanachin/how-to-minimize-rspec-describecontext-nesting-4179
+#
+# rubocop:disable RSpec/NestedGroups
 RSpec.describe Temperature do
   it "includes Comparable module" do
     expect(described_class.ancestors).to include(Comparable)
@@ -761,3 +766,4 @@ RSpec.describe Temperature do
     end
   end
 end
+# rubocop:enable RSpec/NestedGroups
