@@ -25,7 +25,7 @@ RSpec.describe Temperature do
         expect(temperature.scale).to eq("celsius")
       end
 
-      context "and degrees is NOT valid (can not be casted to float)" do
+      context "when degrees is NOT valid (can not be casted to float)" do
         it "raises Errors::InvalidDegrees" do
           expect { described_class.new("abc", "celsius") }
             .to raise_error(Temperature::Errors::InvalidDegrees)
@@ -33,7 +33,7 @@ RSpec.describe Temperature do
         end
       end
 
-      context "and scale is NOT valid (can not be casted to 'celsius', 'fahrenheit', 'kelvin', 'rankine')" do
+      context "when scale is NOT valid (can not be casted to 'celsius', 'fahrenheit', 'kelvin', 'rankine')" do
         it "raises Errors::InvalidScale" do
           message =
             "scale has invalid value, " \
@@ -65,7 +65,7 @@ RSpec.describe Temperature do
         expect(temperature).to be_instance_of(described_class)
       end
 
-      context "and degrees is NOT valid (can not be casted to float)" do
+      context "when degrees is NOT valid (can not be casted to float)" do
         it "raises Errors::InvalidDegrees" do
           expect { described_class.new(degrees: "abc", scale: "celsius") }
             .to raise_error(Temperature::Errors::InvalidDegrees)
@@ -73,7 +73,7 @@ RSpec.describe Temperature do
         end
       end
 
-      context "and scale is NOT valid (can not be casted to 'celsius', 'fahrenheit', 'kelvin', 'rankine')" do
+      context "when scale is NOT valid (can not be casted to 'celsius', 'fahrenheit', 'kelvin', 'rankine')" do
         it "raises Errors::InvalidScale" do
           message =
             "scale has invalid value, " \
