@@ -34,11 +34,9 @@ RSpec.describe Temperature do
       end
 
       context "when scale is NOT valid (can not be casted to 'celsius', 'fahrenheit', 'kelvin', 'rankine')" do
-        it "raises Errors::InvalidScale" do
-          message =
-            "scale has invalid value, " \
-            "valid values are 'celsius', 'fahrenheit', 'kelvin', 'rankine'."
+        let(:message) { "scale has invalid value, valid values are 'celsius', 'fahrenheit', 'kelvin', 'rankine'." }
 
+        it "raises Errors::InvalidScale" do
           expect { described_class.new(0, "abc") }
             .to raise_error(Temperature::Errors::InvalidScale)
             .with_message(message)
@@ -74,11 +72,9 @@ RSpec.describe Temperature do
       end
 
       context "when scale is NOT valid (can not be casted to 'celsius', 'fahrenheit', 'kelvin', 'rankine')" do
-        it "raises Errors::InvalidScale" do
-          message =
-            "scale has invalid value, " \
-            "valid values are 'celsius', 'fahrenheit', 'kelvin', 'rankine'."
+        let(:message) { "scale has invalid value, valid values are 'celsius', 'fahrenheit', 'kelvin', 'rankine'." }
 
+        it "raises Errors::InvalidScale" do
           expect { described_class.new(degrees: 0, scale: "abc") }
             .to raise_error(Temperature::Errors::InvalidScale)
             .with_message(message)
@@ -87,11 +83,9 @@ RSpec.describe Temperature do
     end
 
     context "when positional and keyword arguments are passed together" do
-      it "raises Errors::InitializationArguments" do
-        message =
-          "Positional and keyword arguments are mixed or " \
-          "neither positional nor keyword arguments are passed."
+      let(:message) { "Positional and keyword arguments are mixed or neither positional nor keyword arguments are passed." }
 
+      it "raises Errors::InitializationArguments" do
         expect { described_class.new(0, "celsius", degrees: 0, scale: "celsius") }
           .to raise_error(Temperature::Errors::InitializationArguments)
           .with_message(message)
@@ -99,11 +93,9 @@ RSpec.describe Temperature do
     end
 
     context "when nor positional neither keyword arguments are passed" do
-      it "raises Errors::InitializationArguments" do
-        message =
-          "Positional and keyword arguments are mixed or " \
-          "neither positional nor keyword arguments are passed."
+      let(:message) { "Positional and keyword arguments are mixed or neither positional nor keyword arguments are passed." }
 
+      it "raises Errors::InitializationArguments" do
         expect { described_class.new }
           .to raise_error(Temperature::Errors::InitializationArguments)
           .with_message(message)
