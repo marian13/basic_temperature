@@ -126,7 +126,7 @@ RSpec.describe Temperature do
         expect(temperature.to_celsius.degrees).to eq(0)
       end
 
-      it "memoizes temperature in celsius" do
+      it "memoizes temperature" do
         expect(temperature.to_celsius.object_id).to eq(temperature.to_celsius.object_id)
       end
 
@@ -146,7 +146,7 @@ RSpec.describe Temperature do
         expect(temperature.to_celsius.degrees).to be_within(0.01).of(20)
       end
 
-      it "memoizes temperature in celsius" do
+      it "memoizes temperature" do
         expect(temperature.to_celsius.object_id).to eq(temperature.to_celsius.object_id)
       end
     end
@@ -162,7 +162,7 @@ RSpec.describe Temperature do
         expect(temperature.to_celsius.degrees).to be_within(0.01).of(26.85)
       end
 
-      it "memoizes temperature in celsius" do
+      it "memoizes temperature" do
         expect(temperature.to_celsius.object_id).to eq(temperature.to_celsius.object_id)
       end
     end
@@ -178,7 +178,7 @@ RSpec.describe Temperature do
         expect(temperature.to_celsius.degrees).to be_within(0.01).of(-106.48)
       end
 
-      it "memoizes temperature in celsius" do
+      it "memoizes temperature" do
         expect(temperature.to_celsius.object_id).to eq(temperature.to_celsius.object_id)
       end
     end
@@ -196,7 +196,7 @@ RSpec.describe Temperature do
         expect(temperature.to_fahrenheit.degrees).to eq(0)
       end
 
-      it "memoizes temperature in fahrenheit" do
+      it "memoizes temperature" do
         expect(temperature.to_fahrenheit.object_id).to eq(temperature.to_fahrenheit.object_id)
       end
 
@@ -216,7 +216,7 @@ RSpec.describe Temperature do
         expect(temperature.to_fahrenheit.degrees).to be_within(0.01).of(68)
       end
 
-      it "memoizes temperature in fahrenheit" do
+      it "memoizes temperature" do
         expect(temperature.to_fahrenheit.object_id).to eq(temperature.to_fahrenheit.object_id)
       end
     end
@@ -232,7 +232,7 @@ RSpec.describe Temperature do
         expect(temperature.to_fahrenheit.degrees).to be_within(0.01).of(80.33)
       end
 
-      it "memoizes temperature in fahrenheit" do
+      it "memoizes temperature" do
         expect(temperature.to_fahrenheit.object_id).to eq(temperature.to_fahrenheit.object_id)
       end
     end
@@ -248,7 +248,7 @@ RSpec.describe Temperature do
         expect(temperature.to_fahrenheit.degrees).to be_within(0.01).of(-159.67)
       end
 
-      it "memoizes temperature in fahrenheit" do
+      it "memoizes temperature" do
         expect(temperature.to_fahrenheit.object_id).to eq(temperature.to_fahrenheit.object_id)
       end
     end
@@ -266,7 +266,7 @@ RSpec.describe Temperature do
         expect(temperature.to_kelvin.degrees).to eq(0)
       end
 
-      it "memoizes temperature in kelvin" do
+      it "memoizes temperature" do
         expect(temperature.to_kelvin.object_id).to eq(temperature.to_kelvin.object_id)
       end
 
@@ -286,7 +286,7 @@ RSpec.describe Temperature do
         expect(temperature.to_kelvin.degrees).to be_within(0.01).of(293.15)
       end
 
-      it "memoizes temperature in kelvin" do
+      it "memoizes temperature" do
         expect(temperature.to_kelvin.object_id).to eq(temperature.to_kelvin.object_id)
       end
     end
@@ -302,7 +302,7 @@ RSpec.describe Temperature do
         expect(temperature.to_kelvin.degrees).to be_within(0.01).of(288.71)
       end
 
-      it "memoizes temperature in kelvin" do
+      it "memoizes temperature" do
         expect(temperature.to_kelvin.object_id).to eq(temperature.to_kelvin.object_id)
       end
     end
@@ -318,7 +318,7 @@ RSpec.describe Temperature do
         expect(temperature.to_kelvin.degrees).to be_within(0.01).of(166.67)
       end
 
-      it "memoizes temperature in kelvin" do
+      it "memoizes temperature" do
         expect(temperature.to_kelvin.object_id).to eq(temperature.to_kelvin.object_id)
       end
     end
@@ -336,7 +336,7 @@ RSpec.describe Temperature do
         expect(temperature.to_rankine.degrees).to eq(0)
       end
 
-      it "memoizes temperature in rankine" do
+      it "memoizes temperature" do
         expect(temperature.to_rankine.object_id).to eq(temperature.to_rankine.object_id)
       end
 
@@ -356,7 +356,7 @@ RSpec.describe Temperature do
         expect(temperature.to_rankine.degrees).to be_within(0.01).of(527.67)
       end
 
-      it "memoizes temperature in rankine" do
+      it "memoizes temperature" do
         expect(temperature.to_rankine.object_id).to eq(temperature.to_rankine.object_id)
       end
     end
@@ -372,7 +372,7 @@ RSpec.describe Temperature do
         expect(temperature.to_rankine.degrees).to be_within(0.01).of(527.67)
       end
 
-      it "memoizes temperature in rankine" do
+      it "memoizes temperature" do
         expect(temperature.to_rankine.object_id).to eq(temperature.to_rankine.object_id)
       end
     end
@@ -388,7 +388,7 @@ RSpec.describe Temperature do
         expect(temperature.to_rankine.degrees).to be_within(0.01).of(540)
       end
 
-      it "memoizes temperature in celsius" do
+      it "memoizes temperature" do
         expect(temperature.to_rankine.object_id).to eq(temperature.to_rankine.object_id)
       end
     end
