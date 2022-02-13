@@ -28,6 +28,9 @@
 # - https://github.com/coverallsapp/github-action/issues/29
 # - https://github.com/coverallsapp/github-action/issues/29#issuecomment-704366557
 #
+# NOTE: What is the purpose of bundle-audit?
+# - https://github.com/rubysec/bundler-audit
+#
 # IMPORTANT: This workflow is heavily based on Shopify/packwerk workflow.
 # - https://github.com/Shopify/packwerk/blob/main/.github/workflows/ci.yml
 # - https://github.com/Shopify/packwerk/actions/runs/331834549/workflow
@@ -108,13 +111,31 @@ jobs:
           path-to-lcov: "./coverage/lcov.info"
 
   coverage:
-    name: Gather coverage
     needs:
       - test
     runs-on: ubuntu-20.04
+    name: Gather coverage
     steps:
       - name: Upload coverage reports to Coveralls
         uses: coverallsapp/github-action@master
         with:
           github-token: ${{ secrets.github_token }}
           parallel-finished: true
+
+  bundle-audit:
+    runs-on: ubuntu-20.04
+    name: bundle-audit
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.1
+          ##
+          # NOTE: Installs the latest compatible Bundler version, runs `bundle install' and caches installed gems.
+          # - https://github.com/ruby/setup-ruby#usage
+          # - https://github.com/ruby/setup-ruby#bundler
+          #
+          bundler-cache: true
+      - name: Check for vulnerable gem versions, insecure gem sources, etc...
+        run: bundle exec bundle-audit check --update
