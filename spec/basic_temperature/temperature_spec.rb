@@ -673,6 +673,8 @@ RSpec.describe Temperature do
   end
 
   describe "#coerce" do
+    let(:temperature) { described_class.new(0, "celsius") }
+
     context "when other is a Numeric" do
       it(
         <<~DESCRIPTION
@@ -682,17 +684,17 @@ RSpec.describe Temperature do
           second - is temperature itself
         DESCRIPTION
       ) do
-        temperature = described_class.new(0, "celsius")
-
         expect(temperature.coerce(10)).to eq([described_class.new(10, :celsius), temperature])
       end
     end
 
     context "when other is NOT a Numeric" do
+      let(:message) { "`abc` is not a Numeric." }
+
       it "raises Errors::InvalidNumeric" do
-        expect { described_class.new(0, "celsius").coerce("abc") }
+        expect { temperature.coerce("abc") }
           .to raise_error(Temperature::Errors::InvalidNumeric)
-          .with_message("`abc` is not a Numeric.")
+          .with_message(message)
       end
     end
   end
