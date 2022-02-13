@@ -134,8 +134,11 @@ RSpec.describe Temperature do
       let(:temperature) { described_class.new(68, "fahrenheit") }
 
       it "returns temperature in celsius" do
-        expect(temperature.to_celsius.degrees).to be_within(0.01).of(20)
         expect(temperature.to_celsius.scale).to eq("celsius")
+      end
+
+      it "returns temperature with converted degrees" do
+        expect(temperature.to_celsius.degrees).to be_within(0.01).of(20)
       end
 
       it "memoizes temperature in celsius" do
@@ -198,8 +201,11 @@ RSpec.describe Temperature do
       let(:temperature) { described_class.new(20, "celsius") }
 
       it "returns temperature in fahrenheit" do
-        expect(temperature.to_fahrenheit.degrees).to be_within(0.01).of(68)
         expect(temperature.to_fahrenheit.scale).to eq("fahrenheit")
+      end
+
+      it "returns temperature with converted degrees" do
+        expect(temperature.to_fahrenheit.degrees).to be_within(0.01).of(68)
       end
 
       it "memoizes temperature in fahrenheit" do
