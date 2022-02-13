@@ -400,52 +400,40 @@ RSpec.describe Temperature do
   end
 
   describe "#to_scale" do
-    it "casts scale to string" do
-      temperature = described_class.new(0, :celsius)
+    let(:temperature) { described_class.new(0, "celsius") }
 
+    it "casts scale to string" do
       expect(temperature.to_scale(:fahrenheit).scale).to eq("fahrenheit")
     end
 
     context "when scale is celsius" do
       it "returns temperature in celsius" do
-        temperature = described_class.new(0, "celsius")
-
         expect(temperature.to_scale("celsius").scale).to eq("celsius")
       end
     end
 
     context "when scale is fahrenheit" do
       it "returns temperature in fahrenheit" do
-        temperature = described_class.new(0, "celsius")
-
         expect(temperature.to_scale("fahrenheit").scale).to eq("fahrenheit")
       end
     end
 
     context "when scale is kelvin" do
       it "returns temperature in kelvin" do
-        temperature = described_class.new(0, "celsius")
-
         expect(temperature.to_scale("kelvin").scale).to eq("kelvin")
       end
     end
 
     context "when scale is rankine" do
       it "returns temperature in rankine" do
-        temperature = described_class.new(0, "celsius")
-
         expect(temperature.to_scale("rankine").scale).to eq("rankine")
       end
     end
 
     context "when scale is NOT valid (can not be casted to 'celsius', 'fahrenheit', 'kelvin', 'rankine')" do
+      let(:message) { "scale has invalid value, valid values are 'celsius', 'fahrenheit', 'kelvin', 'rankine'." }
+
       it "raises Errors::InvalidScale" do
-        temperature = described_class.new(0, "celsius")
-
-        message =
-          "scale has invalid value, " \
-          "valid values are 'celsius', 'fahrenheit', 'kelvin', 'rankine'."
-
         expect { temperature.to_scale("abc") }
           .to raise_error(Temperature::Errors::InvalidScale)
           .with_message(message)
