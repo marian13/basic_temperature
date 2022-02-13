@@ -455,30 +455,29 @@ RSpec.describe Temperature do
 
   describe "#==" do
     context "when other temperature is NOT an instance of Temperature" do
+      let(:temperature) { described_class.new(0, "celsius") }
+      let(:other) { nil }
+
       it "returns false" do
-        temperature = described_class.new(0, "celsius")
-
-        other = nil
-
         expect(temperature == other).to eq(false)
       end
     end
 
     context "when temperatures have the same scale" do
       context "when temperatures have different degrees" do
-        it "returns false" do
-          temperature = described_class.new(0, "celsius")
-          other = described_class.new(15, "celsius")
+        let(:temperature) { described_class.new(0, "celsius") }
+        let(:other) { described_class.new(15, "celsius") }
 
+        it "returns false" do
           expect(temperature == other).to eq(false)
         end
       end
 
       context "when temperatures have the same degrees" do
-        it "returns true" do
-          temperature = described_class.new(0, "celsius")
-          other = described_class.new(0, "celsius")
+        let(:temperature) { described_class.new(0, "celsius") }
+        let(:other) { described_class.new(0, "celsius") }
 
+        it "returns true" do
           expect(temperature == other).to eq(true)
         end
       end
@@ -486,19 +485,19 @@ RSpec.describe Temperature do
 
     context "when temperatures have different scales" do
       context "when converted first temperature does NOT have the same degrees as second temperature" do
-        it "returns false" do
-          temperature = described_class.new(0, "celsius")
-          other = described_class.new(0, "kelvin")
+        let(:temperature) { described_class.new(0, "celsius") }
+        let(:other) { described_class.new(0, "kelvin") }
 
+        it "returns false" do
           expect(temperature == other).to eq(false)
         end
       end
 
       context "when converted first temperature has the same degrees as second temperature" do
-        it "returns true" do
-          temperature = described_class.new(0, "celsius")
-          other = described_class.new(273.15, "kelvin")
+        let(:temperature) { described_class.new(0, "celsius") }
+        let(:other) { described_class.new(273.15, "kelvin") }
 
+        it "returns true" do
           expect(temperature == other).to eq(true)
         end
       end
