@@ -31,6 +31,7 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency 'bundler-audit'
   spec.add_development_dependency 'byebug', '~> 10.0'
+  spec.add_development_dependency 'inch'
   spec.add_development_dependency 'rake', '~> 12.0'
   spec.add_development_dependency 'rerun'
   spec.add_development_dependency 'reverse_coverage'
