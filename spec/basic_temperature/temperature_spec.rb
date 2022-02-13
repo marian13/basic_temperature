@@ -569,46 +569,46 @@ RSpec.describe Temperature do
 
   describe "#<=>" do
     context "when first temperature is greater than second temperature" do
-      it "returns 1" do
-        first_temperature = described_class.new(21, "celsius")
-        second_temperature = described_class.new(20, "celsius")
+      let(:first_temperature) { described_class.new(21, "celsius") }
+      let(:second_temperature) { described_class.new(20, "celsius") }
 
+      it "returns 1" do
         expect(first_temperature <=> second_temperature).to eq(1)
       end
     end
 
     context "when first temperature is lower than second temperature" do
-      it "returns -1" do
-        first_temperature = described_class.new(20, "celsius")
-        second_temperature = described_class.new(21, "celsius")
+      let(:first_temperature) { described_class.new(20, "celsius") }
+      let(:second_temperature) { described_class.new(21, "celsius") }
 
+      it "returns -1" do
         expect(first_temperature <=> second_temperature).to eq(-1)
       end
     end
 
     context "when first temperature equals second temperature" do
-      it "returns 0" do
-        first_temperature = described_class.new(20, "celsius")
-        second_temperature = described_class.new(20, "celsius")
+      let(:first_temperature) { described_class.new(20, "celsius") }
+      let(:second_temperature) { described_class.new(20, "celsius") }
 
+      it "returns 0" do
         expect(first_temperature <=> second_temperature).to eq(0)
       end
     end
 
     context "when second temperature is NOT a Temperature" do
-      it "returns nil" do
-        first_temperature = described_class.new(20, "celsius")
-        second_temperature = "abc"
+      let(:first_temperature) { described_class.new(20, "celsius") }
+      let(:second_temperature) { "abc" }
 
+      it "returns nil" do
         expect(first_temperature <=> second_temperature).to be_nil
       end
     end
 
     context "when first and second temperatures have different scales" do
-      it "converts first temperature to second temperature scale" do
-        first_temperature = described_class.new(20, "celsius")
-        second_temperature = described_class.new(250, "kelvin")
+      let(:first_temperature) { described_class.new(20, "celsius") }
+      let(:second_temperature) { described_class.new(250, "kelvin") }
 
+      it "converts first temperature to second temperature scale" do
         expect(first_temperature <=> second_temperature).to eq(1)
       end
     end
