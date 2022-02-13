@@ -23,6 +23,8 @@ AllCops:
   # As a result, Rubocop may miss incompatible code with Ruby 2.3 and Ruby 2.4, but it will be caught by specs (if they are written of course).
   # https://github.com/testdouble/standard#how-do-i-specify-a-ruby-version-what-is-supported
   #
+  # TODO: Update when support for Rubies lower than 2.5 will be dropped.
+  #
   TargetRubyVersion: 2.5
 
   ##
