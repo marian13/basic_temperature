@@ -541,25 +541,22 @@ RSpec.describe Temperature do
   end
 
   describe "#set_scale" do
-    it "returns a new temperature with updated scale" do
-      temperature = described_class.new(0, "celsius")
+    let(:temperature) { described_class.new(0, "celsius") }
+    let(:new_temperature) { temperature.set_scale("kelvin") }
 
-      new_temperature = temperature.set_scale("kelvin")
-
+    it "returns a temperature with updated scale" do
       expect(new_temperature.scale).to eq("kelvin")
+    end
+
+    it "returns a new temperature" do
       expect(new_temperature.object_id).not_to eq(temperature.object_id)
     end
 
     it "converts previous degrees of temperature" do
-      temperature = described_class.new(0, "celsius")
-
-      new_temperature = temperature.set_scale("kelvin")
-
       expect(new_temperature.degrees).to eq(0)
     end
 
     context "when scale is NOT valid (can not be casted to 'celsius', 'fahrenheit', 'kelvin', 'rankine')" do
-      let(:temperature) { described_class.new(0, "celsius") }
       let(:message) { "scale has invalid value, valid values are 'celsius', 'fahrenheit', 'kelvin', 'rankine'." }
 
       it "raises Errors::InvalidScale" do
