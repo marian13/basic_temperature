@@ -1,4 +1,4 @@
-require 'reverse_coverage'
+require "reverse_coverage"
 
 RSpec.configure do |config|
   config.before(:suite) do

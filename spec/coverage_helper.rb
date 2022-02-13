@@ -25,7 +25,7 @@
 #
 # TODO: Remove when support for Rubies lower than 2.5 will be dropped.
 #
-if Gem::Version.new(RUBY_VERSION) < Gem::Version.new('2.5')
+if Gem::Version.new(RUBY_VERSION) < Gem::Version.new("2.5")
   module SimpleCov
     class << self
       def branch_coverage?
@@ -35,12 +35,12 @@ if Gem::Version.new(RUBY_VERSION) < Gem::Version.new('2.5')
   end
 end
 
-require 'simplecov'
-require 'simplecov-lcov'
+require "simplecov"
+require "simplecov-lcov"
 
 SimpleCov::Formatter::LcovFormatter.config do |config|
   config.report_with_single_file = true
-  config.single_report_path = 'coverage/lcov.info'
+  config.single_report_path = "coverage/lcov.info"
 end
 
 SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new([
@@ -49,5 +49,5 @@ SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new([
 ])
 
 SimpleCov.start do
-  add_filter '/spec/'
+  add_filter "/spec/"
 end
