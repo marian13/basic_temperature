@@ -612,9 +612,15 @@ RSpec.describe Temperature do
       end
     end
 
-    it "rounds degrees up to 2 digits after decimal dot" do
+    it "does NOT round degrees with 1 digit after decimal dot" do
       expect(described_class.new(0.1, "celsius") == described_class.new(0.2, "celsius")).to eq(false)
+    end
+
+    it "does NOT round degrees with 2 digits after decimal dot" do
       expect(described_class.new(0.01, "celsius") == described_class.new(0.02, "celsius")).to eq(false)
+    end
+
+    it "rounds degrees with 2+ digits after decimal dot" do
       expect(described_class.new(0.001, "celsius") == described_class.new(0.002, "celsius")).to eq(true)
     end
   end
