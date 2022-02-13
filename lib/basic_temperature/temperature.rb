@@ -251,7 +251,6 @@ module BasicTemperature
     def set_degrees(degrees)
       Temperature.new(degrees, scale)
     end
-    # rubocop:enable Naming/AccessorMethodName
 
     # Returns a new Temperature with updated <tt>scale</tt>.
     #
@@ -264,7 +263,6 @@ module BasicTemperature
     def set_scale(scale)
       Temperature.new(degrees, scale)
     end
-    # rubocop:enable Naming/AccessorMethodName
 
     ##
     # Converts temperature to specific <tt>scale</tt>.
