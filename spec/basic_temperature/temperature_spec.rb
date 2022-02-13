@@ -700,9 +700,7 @@ RSpec.describe Temperature do
   describe "#inspect" do
     context "when scale is celsius" do
       it "returns tempeture as string in special format" do
-        temperature = described_class.new(0, "celsius")
-
-        expect(temperature.inspect).to eq("0 °C")
+        expect(described_class.new(0, "celsius").inspect).to eq("0 °C")
       end
 
       it "prints float without decimal part as integer" do
@@ -720,9 +718,7 @@ RSpec.describe Temperature do
 
     context "when scale is fahrenheit" do
       it "returns tempeture as string in special format" do
-        temperature = described_class.new(0, "fahrenheit")
-
-        expect(temperature.inspect).to eq("0 °F")
+        expect(described_class.new(0, "fahrenheit").inspect).to eq("0 °F")
       end
 
       it "prints float without decimal part as integer" do
@@ -740,9 +736,7 @@ RSpec.describe Temperature do
 
     context "when scale is kelvin" do
       it "returns tempeture as string in special format" do
-        temperature = described_class.new(0, "kelvin")
-
-        expect(temperature.inspect).to eq("0 K")
+        expect(described_class.new(0, "kelvin").inspect).to eq("0 K")
       end
 
       it "prints float without decimal part as integer" do
@@ -760,9 +754,7 @@ RSpec.describe Temperature do
 
     context "when scale is rankine" do
       it "returns tempeture as string in special format" do
-        temperature = described_class.new(0, "rankine")
-
-        expect(temperature.inspect).to eq("0 °R")
+        expect(described_class.new(0, "rankine").inspect).to eq("0 °R")
       end
 
       it "prints float without decimal part as integer" do
