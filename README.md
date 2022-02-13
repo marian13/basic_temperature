@@ -30,7 +30,7 @@ Rankine).
 
 - Allows comparing temperatures between each other.
 - Queries like `boil_water?`, `freeze_water?`.
-- Tested against Ruby 2.3, 2.4, 2.5, 2.6,2.7, 3.0 and 3.1. See [.github/workflows/ci.yml](https://github.com/marian13/basic_temperature/blob/main/.github/workflows/ci.yml).
+- Tested against Ruby 2.3, 2.4, 2.5, 2.6, 2.7, 3.0 and 3.1. See [.github/workflows/ci.yml](https://github.com/marian13/basic_temperature/blob/main/.github/workflows/ci.yml).
 <!-- features:end -->
 
 <!-- dependencies:start -->
@@ -238,27 +238,50 @@ Basic Temperature follows the [Semantic Versioning](https://semver.org/) standar
 Bug reports and pull requests are welcome on GitHub at https://github.com/marian13/basic_temperature.
 <!-- contributing:end -->
 
-<!-- development_local_machine:start -->
-## Development on the local machine
+<!-- development:start -->
+## Development
 
-* Check specs: `bundle exec rspec`.
+### Local Machine
 
-* Check linter: `bundle exec rubocop`.
+* Check specs:
+  ```bash
+  bundle exec rspec
+  ```
 
-* Update docs: `bundle exec sdoc lib -T rails -o docs`.
-<!-- development_local_machine:end -->
+* Check linter:
+  ```bash
+  bundle exec rubocop
+  ```
 
-<!-- development_docker:start -->
-## Development with Docker
+* Update docs:
+  ```bash
+  bundle exec sdoc lib -T rails -o docs
+  ```
 
-* Build container: `docker build . -f docker/Dockerfile-2.3 -t basic_temperature_2.3`.
+### Docker
 
-* Run specs inside container: `docker run -it basic_temperature_2.3:latest bundle exec rspec`.
+* Build container:
+  ```bash
+  docker build . -f docker/3.1/Dockerfile -t basic_temperature:3.1
+  ```
 
-* Interactive shell inside container: `docker run -it basic_temperature_2.3:latest bash`.
+* Run specs inside the container:
+  ```bash
+  docker run --rm -it basic_temperature:3.1 bundle exec rspec
+  ```
 
-* 2.3 can be replaced by 2.4, 2.5, 2.6, 2.7 and 3.0.
-<!-- development_docker:end -->
+* Interactive Bash shell:
+  ```bash
+  docker run --rm -it basic_temperature:3.1 bash
+  ```
+
+* Ruby REPL with already required gem files:
+  ```bash
+  docker run --rm -it basic_temperature:3.1 bin/console
+  ```
+
+* `3.1` can be replaced by `2.3`, `2.4`, `2.5`, `2.6`, `2.7`, and `3.0`.
+<!-- development:end -->
 
 <!-- license:start -->
 ## License
