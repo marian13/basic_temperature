@@ -1,3 +1,6 @@
+inherit_from:
+  - .rubocop_rspec.yml
+
 ##
 # Standard based Rubocop config.
 # - https://github.com/testdouble/standard
@@ -5,6 +8,11 @@
 # - https://evilmartians.com/chronicles/rubocoping-with-legacy-bring-your-ruby-code-up-to-standard
 #
 require:
+  ##
+  # Rubocop for RSpec files.
+  # https://github.com/rubocop/rubocop-rspec#usage
+  #
+  - rubocop-rspec
   ##
   # NOTE: `rubocop-performance' is automatically bundled with Standard.
   #
