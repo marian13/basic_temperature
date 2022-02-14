@@ -113,7 +113,7 @@ RSpec.describe Temperature do
       ##
       # TODO: Shared examples for `.new' and `.[]'.
       #
-      allow(described_class).to receive(:new)
+      allow(described_class).to receive(:new).and_call_original
 
       described_class[0, "celsius"]
 
