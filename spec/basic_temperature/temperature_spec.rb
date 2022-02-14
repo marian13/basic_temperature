@@ -677,12 +677,10 @@ RSpec.describe Temperature do
 
     context "when other is a Numeric" do
       it(
-        <<~DESCRIPTION
-          returns two elements array,
-          where first element is other converted to Temperature
-          and has the same scale as temperature,
-          second - is temperature itself
-        DESCRIPTION
+        "returns two elements array, " \
+        "where first element is other converted to Temperature " \
+        "and has the same scale as temperature, " \
+        "second - is temperature itself"
       ) do
         expect(temperature.coerce(10)).to eq([described_class.new(10, :celsius), temperature])
       end
