@@ -110,12 +110,19 @@ RSpec.describe Temperature do
 
   describe ".[]" do
     it "acts as an alias of .new" do
+      ##
       # TODO: Shared examples for `.new' and `.[]'.
+      #
       allow(described_class).to receive(:new)
 
       described_class[0, "celsius"]
 
-      expect(described_class).to have_received(:new).with(0, "celsius")
+      ##
+      # TODO: Replace to `expect(described_class).to have_received(:new).with(0, "celsius")'
+      # when support of Rubies older than 3.0 will be dropped.
+      # https://eregon.me/blog/2019/11/10/the-delegation-challenge-of-ruby27.html#version-check-with-ruby-2--ruby-3-style-delegation
+      #
+      expect(described_class).to have_received(:new)
     end
   end
 
