@@ -1,13 +1,13 @@
-Mon, 14 Mar 2022 19:55:34 +0000
-lib/basic_temperature/alias.rb	Mon, 14 Mar 2022 19:55:14 +0000
-lib/basic_temperature/specification.rb	Mon, 14 Mar 2022 19:55:14 +0000
-lib/basic_temperature/temperature/additional_helpers.rb	Mon, 14 Mar 2022 19:55:14 +0000
-lib/basic_temperature/temperature/assertions.rb	Mon, 14 Mar 2022 19:55:14 +0000
-lib/basic_temperature/temperature/casting.rb	Mon, 14 Mar 2022 19:55:14 +0000
-lib/basic_temperature/temperature/errors.rb	Mon, 14 Mar 2022 19:55:14 +0000
-lib/basic_temperature/temperature/initialization.rb	Mon, 14 Mar 2022 19:55:14 +0000
-lib/basic_temperature/temperature/memoization.rb	Mon, 14 Mar 2022 19:55:14 +0000
-lib/basic_temperature/temperature/rounding.rb	Mon, 14 Mar 2022 19:55:14 +0000
-lib/basic_temperature/temperature.rb	Mon, 14 Mar 2022 19:55:14 +0000
-lib/basic_temperature/version.rb	Mon, 14 Mar 2022 19:55:14 +0000
-lib/basic_temperature.rb	Mon, 14 Mar 2022 19:55:14 +0000
+Mon, 14 Mar 2022 20:31:26 +0000
+lib/basic_temperature/alias.rb	Mon, 14 Mar 2022 20:31:19 +0000
+lib/basic_temperature/specification.rb	Mon, 14 Mar 2022 20:31:19 +0000
+lib/basic_temperature/temperature/additional_helpers.rb	Mon, 14 Mar 2022 20:31:19 +0000
+lib/basic_temperature/temperature/assertions.rb	Mon, 14 Mar 2022 20:31:19 +0000
+lib/basic_temperature/temperature/casting.rb	Mon, 14 Mar 2022 20:31:19 +0000
+lib/basic_temperature/temperature/errors.rb	Mon, 14 Mar 2022 20:31:19 +0000
+lib/basic_temperature/temperature/initialization.rb	Mon, 14 Mar 2022 20:31:19 +0000
+lib/basic_temperature/temperature/memoization.rb	Mon, 14 Mar 2022 20:31:19 +0000
+lib/basic_temperature/temperature/rounding.rb	Mon, 14 Mar 2022 20:31:19 +0000
+lib/basic_temperature/temperature.rb	Mon, 14 Mar 2022 20:31:19 +0000
+lib/basic_temperature/version.rb	Mon, 14 Mar 2022 20:31:19 +0000
+lib/basic_temperature.rb	Mon, 14 Mar 2022 20:31:19 +0000
