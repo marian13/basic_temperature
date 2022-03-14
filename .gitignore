@@ -16,3 +16,6 @@
 
 # Ignore `Gemfile.lock`
 Gemfile.lock
+
+# Ignore docs
+/docs/*
