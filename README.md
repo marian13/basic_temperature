@@ -255,7 +255,7 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/marian
 
 * Update docs:
   ```bash
-  bundle exec sdoc lib -T rails -o docs
+  bundle exec sdoc lib -T rails -o docs --github
   ```
 
 * Find missed docs:
