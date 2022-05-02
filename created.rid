@@ -1,13 +1,13 @@
-Mon, 02 May 2022 17:50:50 +0000
-lib/basic_temperature/alias.rb	Mon, 02 May 2022 17:50:33 +0000
-lib/basic_temperature/specification.rb	Mon, 02 May 2022 17:50:33 +0000
-lib/basic_temperature/temperature/additional_helpers.rb	Mon, 02 May 2022 17:50:33 +0000
-lib/basic_temperature/temperature/assertions.rb	Mon, 02 May 2022 17:50:33 +0000
-lib/basic_temperature/temperature/casting.rb	Mon, 02 May 2022 17:50:33 +0000
-lib/basic_temperature/temperature/errors.rb	Mon, 02 May 2022 17:50:33 +0000
-lib/basic_temperature/temperature/initialization.rb	Mon, 02 May 2022 17:50:33 +0000
-lib/basic_temperature/temperature/memoization.rb	Mon, 02 May 2022 17:50:33 +0000
-lib/basic_temperature/temperature/rounding.rb	Mon, 02 May 2022 17:50:33 +0000
-lib/basic_temperature/temperature.rb	Mon, 02 May 2022 17:50:33 +0000
-lib/basic_temperature/version.rb	Mon, 02 May 2022 17:50:33 +0000
-lib/basic_temperature.rb	Mon, 02 May 2022 17:50:33 +0000
+Mon, 02 May 2022 18:17:59 +0000
+lib/basic_temperature/alias.rb	Mon, 02 May 2022 18:17:48 +0000
+lib/basic_temperature/specification.rb	Mon, 02 May 2022 18:17:48 +0000
+lib/basic_temperature/temperature/additional_helpers.rb	Mon, 02 May 2022 18:17:48 +0000
+lib/basic_temperature/temperature/assertions.rb	Mon, 02 May 2022 18:17:48 +0000
+lib/basic_temperature/temperature/casting.rb	Mon, 02 May 2022 18:17:48 +0000
+lib/basic_temperature/temperature/errors.rb	Mon, 02 May 2022 18:17:48 +0000
+lib/basic_temperature/temperature/initialization.rb	Mon, 02 May 2022 18:17:48 +0000
+lib/basic_temperature/temperature/memoization.rb	Mon, 02 May 2022 18:17:48 +0000
+lib/basic_temperature/temperature/rounding.rb	Mon, 02 May 2022 18:17:48 +0000
+lib/basic_temperature/temperature.rb	Mon, 02 May 2022 18:17:48 +0000
+lib/basic_temperature/version.rb	Mon, 02 May 2022 18:17:48 +0000
+lib/basic_temperature.rb	Mon, 02 May 2022 18:17:48 +0000
