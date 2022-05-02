@@ -14,7 +14,9 @@ require:
   #
   - rubocop-rspec
   ##
-  # NOTE: `rubocop-performance' is automatically bundled with Standard.
+  # An extension of RuboCop focused on code performance checks (required by Standard.rb).
+  # https://github.com/rubocop/rubocop-performance
+  # https://github.com/testdouble/standard/blob/main/standard.gemspec#L23
   #
   - rubocop-performance
   ##
