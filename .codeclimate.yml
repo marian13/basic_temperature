@@ -1,14 +1,22 @@
-# DOCS: https://docs.codeclimate.com/docs/advanced-configuration
+##
+# Code Climate configuration file.
+# https://docs.codeclimate.com/docs/advanced-configuration
+#
 version: 2
 
 plugins:
   rubocop:
     enabled: true
-    channel: rubocop-0-80
+    config:
+      file: .rubocop.yml
 
 exclude_patterns:
   - spec/**/*
 
+##
+# Disables default Code Climate checks.
+# https://docs.codeclimate.com/docs/default-analysis-configuration
+#
 checks:
   argument-count:
     enabled: false
@@ -30,4 +38,3 @@ checks:
     enabled: false
   identical-code:
     enabled: false
-
