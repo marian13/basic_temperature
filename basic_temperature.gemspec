@@ -36,7 +36,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rerun"
   spec.add_development_dependency "rspec", "~> 3.0"
   spec.add_development_dependency "rubocop"
-  spec.add_development_dependency "rubocop-performance"
   spec.add_development_dependency "rubocop-rspec"
   spec.add_development_dependency "standard"
   spec.add_development_dependency "sdoc"

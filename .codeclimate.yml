@@ -2,6 +2,10 @@
 # Code Climate configuration file.
 # https://docs.codeclimate.com/docs/advanced-configuration
 #
+# IMPORTANT: Code Climate does not support custom Rubocop config like Standard.rb.
+# That is why Code Climate badge shows failures all the time.
+# https://github.com/codeclimate/codeclimate-rubocop/issues/131
+#
 version: 2
 
 plugins:
