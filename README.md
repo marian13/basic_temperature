@@ -285,6 +285,11 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/marian
   docker run --rm -it basic_temperature:3.1 bash
   ```
 
+* Run container with volume (share gem folder between host and container):
+  ```bash
+  docker run --rm -it -v $(pwd):/gem basic_temperature:3.1 bash
+  ```
+
 * Ruby REPL with already required gem files:
   ```bash
   docker run --rm -it basic_temperature:3.1 bin/console
